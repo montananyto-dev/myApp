@@ -5,20 +5,21 @@ import { RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { HomeComponent } from './home/home.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
+import { UserService } from './services/users/user.service';
 
-import { UserService } from './user.service';
+import { AuthentificationGuard } from './guards/authentification.guard';
 
-import { AuthentificationGuard } from './authentification.guard';
 
 
 const appRoutes:Routes = [
   {
-    path:'',
+    path:'login',
     component:LoginFormComponent
   },{
     path:'home',
@@ -34,7 +35,9 @@ const appRoutes:Routes = [
     FooterComponent,
     HeaderComponent,
     LoginFormComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
+  
   ],
   imports: [
     BrowserModule,

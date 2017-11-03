@@ -4,7 +4,8 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
   private isUserLoggedIn;
-  private username;
+  private allUsers;
+  private currentUser;
   
   constructor() { 
     this.isUserLoggedIn =false;
@@ -15,5 +16,21 @@ export class UserService {
   }
   getUserLoggedIn(){
     return this.isUserLoggedIn;
+  }
+
+  setAllUsers(users){
+    this.allUsers = users;
+
+  }
+  getAllUsers(){
+    return this.allUsers;
+  }
+
+  setCurrentUser(user){
+    this.currentUser = user; 
+  }
+
+  getCurrentUser(user){
+    return this.currentUser;
   }
 }
