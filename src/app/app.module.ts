@@ -19,6 +19,10 @@ import { AuthentificationGuard } from './guards/authentification.guard';
 
 const appRoutes:Routes = [
   {
+    path:'',
+    component:LoginFormComponent
+  },
+  {
     path:'login',
     component:LoginFormComponent
   },{

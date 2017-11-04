@@ -11,10 +11,10 @@ import { UserService } from '../../services/users/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  allUsers;
-  displayUsers = false;
+  public allUsers;
+  public displayUsers = false;
 
-  constructor(private user:UserService) {
+  constructor(public user:UserService) {
 
     this.allUsers = user.getAllUsers();
     

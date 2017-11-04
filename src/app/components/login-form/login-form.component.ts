@@ -13,7 +13,7 @@ import { UserService } from '../../services/users/user.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  private apiUrl = "http://api/home/users";
+  public apiUrl = "http://tony.kingston.se.org/api/home/users";
   userdataJson: any;
   inputUserName;
   inputPassword;
