@@ -25,6 +25,5 @@ export class HomeComponent implements OnInit {
 
   showUsers(){
     this.displayUsers = !this.displayUsers;
-    
   }
 }
