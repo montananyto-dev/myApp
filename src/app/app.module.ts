@@ -14,6 +14,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserService } from './services/users/user.service';
 
 import { AuthentificationGuard } from './guards/authentification.guard';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 
 
@@ -40,7 +41,8 @@ const appRoutes:Routes = [
     HeaderComponent,
     LoginFormComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    AddUserComponent
   
   ],
   imports: [

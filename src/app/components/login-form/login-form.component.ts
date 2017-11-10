@@ -13,7 +13,7 @@ import { UserService } from '../../services/users/user.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  public apiUrl = "http://tony.kingston.se.org/api/home/users";
+  public apiUrl = "http://slim.kingstonse.org/home/users";
   userdataJson: any;
   inputUserName;
   inputPassword;
@@ -49,4 +49,7 @@ export class LoginFormComponent implements OnInit {
       this.user.setAllUsers(this.userdataJson);
     });
   }
+ 
 }
+
+
