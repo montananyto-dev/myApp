@@ -16,6 +16,7 @@ import { UserService } from './services/users/user.service';
 import { AuthentificationGuard } from './guards/authentification.guard';
 import { AddUserComponent } from './components/add-user/add-user.component';
 
+import { BsDropdownModule } from '././././node_modules/nngx-bootstrap/dropdown';
 
 
 const appRoutes:Routes = [
@@ -42,8 +43,9 @@ const appRoutes:Routes = [
     LoginFormComponent,
     HomeComponent,
     NavbarComponent,
-    AddUserComponent
-  
+    AddUserComponent,
+
+
   ],
   imports: [
     BrowserModule,
