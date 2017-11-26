@@ -5,34 +5,37 @@ import { RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { HeaderComponent } from './components/header/header.component';
-import { LoginFormComponent } from './components/login-form/login-form.component';
-import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/login-components/footer/footer.component';
+import { HeaderComponent } from './components/login-components/header/header.component';
+import { LoginFormComponent } from './components/login-components/login-form/login-form.component';
+import { HomeComponent } from './components/admin-components/home/home.component';
+import { NavbarComponent } from './components/admin-components/navbar/navbar.component';
 
 import { UserService } from './services/users/user.service';
 
 import { AuthentificationGuard } from './guards/authentification.guard';
-import { AddUserComponent } from './components/add-user/add-user.component';
+import { AddUserComponent } from './components/admin-components/add-user/add-user.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ViewUserComponent } from './components/admin-components/view-user/view-user.component';
+import { SideBarComponent } from './components/admin-components/side-bar/side-bar.component';
 
-import { BsDropdownModule } from '././././node_modules/nngx-bootstrap/dropdown';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
-const appRoutes:Routes = [
+const appRoutes: Routes = [
   {
-    path:'',
-    component:LoginFormComponent
+    path: '',
+    component: LoginFormComponent
   },
   {
-    path:'login',
-    component:LoginFormComponent
-  },{
-    path:'home',
-    canActivate: [AuthentificationGuard],
+    path: 'login',
+    component: LoginFormComponent
+  }, {
+    path: 'home',
+    /*canActivate: [AuthentificationGuard], */ /* access to home page once logged in */
     component: HomeComponent
   }
-]
+];
 
 
 @NgModule({
@@ -44,16 +47,19 @@ const appRoutes:Routes = [
     HomeComponent,
     NavbarComponent,
     AddUserComponent,
-
+    ViewUserComponent,
+    SideBarComponent
 
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
+    FormsModule,
     HttpModule,
-    FormsModule
+    BsDropdownModule.forRoot(),
+    AngularFontAwesomeModule
   ],
-  providers: [UserService,AuthentificationGuard],
+  providers: [UserService, AuthentificationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

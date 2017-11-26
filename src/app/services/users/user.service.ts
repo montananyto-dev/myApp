@@ -6,31 +6,31 @@ export class UserService {
   private isUserLoggedIn;
   private allUsers;
   private currentUser;
-  
-  constructor() { 
-    this.isUserLoggedIn =false;
+
+  constructor() {
+    this.isUserLoggedIn = false;
   }
 
-  setUserLoggedIn(){
+  setUserLoggedIn() {
     this.isUserLoggedIn = true;
   }
-  getUserLoggedIn(){
+  getUserLoggedIn() {
     return this.isUserLoggedIn;
   }
 
-  setAllUsers(users){
+  setAllUsers(users) {
     this.allUsers = users;
 
   }
-  getAllUsers(){
+  getAllUsers() {
     return this.allUsers;
   }
 
-  setCurrentUser(user){
-    this.currentUser = user; 
+  setCurrentUser(user) {
+    this.currentUser = user;
   }
 
-  getCurrentUser(user){
+  getCurrentUser(user) {
     return this.currentUser;
   }
 }

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Http, Response } from '@angular/http';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Http, Response} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 
-import { UserService } from '../../services/users/user.service';
+import {UserService} from '../../../services/users/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -13,12 +13,14 @@ import { UserService } from '../../services/users/user.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  public apiUrl = "http://slim.kingstonse.org/home/users";
+  public apiUrl = 'http://slim.kingstonse.org/home/users';
   userdataJson: any;
   inputUserName;
   inputPassword;
 
-  constructor(private router: Router, private user: UserService, private http: Http) {}
+  constructor(private router: Router, private user: UserService, private http: Http) {
+  }
+
   ngOnInit() {
     this.getAllUsers();
   }
@@ -31,12 +33,12 @@ export class LoginFormComponent implements OnInit {
 
     this.userdataJson.forEach(element => {
 
-      if (element['username'] == this.inputUserName && element['password'] == this.inputPassword) {
+      if (element['username'] === this.inputUserName && element['password'] === this.inputPassword) {
         this.user.setCurrentUser(this.inputUserName);
         this.user.setUserLoggedIn();
         this.router.navigate(['home']);
-        
-        
+
+
       } else {
         return ErrorEvent;
       }
@@ -44,12 +46,12 @@ export class LoginFormComponent implements OnInit {
   }
 
   getAllUsers() {
-      return this.http.get(this.apiUrl).map((res: Response) => res.json()).subscribe(object => {
+    return this.http.get(this.apiUrl).map((res: Response) => res.json()).subscribe(object => {
       this.userdataJson = object;
       this.user.setAllUsers(this.userdataJson);
     });
   }
- 
+
 }
 
 

@@ -4,7 +4,7 @@ import {FormControl} from '@angular/forms';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Http, Response} from '@angular/http';
-import {UserService} from '../../services/users/user.service';
+import {UserService} from '../../../services/users/user.service';
 
 import 'rxjs/add/operator/map';
 

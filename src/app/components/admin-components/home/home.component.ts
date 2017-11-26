@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from '../../services/users/user.service';
+import { UserService } from '../../../services/users/user.service';
 
 
 
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(public user:UserService) {
 
     this.allUsers = user.getAllUsers();
-    
+
    }
 
   ngOnInit() {
