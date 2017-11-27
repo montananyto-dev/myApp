@@ -1,19 +1,51 @@
-<h2>User form</h2>
+<app-navbar></app-navbar>
 
-<form #userForm="ngForm" (ngSubmit)="addUser(userForm.value)">
+<app-side-bar></app-side-bar>
 
-  <div class="form-group">
-    <input type="text" class="form-control" name="username" placeholder="username" ngModel required>
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" name="name" placeholder="name" ngModel required>
-  </div>
-  <div class="form-group">
-    <input type="password" class="form-control" name="password" placeholder="password" ngModel required>
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-success">add user</button>
-  </div>
+<div class="form-group row">
 
-</form>
+  <form  #userForm="ngForm" (ngSubmit)="addUser(userForm.value)">
+
+    <label for="example-text-input" class="col-2  col-form-label">Text</label>
+    <div class="col-5">
+      <input type="text" class="form-control" name="organisation" placeholder="organisation" ngModel required>
+    </div>
+
+    <label for="example-text-input" class="col-2  col-form-label">Text</label>
+    <div class="col-5">
+      <input type="text" class="form-control" name="userType" placeholder="userType" ngModel required>
+    </div>
+
+
+      <label for="example-text-input" class="col-2  col-form-label">Text</label>
+      <div class="col-5">
+      <input type="text" class="form-control" name="firstName" placeholder="firstName" ngModel required>
+      </div>
+
+        <label for="example-text-input" class="col-2  col-form-label">Text</label>
+        <div class="col-5">
+      <input type="text" class="form-control" name="lastName" placeholder="lastName" ngModel required>
+        </div>
+
+
+          <label for="example-text-input" class="col-2  col-form-label">Text</label>
+          <div class="col-5">
+      <input type="password" class="form-control" name="password" placeholder="password" ngModel required>
+          </div>
+
+
+            <label for="example-text-input" class="col-2  col-form-label">Text</label>
+            <div class="col-5">
+      <input type="email" class="form-control" name="email" placeholder="email" ngModel required>
+            </div>
+
+
+              <label for="example-text-input" class="col-2 col-form-label">Text</label>
+              <div class="col-5">
+      <input type="tel" class="form-control" name="phoneNumber" placeholder="phoneNumber" ngModel required>
+              </div>
+      <button type="submit" class="btn btn-success">add user</button>
+
+  </form>
+  </div>
 

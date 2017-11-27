@@ -32,6 +32,9 @@ const appRoutes: Routes = [
     path: 'home',
     /*canActivate: [AuthentificationGuard], */ /* access to home page once logged in */
     component: HomeComponent
+  }, {
+    path: 'add/user',
+    component: AddUserComponent
   }
 ];
 
