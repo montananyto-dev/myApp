@@ -86,3 +86,18 @@
   transition: all 2s ease-in-out;
 
 }
+
+#sidebar[_ngcontent-c3]   .list-group-item[_ngcontent-c3]{
+
+  border-radius: 0;
+  background-color: #f7f7f7;
+  color: #000;
+  border-left: 0;
+  border-right: 0;
+  border-color: #2c2c2c;
+  white-space: nowrap;
+}
+
+#sidebar[_ngcontent-c3] .list-group[_ngcontent-c3] .list-group-item[aria-expanded="true"][_ngcontent-c3] {
+  background-color: #d2d2d2;
+}
