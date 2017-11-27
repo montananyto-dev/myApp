@@ -7,6 +7,7 @@ import {Http, Response} from '@angular/http';
 import {UserService} from '../../../services/users/user.service';
 
 import 'rxjs/add/operator/map';
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -20,7 +21,7 @@ export class AddUserComponent implements OnInit {
 
   allusers = this.user.setAllUsers;
 
-  constructor(private router: Router, private user: UserService, private http: Http) {
+  constructor(private router: Router, private user: UserService, private http: HttpClient) {
   }
 
   ngOnInit() {

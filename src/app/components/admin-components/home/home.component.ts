@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   public allUsers;
   public displayUsers = false;
 
-  constructor(public user:UserService) {
+  constructor(public user: UserService) {
 
     this.allUsers = user.getAllUsers();
 

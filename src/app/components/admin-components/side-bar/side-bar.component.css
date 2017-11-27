@@ -1,127 +1,88 @@
-
-.fa-2x {
-  font-size: 2em;
-}
-.fa {
-  position: relative;
-  display: table-cell;
-  width: 60px;
-  height: 36px;
-  text-align: center;
-  vertical-align: middle;
-  font-size:20px;
+#sidebar .list-group-item {
+  border-radius: 0;
+  background-color: #333;
+  color: #ccc;
+  border-left: 0;
+  border-right: 0;
+  border-color: #2c2c2c;
+  white-space: nowrap;
 }
 
-
-.main-menu:hover,nav.main-menu.expanded {
-  width:250px;
-  overflow:visible;
+/* highlight active menu */
+#sidebar .list-group-item:not(.collapsed) {
+  background-color: #222;
 }
 
-.main-menu {
-  background:#f7f7f7;
-  border-right:1px solid #e5e5e5;
-  position:relative;
-  top:0;
-  bottom:0;
-  height:100%;
-  left:0;
-  width:60px;
-  overflow:hidden;
-  -webkit-transition:width .05s linear;
-  transition:width .05s linear;
-  -webkit-transform:translateZ(0) scale(1,1);
-  z-index:1000;
+/* closed state */
+#sidebar .list-group .list-group-item[aria-expanded="false"]::after {
+  content: " \f0d7";
+  font-family: FontAwesome;
+  display: inline;
+  text-align: right;
+  padding-left: 5px;
 }
 
-.main-menu>ul {
-  margin:7px 0;
+/* open state */
+#sidebar .list-group .list-group-item[aria-expanded="true"] {
+  background-color: #222;
+}
+#sidebar .list-group .list-group-item[aria-expanded="true"]::after {
+  content: " \f0da";
+  font-family: FontAwesome;
+  display: inline;
+  text-align: right;
+  padding-left: 5px;
 }
 
-.main-menu li {
-  position:relative;
-  display:block;
-  width:250px;
+/* level 1*/
+#sidebar .list-group .collapse .list-group-item  {
+  padding-left: 20px;
 }
 
-.main-menu li>a {
-  position:relative;
-  display:table;
-  border-collapse:collapse;
-  border-spacing:0;
-  color:#999;
-  font-family: arial;
-  font-size: 14px;
-  text-decoration:none;
-  -webkit-transform:translateZ(0) scale(1,1);
-  -webkit-transition:all .1s linear;
-  transition:all .1s linear;
+/* level 2*/
+#sidebar .list-group .collapse > .collapse .list-group-item {
+  padding-left: 30px;
+}
+
+/* level 3*/
+#sidebar .list-group .collapse > .collapse > .collapse .list-group-item {
+  padding-left: 40px;
+}
+
+@media (max-width:48em) {
+  /* overlay sub levels on small screens */
+  #sidebar .list-group .collapse.in, #sidebar .list-group .collapsing {
+    position: absolute;
+    z-index: 1;
+    width: 190px;
+  }
+  #sidebar .list-group > .list-group-item {
+    text-align: center;
+    padding: .75rem .5rem;
+  }
+  /* hide caret icons of top level when collapsed */
+  #sidebar .list-group > .list-group-item[aria-expanded="true"]::after,
+  #sidebar .list-group > .list-group-item[aria-expanded="false"]::after {
+    display:none;
+  }
+}
+
+/* change transition animation to width when entire sidebar is toggled */
+#sidebar.collapse {
+  -webkit-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: .2s;
+  -o-transition-duration: .2s;
+  transition-duration: .2s;
 
 }
 
-.main-menu .nav-icon {
-  position:relative;
-  display:table-cell;
-  width:60px;
-  height:36px;
-  text-align:center;
-  vertical-align:middle;
-  font-size:18px;
-}
+#sidebar.collapsing {
+  -webkit-transition: all 2s ease-in-out;
+  -moz-transition: all 2s ease-in-out;
+  -ms-transition: all 2s ease-in-out;
+  -o-transition: all 2s ease-in-out;
+  transition: all 2s ease-in-out;
 
-.main-menu .nav-text {
-  position:relative;
-  display:table-cell;
-  vertical-align:middle;
-  width:190px;
-  font-family: 'Titillium Web', sans-serif;
-}
-
-.main-menu>ul.logout {
-  position:absolute;
-  left:0;
-  bottom:0;
-}
-
-.no-touch .scrollable.hover {
-  overflow-y:hidden;
-}
-
-.no-touch .scrollable.hover:hover {
-  overflow-y:auto;
-  overflow:visible;
-}
-
-a:hover,a:focus {
-  text-decoration:none;
-}
-
-nav {
-  -webkit-user-select:none;
-  -moz-user-select:none;
-  -ms-user-select:none;
-  -o-user-select:none;
-  user-select:none;
-}
-
-nav ul,nav li {
-  outline:0;
-  margin:0;
-  padding:0;
-}
-.main-menu li:hover>a,nav.main-menu li.active>a,.dropdown-menu>li>a:hover,.dropdown-menu>li>a:focus,.dropdown-menu>.active>a,.dropdown-menu>.active>a:hover,.dropdown-menu>.active>a:focus,.no-touch .dashboard-page nav.dashboard-menu ul li:hover a,.dashboard-page nav.dashboard-menu ul li.active a {
-  color:#fff;
-  background-color:#5fa2db;
-}
-.area {
-  float: left;
-  background: #e2e2e2;
-  width: 100%;
-  height: 100%;
-}
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
 }
