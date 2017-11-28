@@ -18,6 +18,7 @@ import { UserService } from './services/users/user.service';
 import { AuthentificationGuard } from './guards/authentification.guard';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 
 const appRoutes: Routes = [
@@ -50,14 +51,15 @@ const appRoutes: Routes = [
     AddUserComponent,
     ViewUserComponent,
     SideBarComponent
-
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
     HttpClientModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    MalihuScrollbarModule.forRoot()
+
   ],
   providers: [UserService, AuthentificationGuard],
   bootstrap: [AppComponent]
