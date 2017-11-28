@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { sidebar } from '../../../../assets/js/sidebar'; /*import js file */
 
 @Component({
   selector: 'app-side-bar',
@@ -11,7 +10,7 @@ export class SideBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    sidebar();
+
   }
 
 }

@@ -1,55 +1,3 @@
-<!--<div class="container-fluid ">-->
-
-<!--<div class="row">-->
-
-<!--<div class="col-md-3 col-xs-1 p-l-0 p-r-0 collapse in" id="sidebar">-->
-
-<!--<div class="list-group panel">-->
-
-<!--<a href="#menu1" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar"-->
-<!--aria-expanded="false"><i class="fa fa-user fa-fw"></i> <span class="hidden-sm-down">Users</span> </a>-->
-
-<!--<div class="collapse" id="menu1">-->
-
-<!--<a href="/add/user" class="list-group-item" data-parent="#menu1">Add Users</a>-->
-<!--<a href="#" class="list-group-item" data-parent="#menu1">View Users</a>-->
-<!--<a href="#" class="list-group-item" data-parent="#menu1">View Users Per Module</a>-->
-<!--<a href="#" class="list-group-item" data-parent="#menu1">View Users Per Course</a>-->
-
-<!--</div>-->
-
-<!--<a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar"-->
-<!--aria-expanded="false"><i class="fa fa-book fa-fw"></i> <span class="hidden-sm-down">Courses</span></a>-->
-
-<!--<div class="collapse" id="menu3">-->
-
-<!--<a href="#" class="list-group-item" data-parent="#menu3">Add Course</a>-->
-<!--<a href="#" class="list-group-item" data-parent="#menu3">View Courses</a>-->
-<!--<a href="#" class="list-group-item" data-parent="#menu3">View Courses Per Module</a>-->
-
-<!--</div>-->
-
-<!--<a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar"-->
-<!--aria-expanded="false"><i class="fa fa-book fa-fw"></i> <span class="hidden-sm-down">Modules</span></a>-->
-
-<!--<div class="collapse" id="menu2">-->
-
-<!--<a href="#" class="list-group-item" data-parent="#menu1">Add Module</a>-->
-<!--<a href="#" class="list-group-item" data-parent="#menu1">View Module</a>-->
-<!--<a href="#" class="list-group-item" data-parent="#menu1">Archive Module</a>-->
-
-<!--</div>-->
-
-<!--</div>-->
-
-<!--</div>-->
-
-<!--<a href="#sidebar" data-toggle="collapse"><i class="fa fa-navicon fa-lg"></i></a>-->
-
-<!--</div>-->
-
-<!--</div>-->
-
 <div class="wrapper">
   <!-- Sidebar Holder -->
   <nav id="sidebar">
@@ -58,88 +6,82 @@
     </div>
 
     <div class="sidebar-header">
-      <h3>Bootstrap Sidebar</h3>
+      <h3>My Project</h3>
     </div>
 
     <ul class="list-unstyled components">
-      <p>Dummy Heading</p>
+
+      <p>Welcome Admin</p>
+
       <li class="active">
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Home</a>
+        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Users</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
-          <li><a href="#">Home 1</a></li>
-          <li><a href="#">Home 2</a></li>
-          <li><a href="#">Home 3</a></li>
+          <li><a href="#">View all Users</a></li>
+          <li><a href="#">View all Users per Module</a></li>
+          <li><a href="#">View all Users per Course</a></li>
+          <li><a href="#">Add a User</a></li>
+          <li><a href="#">Delete a User</a></li>
         </ul>
       </li>
-      <li>
-        <a href="#">About</a>
-        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-        <ul class="collapse list-unstyled" id="pageSubmenu">
-          <li><a href="#">Page 1</a></li>
-          <li><a href="#">Page 2</a></li>
-          <li><a href="#">Page 3</a></li>
+
+      <li class="active">
+        <a href="#homeSubmenu2" data-toggle="collapse" aria-expanded="false">Modules</a>
+        <ul class="collapse list-unstyled" id="homeSubmenu2">
+          <li><a href="#">View all Modules</a></li>
+          <li><a href="#">View all Modules per Course</a></li>
+          <li><a href="#">Add a Module</a></li>
+          <li><a href="#">Delete a Module</a></li>
         </ul>
       </li>
-      <li>
-        <a href="#">Portfolio</a>
+
+      <li class="active">
+        <a href="#homeSubmenu3" data-toggle="collapse" aria-expanded="false">Courses</a>
+        <ul class="collapse list-unstyled" id="homeSubmenu3">
+          <li><a href="#">View all Courses </a></li>
+          <li><a href="#">Add a Course</a></li>
+          <li><a href="#">Delete a Course</a></li>
+        </ul>
       </li>
-      <li>
-        <a href="#">Contact</a>
+
+      <li class="active">
+        <a href="#homeSubmenu4" data-toggle="collapse" aria-expanded="false">Organisations</a>
+        <ul class="collapse list-unstyled" id="homeSubmenu4">
+          <li><a href="#">Edit the Organisation</a></li>
+          <li><a href="#">Archive the organisation</a></li>
+
+        </ul>
       </li>
+
+      <li> <a href="#"></a></li>
+      <li><a href="#">Contact</a></li>
+
     </ul>
 
-    <ul class="list-unstyled CTAs">
-      <li><a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a></li>
-      <li><a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a></li>
-    </ul>
   </nav>
 
   <!-- Page Content Holder -->
   <div id="content">
 
     <nav class="navbar navbar-default">
-      <div class="container-fluid">
 
         <div class="navbar-header">
-          <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-            <i class="glyphicon glyphicon-align-left"></i>
-            <span>Open Sidebar</span>
-          </button>
+
+            <i id="sidebarCollapse" class="fa fa-bars fa-3x"></i>
+
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Page</a></li>
-            <li><a href="#">Page</a></li>
-            <li><a href="#">Page</a></li>
-            <li><a href="#">Page</a></li>
-          </ul>
+          <ul class="nav navbar-nav"></ul>
+
         </div>
-      </div>
+
     </nav>
 
-    <h2>Collapsible Sidebar Using Bootstrap 3</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-    <div class="line"></div>
-
-    <h2>Lorem Ipsum Dolor</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-    <div class="line"></div>
-
-    <h2>Lorem Ipsum Dolor</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-    <div class="line"></div>
-
-    <h3>Lorem Ipsum Dolor</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
+
 </div>
 
 
-
 <div class="overlay"></div>
+
 
