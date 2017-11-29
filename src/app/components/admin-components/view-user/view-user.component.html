@@ -1,25 +1,7 @@
 
 
+<app-side-bar></app-side-bar>
 <!-- <div><a routerLink ="/login">Go back to login</a></div> -->
 
 
-<div (click) ="showUsers()">
 
-  <button type="button" class="btn btn-primary">Show/hide users</button>
-
-  <div *ngIf="displayUsers == true">
-    <table class="table">
-      <tr>
-        <th>ID</th>
-        <th>Firstname</th>
-        <th>Password</th>
-      </tr>
-      <tr *ngFor = "let item of allUsers">
-
-        <td>{{item.id}}</td>
-        <td>{{item.username}}</td>
-        <td>{{item.password}}</td>
-      </tr>
-    </table>
-  </div>
-</div>

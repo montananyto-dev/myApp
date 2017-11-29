@@ -36,6 +36,10 @@ const appRoutes: Routes = [
   }, {
     path: 'add/user',
     component: AddUserComponent
+  },
+  {
+    path: 'view/user',
+    component: ViewUserComponent
   }
 ];
 
