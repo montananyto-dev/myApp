@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map';
 
 
 import { UserService } from '../../../services/users/user.service';
-import { HttpClient, HttpResponseBase} from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-login-form',
