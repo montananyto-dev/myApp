@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {Http, Response} from '@angular/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 
-import {UserService} from '../../../services/users/user.service';
+import { UserService } from '../../../services/users/user.service';
+import { HttpClient, HttpResponseBase} from '@angular/common/http';
 
 @Component({
   selector: 'app-login-form',
@@ -18,7 +18,7 @@ export class LoginFormComponent implements OnInit {
   inputUserName;
   inputPassword;
 
-  constructor(private router: Router, private user: UserService, private http: Http) {
+  constructor(private router: Router, private user: UserService, private http: HttpClient) {
   }
 
   ngOnInit() {
@@ -46,7 +46,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   getAllUsers() {
-    return this.http.get(this.apiUrl).map((res: Response) => res.json()).subscribe(object => {
+    return this.http.get(this.apiUrl).subscribe(object => {
       this.userdataJson = object;
       this.user.setAllUsers(this.userdataJson);
     });

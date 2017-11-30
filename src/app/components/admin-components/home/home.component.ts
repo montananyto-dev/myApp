@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  showUsers(){
+  showUsers() {
     this.displayUsers = !this.displayUsers;
   }
 }
