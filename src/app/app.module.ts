@@ -13,12 +13,15 @@ import { NavbarComponent } from './components/admin-components/navbar/navbar.com
 import { AddUserComponent } from './components/admin-components/add-user/add-user.component';
 import { ViewUserComponent } from './components/admin-components/view-user/view-user.component';
 import { SideBarComponent } from './components/admin-components/side-bar/side-bar.component';
+import { ViewOrganisationComponent } from './components/admin-components/view-organisation/view-organisation.component';
 
-import { UserService } from './services/users/user.service';
 import { AuthentificationGuard } from './guards/authentification.guard';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
+
+import { UserService } from './services/user/user.service';
+import { OrganisationService } from './services/organisation/organisation.service';
 
 
 const appRoutes: Routes = [
@@ -40,6 +43,10 @@ const appRoutes: Routes = [
   {
     path: 'view/user',
     component: ViewUserComponent
+  },
+  {
+  path: 'view/organisation',
+    component: ViewOrganisationComponent
   }
 ];
 
@@ -54,7 +61,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     AddUserComponent,
     ViewUserComponent,
-    SideBarComponent
+    SideBarComponent,
+    ViewOrganisationComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +73,7 @@ const appRoutes: Routes = [
     MalihuScrollbarModule.forRoot()
 
   ],
-  providers: [UserService, AuthentificationGuard],
+  providers: [UserService, OrganisationService, AuthentificationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import 'rxjs/add/operator/map';
 
 
-import {UserService} from '../../../services/users/user.service';
+import {UserService} from '../../../services/user/user.service';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 
 @Component({
@@ -13,15 +13,13 @@ import {HttpClient, HttpResponse} from '@angular/common/http';
 })
 export class ViewUserComponent implements OnInit {
 
-  public apiUrl = 'http://slim.kingstonse.org/view/users';
+  public apiUrl = 'http://slim.kingstonse.org/view/user';
   userdataJson: any;
   // displayUsers: boolean;
   allUsers;
 
 
   constructor(private router: Router, private user: UserService, private http: HttpClient) {
-
-
   }
 
   ngOnInit() {

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 
-import { UserService } from '../../../services/users/user.service';
+import { UserService } from '../../../services/user/user.service';
 import { HttpClient} from '@angular/common/http';
 
 @Component({
@@ -13,7 +13,7 @@ import { HttpClient} from '@angular/common/http';
 })
 export class LoginFormComponent implements OnInit {
 
-  public apiUrl = 'http://slim.kingstonse.org/home/users';
+  public apiUrl = 'http://slim.kingstonse.org/view/user';
   userdataJson: any;
   inputUserName;
   inputPassword;
