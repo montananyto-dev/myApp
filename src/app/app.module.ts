@@ -15,7 +15,7 @@ import { ViewUserComponent } from './components/admin-components/view-user/view-
 import { SideBarComponent } from './components/admin-components/side-bar/side-bar.component';
 import { ViewOrganisationComponent } from './components/admin-components/view-organisation/view-organisation.component';
 import { ViewModuleComponent } from './components/admin-components/view-module/view-module.component';
-
+import { ViewCourseComponent } from './components/admin-components/view-course/view-course.component';
 import { AuthentificationGuard } from './guards/authentification.guard';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -24,7 +24,6 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 import { UserService } from './services/user/user.service';
 import { OrganisationService } from './services/organisation/organisation.service';
 import { ModuleService } from './services/module/module.service';
-import { ViewCourseComponent } from './components/admin-components/view-course/view-course.component';
 import {CourseService} from './services/course/course.service';
 
 
@@ -40,7 +39,7 @@ const appRoutes: Routes = [
     component: LoginFormComponent
   }, {
     path: 'home',
-    /*canActivate: [AuthentificationGuard], */ /* access to home page once logged in */
+    canActivate: [AuthentificationGuard],  /* access to home page once logged in */
     component: HomeComponent
   }, {
     path: 'add/user',

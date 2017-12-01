@@ -33,10 +33,10 @@ export class LoginFormComponent implements OnInit {
 
     this.userdataJson.forEach(element => {
 
-      if (element['username'] === this.inputUserName && element['password'] === this.inputPassword) {
+      if (element['first_name'] === this.inputUserName && element['password'] === this.inputPassword) {
         this.user.setCurrentUser(this.inputUserName);
         this.user.setUserLoggedIn();
-        this.router.navigate(['home']);
+        this.router.navigateByUrl('/home');
 
 
       } else {
