@@ -14,6 +14,7 @@ import { AddUserComponent } from './components/admin-components/add-user/add-use
 import { ViewUserComponent } from './components/admin-components/view-user/view-user.component';
 import { SideBarComponent } from './components/admin-components/side-bar/side-bar.component';
 import { ViewOrganisationComponent } from './components/admin-components/view-organisation/view-organisation.component';
+import { ViewModuleComponent } from './components/admin-components/view-module/view-module.component';
 
 import { AuthentificationGuard } from './guards/authentification.guard';
 
@@ -22,6 +23,10 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 import { UserService } from './services/user/user.service';
 import { OrganisationService } from './services/organisation/organisation.service';
+import { ModuleService } from './services/module/module.service';
+import { ViewCourseComponent } from './components/admin-components/view-course/view-course.component';
+import {CourseService} from './services/course/course.service';
+
 
 
 
@@ -48,6 +53,14 @@ const appRoutes: Routes = [
   {
   path: 'view/organisation',
     component: ViewOrganisationComponent
+  },
+  {
+    path: 'view/module',
+    component: ViewModuleComponent
+  },
+  {
+    path: 'view/course',
+    component: ViewCourseComponent
   }
 
 ];
@@ -64,7 +77,9 @@ const appRoutes: Routes = [
     AddUserComponent,
     ViewUserComponent,
     SideBarComponent,
-    ViewOrganisationComponent
+    ViewOrganisationComponent,
+    ViewModuleComponent,
+    ViewCourseComponent
 
   ],
   imports: [
@@ -76,7 +91,7 @@ const appRoutes: Routes = [
     MalihuScrollbarModule.forRoot()
 
   ],
-  providers: [UserService, OrganisationService, AuthentificationGuard],
+  providers: [UserService, OrganisationService, ModuleService, CourseService, AuthentificationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
