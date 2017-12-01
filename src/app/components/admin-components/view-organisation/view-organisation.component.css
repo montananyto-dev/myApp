@@ -1,6 +1,7 @@
 .table-responsive {
   display: block;
-  width: 100%;
+  width: 75%;
   overflow-x: initial;
   -ms-overflow-style: -ms-autohiding-scrollbar;
+  margin:auto;
 }
