@@ -22,6 +22,7 @@ import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
 import { UserService } from './services/user/user.service';
 import { OrganisationService } from './services/organisation/organisation.service';
+import { UserTestComponent } from './user-test/user-test.component';
 
 
 const appRoutes: Routes = [
@@ -47,6 +48,10 @@ const appRoutes: Routes = [
   {
   path: 'view/organisation',
     component: ViewOrganisationComponent
+  },
+  {
+    path: 'user',
+    component: UserTestComponent
   }
 ];
 
@@ -62,7 +67,8 @@ const appRoutes: Routes = [
     AddUserComponent,
     ViewUserComponent,
     SideBarComponent,
-    ViewOrganisationComponent
+    ViewOrganisationComponent,
+    UserTestComponent
   ],
   imports: [
     BrowserModule,
