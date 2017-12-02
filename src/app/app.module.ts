@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule, Routes} from '@angular/router';
+import {NgModule, OnInit} from '@angular/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {Router, RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -25,9 +25,9 @@ import { UserService } from './services/user/user.service';
 import { OrganisationService } from './services/organisation/organisation.service';
 import { ModuleService } from './services/module/module.service';
 import {CourseService} from './services/course/course.service';
+import { UserTypeService } from './services/user-type/user-type.service';
 
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   {
@@ -39,7 +39,7 @@ const appRoutes: Routes = [
     component: LoginFormComponent
   }, {
     path: 'home',
-    canActivate: [AuthentificationGuard],  /* access to home page once logged in */
+   canActivate: [AuthentificationGuard],  /* access to home page once logged in */
     component: HomeComponent
   }, {
     path: 'add/user',
@@ -87,10 +87,35 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    MalihuScrollbarModule.forRoot()
+    MalihuScrollbarModule.forRoot(),
+    ReactiveFormsModule
 
   ],
-  providers: [UserService, OrganisationService, ModuleService, CourseService, AuthentificationGuard],
+  providers: [UserService, OrganisationService, ModuleService, UserTypeService, CourseService, AuthentificationGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule implements OnInit{
+
+  users;
+  userdataJson: any;
+  public apiUrl = 'http://slim.kingstonse.org/view/user';
+
+  constructor(private router: Router, private user: UserService, private http: HttpClient, private userType: UserTypeService) {
+  }
+
+  ngOnInit() {
+
+    this.getUsersDetails();
+
+  }
+  getUsersDetails() {
+    return this.http.get(this.apiUrl).subscribe(object => {
+      this.userdataJson = object;
+      this.user.setAllUsers(this.userdataJson);
+      this.users = this.user.getAllUsers();
+      console.log(this.users);
+    });
+  }
+}
+
+
