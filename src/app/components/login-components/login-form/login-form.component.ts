@@ -44,9 +44,9 @@ export class LoginFormComponent implements OnInit {
   ngOnInit() {
     this.getAllUsers();
     this.getAllOrganisations();
-    this.getCourses();
-    this.getModules();
-    this.getUserType();
+    this.getAllCourses();
+    this.getAllModules();
+    this.getAllUserTypes();
   }
 
   loginUser(event) {
@@ -78,19 +78,19 @@ export class LoginFormComponent implements OnInit {
       this.organisation.setOrganisations(this.organisationDataJson);
     });
   }
-  getModules() {
+  getAllModules() {
     return this.http.get(this.moduleApi).subscribe(object => {
       this.moduleDataJson = object;
       this.module.setModules(this.moduleDataJson);
     });
   }
-  getCourses() {
+  getAllCourses() {
     return this.http.get(this.courseApi).subscribe(object => {
       this.courseDataJson = object;
       this.course.setCourses(this.courseDataJson);
     });
   }
-  getUserType() {
+  getAllUserTypes() {
     return this.http.get(this.userTypeApi).subscribe(object => {
       this.userTypeDataJson = object;
       this.userType.setUserType(this.userTypeDataJson);

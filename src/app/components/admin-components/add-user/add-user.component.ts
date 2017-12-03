@@ -1,17 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+// import {FormsModule} from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {NgForm} from '@angular/forms';
+// import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Http, Response} from '@angular/http';
+// import {Http, Response} from '@angular/http';
 import {UserTypeService} from '../../../services/user-type/user-type.service';
 import {UserService} from '../../../services/user/user.service';
 import 'rxjs/add/operator/map';
 import {HttpClient} from '@angular/common/http';
-import {ModuleService} from '../../../services/module/module.service';
+// import {ModuleService} from '../../../services/module/module.service';
 import {CourseService} from '../../../services/course/course.service';
 import {OrganisationService} from '../../../services/organisation/organisation.service';
+import {LoginFormComponent} from '../../login-components/login-form/login-form.component';
+import {ModuleService} from '../../../services/module/module.service';
 
 
 @Component({
@@ -45,28 +47,41 @@ export class AddUserComponent implements OnInit {
   courses;
   userTypes;
   organisations;
+  userTypeChange: String = 'unselected';
 
   selectionDataJson: any;
 
+  //for testing adduser only, need to remove after
+   loginClass = new LoginFormComponent(this.router, this.user, this.organisation, this.module, this.course, this.userType, this.http);
+
   constructor(private router: Router,
               private user: UserService,
-              private module: ModuleService,
+              // private module: ModuleService,
               private course: CourseService,
               private userType: UserTypeService,
               private organisation: OrganisationService,
-              private http: HttpClient) {
-  }
+              private module: ModuleService,
+              private http: HttpClient) {}
+
 
   ngOnInit() {
 
     this.users = this.user.getAllUsers();
-    this.modules = this.module.getModules();
     this.userTypes = this.userType.getUserType();
     this.courses = this.course.getCourses();
     this.organisations = this.organisation.getOrganisations();
+//for testing adduser only, need to remove after
+    this.loginClass.getAllUsers();
+    this.loginClass.getAllOrganisations();
+    this.loginClass.getAllCourses();
+    this.loginClass.getAllModules();
+    this.loginClass.getAllUserTypes();
+
   }
 
-  onSubmit = function(submit){
+
+
+  onSubmit = function (submit) {
 
     console.log(JSON.stringify(submit));
     return this.http.post(this.apiUrl, JSON.stringify(submit),
@@ -89,14 +104,27 @@ export class AddUserComponent implements OnInit {
     console.log(type);
   }
 
-  sendCourse(e) {
-      console.log(e)
-      return this.http.get(this.apiUrl2 + '/' + e).subscribe(object => {
-        this.selectionDataJson = object;
-        this.organisation.setOrganisations(this.selectionDataJson);
-        console.log(this.selectionDataJson);
-      });
-    }
+  sendUserType(e) {
 
+    console.log('userType: ' + e );
+
+    if (e === 'Student') {
+      this.userTypeChange = 'Student';
+    } else if (e === 'Admin') {
+      this.userTypeChange = 'Admin';
+    } else {
+      this.userTypeChange = 'Lecturer';
+    }
   }
+
+  sendCourse(e) {
+    console.log(e);
+    return this.http.get(this.apiUrl2 + '/' + e).subscribe(object => {
+      this.selectionDataJson = object;
+      this.modules = this.selectionDataJson;
+      console.log(this.selectionDataJson);
+    });
+  }
+
+}
 

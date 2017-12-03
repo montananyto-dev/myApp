@@ -4,6 +4,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Router, RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/login-components/footer/footer.component';
 import { HeaderComponent } from './components/login-components/header/header.component';
@@ -94,14 +95,7 @@ const appRoutes: Routes = [
   providers: [UserService, OrganisationService, ModuleService, UserTypeService, CourseService, AuthentificationGuard],
   bootstrap: [AppComponent]
 })
-export class AppModule implements OnInit{
-
-  users;
-  modules;
-  userdataJson: any;
-  moduleDataJson: any;
-  public apiUrlusers = 'http://slim.kingstonse.org/view/user';
-  public apiUrlModules = 'http://slim.kingstonse.org/view/module';
+export class AppModule implements OnInit {
 
   constructor(private router: Router,
               private user: UserService,
@@ -111,28 +105,8 @@ export class AppModule implements OnInit{
   }
 
   ngOnInit() {
-
-    this.getUsersDetails();
-    this.getModules();
-
-  }
-  getUsersDetails() {
-    return this.http.get(this.apiUrlusers).subscribe(object => {
-      this.userdataJson = object;
-      this.user.setAllUsers(this.userdataJson);
-      this.users = this.user.getAllUsers();
-      console.log(this.users);
-    });
   }
 
-  getModules() {
-    return this.http.get(this.apiUrlModules).subscribe(object => {
-      this.moduleDataJson = object;
-      this.module.setModules(this.moduleDataJson);
-      this.modules = this.module.getModules();
-      console.log(this.modules);
-    });
-  }
 }
 
 

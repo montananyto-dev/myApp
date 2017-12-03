@@ -43,27 +43,42 @@
 
 <!--</form>-->
 <!--</div>-->
-<div class="container">
+<div class="container"   >
+
+
+
   <form [formGroup]="userForm" no validate>
-
-
     <div class="form-group row">
       <label for="userType" class="col-2 col-form-label">UserType</label>
-      <div class="col-10">
-        <select class="form-control" formControlName="userType" type="text"  id="userType" required >
-          <option *ngFor="let item of userTypes"
-                  [value]="item.user_type_role">
-            {{item.user_type_role}}
+      <div class="col-10" >
+        <select #userType class="form-control" formControlName="userType" (change)="sendUserType(userType.value)" type="text"  id="userType" required >
+          <option *ngFor="let userType of userTypes"
+                  [value]="userType.user_type_role" >
+            {{userType.user_type_role}}
           </option>
+
         </select>
       </div>
     </div>
 
-    <div class="form-group row">
+    <div *ngIf ="userTypeChange== 'Student'  || userTypeChange== 'unselected' " class="form-group row" >
       <label for="course" class="col-2 col-form-label">Course</label>
       <div class="col-10">
-        <select class="form-control"  formControlName="course" (change)="sendCourse($event.target.value)" type="text"  id="course" required >
-          <option *ngFor="let item of courses,let i of courses"
+        <select  class="form-control"  formControlName="course" (change)="sendCourse($event.target.value)" type="text"  id="course" required >
+          <option *ngFor="let item of courses"
+                  [value]="item.course_id" >
+            {{item.course_name}}
+          </option>
+        </select>
+
+      </div>
+    </div>
+
+    <div *ngIf ="userTypeChange== 'Lecturer' " class="form-group row" >
+      <label for="course" class="col-2 col-form-label">Course</label>
+      <div class="col-10">
+        <select multiple class="form-control"  formControlName="course" (change)="sendCourse($event.target.value)" type="text"  id="course" required >
+          <option *ngFor="let item of courses"
                   [value]="item.course_id" >
             {{item.course_name}}
           </option>
@@ -73,41 +88,87 @@
     </div>
 
 
-    <div class="form-group row">
-      <label for="module" class="col-2 col-form-label">Module</label>
-      <div class="col-10">
-        <select class="form-control" formControlName="module" type="text"  id="module" required >
-          <option *ngFor="let item of modules"
-                  [value]="item.module_name">
-            {{item.module_name}}
-          </option>
-        </select>
+    <!--<div *ngIf ="userTypeChange== 'Student'  || userTypeChange== 'unselected'  " class="form-group row">-->
+      <!--<label for="module" class="col-2 col-form-label">Module</label>-->
+      <!--<div class="col-10">-->
+        <!--<select class="form-control" formControlName="module" type="text"  id="module" required >-->
+          <!--<option *ngFor="let item of modules"-->
+                  <!--[value]="item.module_name">-->
+            <!--{{item.module_name}}-->
+          <!--</option>-->
+        <!--</select>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <div *ngIf ="userTypeChange== 'Lecturer' " class="form-group ">
+      <label for="course" class="col-2 col-form-label">Courses</label>
+      <div class="form-check" *ngFor="let course of courses; let i = index;">
+          <div class="col-10">
+          <input multiple class="form-check-input" type="checkbox" (change)="sendCourse(course.course_id)"
+                 name="{{course.value}}" value="{{course.value}}"(change)="checkValue($event, course)"
+                 [checked]="course.checked"/>{{course.course_name}}
+
+          </div>
       </div>
     </div>
+
+
+    <div *ngIf ="userTypeChange== 'Lecturer' || userTypeChange== 'Student'" class="form-group ">
+      <div class="form-check" *ngFor="let module of modules; let i = index;">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" name="{{module.value}}" value="{{module.value}}"
+            (change)="checkValue($event, module)"
+            [checked]="module.checked"/>
+          {{module.module_name}}
+        </label>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="form-group row">
       <label for="organisation" class="col-2 col-form-label">Organisation</label>
       <div class="col-10">
-        <select class="form-control" formControlName="organisation" type="text"  id="organisation" required>
-          <option *ngFor="let item of organisations" [value]="item.organisation_name">
-            {{item.organisation_name}}
+        <select  class="form-control" formControlName="organisation" type="text"  id="organisation" required>
+          <option *ngFor="let organisation of organisations" [value]="organisation.organisation_name">
+            {{organisation.organisation_name}}
           </option>
-
         </select>
       </div>
     </div>
 
-    <div class="form-group">
-      <div class="form-check" *ngFor="let item of modules; let i = index;">
-        <label class="form-check-label">
-          <input
-            class="form-check-input" type="checkbox" name="{{item.value}}" value="{{item.value}}"
-            (change)="checkValue($event, item)"
-            [checked]="item.checked"/>
-          {{item.module_name}}
-        </label>
-      </div>
-    </div>
+
 
 
     <div class="form-group row">
@@ -173,5 +234,7 @@
     <button type="submit" class="btn btn-success" (click)="onSubmit(userForm.value)">Submit</button>
 
   </form>
+
+
 </div>
 
