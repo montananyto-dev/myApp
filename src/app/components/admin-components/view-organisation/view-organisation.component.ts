@@ -10,20 +10,18 @@ import {OrganisationService} from '../../../services/organisation/organisation.s
 })
 export class ViewOrganisationComponent implements OnInit {
 
-  apiUrl = 'http://slim.kingstonse.org/view/organisation';
-  organisationDataJson: any;
   organisations;
-  constructor(private router: Router, private org: OrganisationService, private http: HttpClient) {
+
+  constructor(private router: Router,
+              private org: OrganisationService,
+              private http: HttpClient) {
+
+    this.organisations = this.org.getOrganisations();
   }
 
-  ngOnInit() {this.getUsersDetails();}
-  getUsersDetails() {
-      return this.http.get(this.apiUrl).subscribe(object => {
-      this.organisationDataJson = object;
-      this.org.setOrganisations(this.organisationDataJson);
-      this.organisations = this.org.getOrganisations();
-      console.log(this.organisations);
-    });
+  ngOnInit() {
+
+
   }
 }
 

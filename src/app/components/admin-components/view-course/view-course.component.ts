@@ -10,20 +10,14 @@ import {CourseService} from '../../../services/course/course.service';
 })
 export class ViewCourseComponent implements OnInit {
 
-
-  apiUrl = 'http://slim.kingstonse.org/view/course';
-  courseDataJson: any;
   courses;
-  constructor(private router: Router, private cou: CourseService, private http: HttpClient) {
+
+  constructor(private router: Router, private course: CourseService, private http: HttpClient) {
+
+    this.courses = this.course.getCourses();
   }
 
-  ngOnInit() {this.getUsersDetails();}
-  getUsersDetails() {
-    return this.http.get(this.apiUrl).subscribe(object => {
-      this.courseDataJson = object;
-      this.cou.setCourses(this.courseDataJson);
-      this.courses = this.cou.getCourses();
-      console.log(this.courses);
-    });
-  }
+  ngOnInit() {}
+
+
 }

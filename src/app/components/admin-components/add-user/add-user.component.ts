@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 import {HttpClient} from '@angular/common/http';
 import {ModuleService} from '../../../services/module/module.service';
 import {CourseService} from '../../../services/course/course.service';
+import {OrganisationService} from '../../../services/organisation/organisation.service';
 
 
 @Component({
@@ -22,26 +23,37 @@ export class AddUserComponent implements OnInit {
 
   userForm = new FormGroup({
 
+    organisation: new FormControl(),
     userType: new FormControl(),
     course: new FormControl(),
     module: new FormControl(),
-    firstName: new FormControl(),
-    lastName: new FormControl(),
+    firstName: new FormControl('', Validators.pattern('[a-zA-Z]+')), // input field that can contain only three letters (no numbers or special characters):
+    lastName: new FormControl('', Validators.pattern('[a-zA-Z]+')),
     dateOfBirth: new FormControl(),
-    password: new FormControl(),
+    password: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')), // An <input> element with type="password" that must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter:
+    passwordConfirmation: new FormControl(),
     email: new FormControl(),
     phoneNumber: new FormControl(),
     department: new FormControl()
   });
 
   public apiUrl = 'http://slim.kingstonse.org/home/add/users';
+  public apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
   users;
   modules;
   courses;
   userTypes;
+  organisations;
 
-  constructor(private router: Router, private user: UserService, private module: ModuleService, private course: CourseService, private userType: UserTypeService,
+  selectionDataJson: any;
+
+  constructor(private router: Router,
+              private user: UserService,
+              private module: ModuleService,
+              private course: CourseService,
+              private userType: UserTypeService,
+              private organisation: OrganisationService,
               private http: HttpClient) {
   }
 
@@ -51,11 +63,13 @@ export class AddUserComponent implements OnInit {
     this.modules = this.module.getModules();
     this.userTypes = this.userType.getUserType();
     this.courses = this.course.getCourses();
+    this.organisations = this.organisation.getOrganisations();
   }
 
-  addUser = function (newUser) {
-    console.log(JSON.stringify(newUser));
-    return this.http.post(this.apiUrl, JSON.stringify(newUser),
+  onSubmit = function(submit){
+
+    console.log(JSON.stringify(submit));
+    return this.http.post(this.apiUrl, JSON.stringify(submit),
       {
         headers: {
           'Accept': 'application/ json',
@@ -69,4 +83,20 @@ export class AddUserComponent implements OnInit {
         console.log('Error occured');
       });
   };
-}
+
+  checkValue(e, type) {
+    console.log(e.target.checked);
+    console.log(type);
+  }
+
+  sendCourse(e) {
+      console.log(e)
+      return this.http.get(this.apiUrl2 + '/' + e).subscribe(object => {
+        this.selectionDataJson = object;
+        this.organisation.setOrganisations(this.selectionDataJson);
+        console.log(this.selectionDataJson);
+      });
+    }
+
+  }
+

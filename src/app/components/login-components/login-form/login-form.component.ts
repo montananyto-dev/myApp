@@ -5,6 +5,10 @@ import 'rxjs/add/operator/map';
 
 import { UserService } from '../../../services/user/user.service';
 import { HttpClient} from '@angular/common/http';
+import {OrganisationService} from '../../../services/organisation/organisation.service';
+import {ModuleService} from '../../../services/module/module.service';
+import {UserTypeService} from '../../../services/user-type/user-type.service';
+import {CourseService} from '../../../services/course/course.service';
 
 @Component({
   selector: 'app-login-form',
@@ -13,16 +17,36 @@ import { HttpClient} from '@angular/common/http';
 })
 export class LoginFormComponent implements OnInit {
 
-  public apiUrl = 'http://slim.kingstonse.org/view/user';
+  public userApi = 'http://slim.kingstonse.org/view/user';
+  public userTypeApi = 'http://slim.kingstonse.org/view/usertype';
+  public organisationApi = 'http://slim.kingstonse.org/view/organisation';
+  public moduleApi = 'http://slim.kingstonse.org/view/module';
+  public courseApi = 'http://slim.kingstonse.org/view/course';
+
   userdataJson: any;
+  userTypeDataJson: any;
+  organisationDataJson: any;
+  moduleDataJson: any;
+  courseDataJson: any;
+
   inputUserName;
   inputPassword;
 
-  constructor(private router: Router, private user: UserService, private http: HttpClient) {
+  constructor(private router: Router,
+              private user: UserService,
+              private organisation: OrganisationService,
+              private module: ModuleService,
+              private course: CourseService,
+              private userType: UserTypeService,
+              private http: HttpClient) {
   }
 
   ngOnInit() {
     this.getAllUsers();
+    this.getAllOrganisations();
+    this.getCourses();
+    this.getModules();
+    this.getUserType();
   }
 
   loginUser(event) {
@@ -37,21 +61,41 @@ export class LoginFormComponent implements OnInit {
         this.user.setCurrentUser(this.inputUserName);
         this.user.setUserLoggedIn();
         this.router.navigateByUrl('/home');
-
-
       } else {
         return ErrorEvent;
       }
     });
   }
-
   getAllUsers() {
-    return this.http.get(this.apiUrl).subscribe(object => {
+    return this.http.get(this.userApi).subscribe(object => {
       this.userdataJson = object;
       this.user.setAllUsers(this.userdataJson);
     });
   }
-
+  getAllOrganisations() {
+    return this.http.get(this.organisationApi).subscribe(object => {
+      this.organisationDataJson = object;
+      this.organisation.setOrganisations(this.organisationDataJson);
+    });
+  }
+  getModules() {
+    return this.http.get(this.moduleApi).subscribe(object => {
+      this.moduleDataJson = object;
+      this.module.setModules(this.moduleDataJson);
+    });
+  }
+  getCourses() {
+    return this.http.get(this.courseApi).subscribe(object => {
+      this.courseDataJson = object;
+      this.course.setCourses(this.courseDataJson);
+    });
+  }
+  getUserType() {
+    return this.http.get(this.userTypeApi).subscribe(object => {
+      this.userTypeDataJson = object;
+      this.userType.setUserType(this.userTypeDataJson);
+    });
+  }
 }
 
 

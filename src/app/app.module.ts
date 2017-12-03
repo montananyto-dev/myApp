@@ -97,23 +97,40 @@ const appRoutes: Routes = [
 export class AppModule implements OnInit{
 
   users;
+  modules;
   userdataJson: any;
-  public apiUrl = 'http://slim.kingstonse.org/view/user';
+  moduleDataJson: any;
+  public apiUrlusers = 'http://slim.kingstonse.org/view/user';
+  public apiUrlModules = 'http://slim.kingstonse.org/view/module';
 
-  constructor(private router: Router, private user: UserService, private http: HttpClient, private userType: UserTypeService) {
+  constructor(private router: Router,
+              private user: UserService,
+              private module: ModuleService,
+              private http: HttpClient,
+              private userType: UserTypeService) {
   }
 
   ngOnInit() {
 
     this.getUsersDetails();
+    this.getModules();
 
   }
   getUsersDetails() {
-    return this.http.get(this.apiUrl).subscribe(object => {
+    return this.http.get(this.apiUrlusers).subscribe(object => {
       this.userdataJson = object;
       this.user.setAllUsers(this.userdataJson);
       this.users = this.user.getAllUsers();
       console.log(this.users);
+    });
+  }
+
+  getModules() {
+    return this.http.get(this.apiUrlModules).subscribe(object => {
+      this.moduleDataJson = object;
+      this.module.setModules(this.moduleDataJson);
+      this.modules = this.module.getModules();
+      console.log(this.modules);
     });
   }
 }

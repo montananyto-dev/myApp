@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {ModuleService} from '../../../services/module/module.service';
@@ -10,19 +10,16 @@ import {ModuleService} from '../../../services/module/module.service';
 })
 export class ViewModuleComponent implements OnInit {
 
-  apiUrl = 'http://slim.kingstonse.org/view/module';
-  moduleDataJson: any;
   modules;
-  constructor(private router: Router, private mod: ModuleService, private http: HttpClient) {
+
+  constructor(private router: Router, private module: ModuleService, private http: HttpClient) {
+
+    this.modules = this.module.getModules();
+
   }
 
-  ngOnInit() {this.getUsersDetails();}
-  getUsersDetails() {
-    return this.http.get(this.apiUrl).subscribe(object => {
-      this.moduleDataJson = object;
-      this.mod.setModules(this.moduleDataJson);
-      this.modules = this.mod.getModules();
-      console.log(this.modules);
-    });
+  ngOnInit() {
+
   }
+
 }
