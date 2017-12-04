@@ -1,0 +1,58 @@
+<app-side-bar></app-side-bar>
+
+<div class="container">
+
+  <form  [formGroup]="organisationForm" no validate>
+
+    <div class="form-group row">
+      <label for="name" class="col-2 col-form-label">Name</label>
+      <div class="col-10">
+        <input class="form-control" formControlName="name" type="text" id="name" required>
+      </div>
+
+    </div>
+
+
+    <div class="form-group row">
+      <label for="address" class="col-2 col-form-label">Address</label>
+      <div class="col-10">
+        <input class="form-control" formControlName="address" type="text" id="address" required>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label for="type" class="col-2 col-form-label">Type</label>
+      <div class="col-10">
+        <input class="form-control" formControlName="type" type="text" id="type" required>
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label for="phoneNumber" class="col-2 col-form-label">Phone number</label>
+      <div class="col-10">
+        <input class="form-control" formControlName="phoneNumber" type="tel" id="phoneNumber" required>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="email" class="col-2 col-form-label">Email</label>
+      <div class="col-10">
+        <input class="form-control" formControlName="email" type="email" id="email" required>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="country" class="col-2 col-form-label">Country</label>
+      <div class="col-10">
+        <input class="form-control" formControlName="country" type="text" id="country" required>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-success" (click)="onSubmit(organisationForm.value)">Submit</button>
+
+  </form>
+
+</div>
+

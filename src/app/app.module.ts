@@ -29,6 +29,7 @@ import {CourseService} from './services/course/course.service';
 import { UserTypeService } from './services/user-type/user-type.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddOrganisationComponent } from './components/admin-components/add-organisation/add-organisation.component';
 
 const appRoutes: Routes = [
   {
@@ -61,6 +62,10 @@ const appRoutes: Routes = [
   {
     path: 'view/course',
     component: ViewCourseComponent
+  },
+  {
+    path: 'add/organisation',
+    component: AddOrganisationComponent
   }
 
 ];
@@ -79,7 +84,8 @@ const appRoutes: Routes = [
     SideBarComponent,
     ViewOrganisationComponent,
     ViewModuleComponent,
-    ViewCourseComponent
+    ViewCourseComponent,
+    AddOrganisationComponent
 
   ],
   imports: [
