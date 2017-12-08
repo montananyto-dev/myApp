@@ -11,15 +11,25 @@ import {ModuleService} from '../../../services/module/module.service';
 export class ViewModuleComponent implements OnInit {
 
   modules;
+  moduleDataJson: any;
+
 
   constructor(private router: Router, private module: ModuleService, private http: HttpClient) {
-
-    this.modules = this.module.getModules();
 
   }
 
   ngOnInit() {
 
+    this.retrieveModules();
+
   }
+
+  retrieveModules(){
+
+  this.module.getAllModules().subscribe(data => {
+    this.moduleDataJson = data;
+    this.modules = data;
+
+  })}
 
 }

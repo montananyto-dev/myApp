@@ -11,13 +11,22 @@ import {CourseService} from '../../../services/course/course.service';
 export class ViewCourseComponent implements OnInit {
 
   courses;
+  courseDataJson: any;
 
   constructor(private router: Router, private course: CourseService, private http: HttpClient) {
 
-    this.courses = this.course.getCourses();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
 
+    this.retrieveCourses()
+  }
+
+  retrieveCourses(){
+
+    this.course.getAllCourses().subscribe(data => {
+    this.courseDataJson = data;
+    this.courses = data;
+  })}
 
 }

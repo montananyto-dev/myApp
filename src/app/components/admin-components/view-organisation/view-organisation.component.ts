@@ -11,15 +11,28 @@ import {OrganisationService} from '../../../services/organisation/organisation.s
 export class ViewOrganisationComponent implements OnInit {
 
   organisations;
+  organisationDataJson: any;
 
-  constructor(private router: Router,
-              private org: OrganisationService,
-              private http: HttpClient) {
-
-    this.organisations = this.org.getOrganisations();
+  constructor(private router: Router, private organisation: OrganisationService, private http: HttpClient) {
   }
 
   ngOnInit() {
+
+   this.retrieveOrganisations();
+
+  }
+  retrieveOrganisations(){
+
+    this.organisation.getOrganisations().subscribe(data => {
+    this.organisationDataJson = data;
+    this.organisations = data;
+
+  })}
+
+
+  refreshOrganisation(){
+
+    this.ngOnInit();
 
 
   }

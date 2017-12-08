@@ -4,7 +4,6 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Router, RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppComponent } from './app.component';
 import { FooterComponent } from './components/login-components/footer/footer.component';
 import { HeaderComponent } from './components/login-components/header/header.component';

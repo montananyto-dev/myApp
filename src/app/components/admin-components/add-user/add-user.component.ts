@@ -49,7 +49,12 @@ export class AddUserComponent implements OnInit {
   organisations;
   userTypeChange: String = 'unselected';
 
+  usersDataJson: any;
   selectionDataJson: any;
+  courseDataJson: any;
+  moduleDataJson: any;
+  userTypeDataJson: any;
+  organisationDataJson: any;
 
   //for testing adduser only, need to remove after
    loginClass = new LoginFormComponent(this.router, this.user, this.organisation, this.module, this.course, this.userType, this.http);
@@ -67,7 +72,7 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
 
     this.users = this.user.getAllUsers();
-    this.userTypes = this.userType.getUserType();
+    this.userTypes = this.userType.getAllUserTypes();
     this.courses = this.course.getCourses();
     this.organisations = this.organisation.getOrganisations();
 //for testing adduser only, need to remove after
@@ -77,9 +82,57 @@ export class AddUserComponent implements OnInit {
     this.loginClass.getAllModules();
     this.loginClass.getAllUserTypes();
 
+    this.retrieveUsers();
+    this.retrieveCourses();
+    this.retrieveModules();
+    this.retrieveUserTypes();
+    this.retrieveOrganisations();
+
   }
 
 
+
+
+retrieveOrganisations(){
+
+  this.organisation.getOrganisations().subscribe(data => {
+    this.organisationDataJson = data;
+    this.organisations = data;
+
+  })}
+
+  retrieveUsers(){
+
+    this.user.getAllUsers().subscribe(data => {
+      this.usersDataJson = data;
+      this.users = data;
+
+    })}
+
+
+  retrieveCourses(){
+
+    this.course.getAllCourses().subscribe(data => {
+      this.courseDataJson = data;
+      this.courses = data;
+    })}
+
+
+  retrieveModules(){
+
+    this.module.getAllModules().subscribe(data => {
+      this.moduleDataJson = data;
+      this.modules = data;
+
+    })}
+
+  retrieveUserTypes(){
+
+    this.userType.getAllUserTypes().subscribe(data => {
+      this.userTypeDataJson = data;
+      this.userTypes = data;
+
+    })}
 
   onSubmit = function (submit) {
 

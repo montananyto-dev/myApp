@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Observable } from "rxjs/Observable";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class UserService {
 
   public isUserLoggedIn;
-  public allUsers;
+  public users;
   public currentUser;
+  public userApi = 'http://slim.kingstonse.org/view/user';
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.isUserLoggedIn = false;
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get(this.userApi);
   }
 
   setUserLoggedIn() {
@@ -19,12 +26,12 @@ export class UserService {
   }
 
   setAllUsers(users) {
-    this.allUsers = users;
+    this.users = users;
 
   }
-  getAllUsers() {
-    return this.allUsers;
-  }
+  // getAllUsers() {
+  //   return this.users;
+  // }
 
   setCurrentUser(user) {
     this.currentUser = user;
