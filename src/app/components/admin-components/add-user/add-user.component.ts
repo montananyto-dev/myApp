@@ -1,18 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-// import {FormsModule} from '@angular/forms';
 import {FormControl} from '@angular/forms';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-// import {NgForm} from '@angular/forms';
-import {Router} from '@angular/router';
-// import {Http, Response} from '@angular/http';
+import {FormGroup, Validators} from '@angular/forms';
 import {UserTypeService} from '../../../services/user-type/user-type.service';
 import {UserService} from '../../../services/user/user.service';
 import 'rxjs/add/operator/map';
 import {HttpClient} from '@angular/common/http';
-// import {ModuleService} from '../../../services/module/module.service';
 import {CourseService} from '../../../services/course/course.service';
 import {OrganisationService} from '../../../services/organisation/organisation.service';
-import {LoginFormComponent} from '../../login-components/login-form/login-form.component';
 import {ModuleService} from '../../../services/module/module.service';
 
 
@@ -42,13 +36,6 @@ export class AddUserComponent implements OnInit {
   public apiUrl = 'http://slim.kingstonse.org/home/add/users';
   public apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
-  users;
-  modules;
-  courses;
-  userTypes;
-  organisations;
-  userTypeChange: String = 'unselected';
-
   usersDataJson: any;
   selectionDataJson: any;
   courseDataJson: any;
@@ -56,12 +43,22 @@ export class AddUserComponent implements OnInit {
   userTypeDataJson: any;
   organisationDataJson: any;
 
-  //for testing adduser only, need to remove after
-   loginClass = new LoginFormComponent(this.router, this.user, this.organisation, this.module, this.course, this.userType, this.http);
 
-  constructor(private router: Router,
+  users;
+  allModules;
+  modulesMatchingCourses;
+  courses;
+  userTypes;
+  organisations;
+  userTypeChange: String = 'unselected';
+
+
+  SelectedModulesForStudent;
+
+
+
+  constructor(
               private user: UserService,
-              // private module: ModuleService,
               private course: CourseService,
               private userType: UserTypeService,
               private organisation: OrganisationService,
@@ -70,48 +67,27 @@ export class AddUserComponent implements OnInit {
 
 
   ngOnInit() {
-
-    this.users = this.user.getAllUsers();
-    this.userTypes = this.userType.getAllUserTypes();
-    this.courses = this.course.getCourses();
-    this.organisations = this.organisation.getOrganisations();
-//for testing adduser only, need to remove after
-    this.loginClass.getAllUsers();
-    this.loginClass.getAllOrganisations();
-    this.loginClass.getAllCourses();
-    this.loginClass.getAllModules();
-    this.loginClass.getAllUserTypes();
-
     this.retrieveUsers();
     this.retrieveCourses();
     this.retrieveModules();
     this.retrieveUserTypes();
     this.retrieveOrganisations();
-
   }
 
-
-
-
 retrieveOrganisations(){
-
   this.organisation.getOrganisations().subscribe(data => {
     this.organisationDataJson = data;
     this.organisations = data;
-
   })}
 
   retrieveUsers(){
-
     this.user.getAllUsers().subscribe(data => {
       this.usersDataJson = data;
       this.users = data;
-
     })}
 
 
   retrieveCourses(){
-
     this.course.getAllCourses().subscribe(data => {
       this.courseDataJson = data;
       this.courses = data;
@@ -119,38 +95,37 @@ retrieveOrganisations(){
 
 
   retrieveModules(){
-
     this.module.getAllModules().subscribe(data => {
       this.moduleDataJson = data;
-      this.modules = data;
-
+      this.allModules = data;
     })}
 
   retrieveUserTypes(){
-
     this.userType.getAllUserTypes().subscribe(data => {
       this.userTypeDataJson = data;
       this.userTypes = data;
-
     })}
 
-  onSubmit = function (submit) {
 
-    console.log(JSON.stringify(submit));
-    return this.http.post(this.apiUrl, JSON.stringify(submit),
-      {
-        headers: {
-          'Accept': 'application/ json',
-          'Content-Type': 'application/json'
-        }
-      }).subscribe
-    (data => {
-        console.log(data);
-      },
-      err => {
-        console.log('Error occured');
-      });
-  };
+
+
+
+  testingCheck(event, type){
+    console.log(event);
+    console.log(type);
+
+
+  }
+
+
+
+
+
+
+
+
+
+
 
   checkValue(e, type) {
     console.log(e.target.checked);
@@ -170,14 +145,51 @@ retrieveOrganisations(){
     }
   }
 
-  sendCourse(e) {
-    console.log(e);
-    return this.http.get(this.apiUrl2 + '/' + e).subscribe(object => {
+  retrieveModuleFromCourse(course) {
+    console.log(course);
+    return this.http.get(this.apiUrl2 + '/' + course).subscribe(object => {
       this.selectionDataJson = object;
-      this.modules = this.selectionDataJson;
+      this.modulesMatchingCourses = this.selectionDataJson;
       console.log(this.selectionDataJson);
     });
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  onSubmit = function (submit) {
+
+    console.log(JSON.stringify(submit));
+    return this.http.post(this.apiUrl, JSON.stringify(submit),
+      {
+        headers: {
+          'Accept': 'application/ json',
+          'Content-Type': 'application/json'
+        }
+      }).subscribe
+    (data => {
+        console.log(data);
+      },
+      err => {
+        console.log('Error occured');
+      });
+  };
 
 }
 

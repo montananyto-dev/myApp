@@ -17,36 +17,16 @@ import {CourseService} from '../../../services/course/course.service';
 })
 export class LoginFormComponent implements OnInit {
 
-  public userApi = 'http://slim.kingstonse.org/view/user';
-  public userTypeApi = 'http://slim.kingstonse.org/view/usertype';
-  public organisationApi = 'http://slim.kingstonse.org/view/organisation';
-  public moduleApi = 'http://slim.kingstonse.org/view/module';
-  public courseApi = 'http://slim.kingstonse.org/view/course';
-
-  userdataJson: any;
-  userTypeDataJson: any;
-  organisationDataJson: any;
-  moduleDataJson: any;
-  courseDataJson: any;
-
+  usersDataJson: any;
+  users;
   inputUserName;
   inputPassword;
 
-  constructor(private router: Router,
-              private user: UserService,
-              private organisation: OrganisationService,
-              private module: ModuleService,
-              private course: CourseService,
-              private userType: UserTypeService,
-              private http: HttpClient) {
+  constructor(private router: Router, private user: UserService) {
   }
 
   ngOnInit() {
-    this.getAllUsers();
-    this.getAllOrganisations();
-    this.getAllCourses();
-    this.getAllModules();
-    this.getAllUserTypes();
+    this.retrieveUsers();
   }
 
   loginUser(event) {
@@ -55,7 +35,7 @@ export class LoginFormComponent implements OnInit {
     this.inputUserName = event.target.elements[0].value;
     this.inputPassword = event.target.elements[1].value;
 
-    this.userdataJson.forEach(element => {
+    this.usersDataJson.forEach(element => {
 
       if (element['first_name'] === this.inputUserName && element['password'] === this.inputPassword) {
         this.user.setCurrentUser(this.inputUserName);
@@ -66,36 +46,15 @@ export class LoginFormComponent implements OnInit {
       }
     });
   }
-  getAllUsers() {
-    return this.http.get(this.userApi).subscribe(object => {
-      this.userdataJson = object;
-      this.user.setAllUsers(this.userdataJson);
-    });
-  }
-  getAllOrganisations() {
-    return this.http.get(this.organisationApi).subscribe(object => {
-      this.organisationDataJson = object;
-      this.organisation.setOrganisations(this.organisationDataJson);
-    });
-  }
-  getAllModules() {
-    return this.http.get(this.moduleApi).subscribe(object => {
-      this.moduleDataJson = object;
-      this.module.setModules(this.moduleDataJson);
-    });
-  }
-  getAllCourses() {
-    return this.http.get(this.courseApi).subscribe(object => {
-      this.courseDataJson = object;
-      this.course.setCourses(this.courseDataJson);
-    });
-  }
-  getAllUserTypes() {
-    return this.http.get(this.userTypeApi).subscribe(object => {
-      this.userTypeDataJson = object;
-      this.userType.setUserType(this.userTypeDataJson);
-    });
-  }
+
+  retrieveUsers(){
+
+    this.user.getAllUsers().subscribe(data => {
+      this.usersDataJson = data;
+      this.users = data;
+
+    })}
+
 }
 
 
