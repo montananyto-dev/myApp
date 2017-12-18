@@ -18,7 +18,8 @@ export class ViewOrganisationComponent implements OnInit {
 
   ngOnInit() {
 
-   this.retrieveOrganisations();
+    this.retrieveOrganisations();
+
 
   }
   retrieveOrganisations(){
@@ -29,13 +30,6 @@ export class ViewOrganisationComponent implements OnInit {
 
   })}
 
-
-  refreshOrganisation(){
-
-    this.ngOnInit();
-
-
-  }
 }
 
 
