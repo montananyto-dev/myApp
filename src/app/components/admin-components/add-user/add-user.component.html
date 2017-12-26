@@ -64,24 +64,32 @@
         <select class="form-control" formControlName="course" (change)="retrieveModuleFromCourse($event.target.value)"
                 type="text"
                 id="courseStudent" required>
-          <option *ngFor="let item of courses"
-                  [value]="item.course_id">
+
+          <option *ngFor="let item of courses" [value]="item.course_id">
+
             {{item.course_name}}
+
           </option>
+
         </select>
 
       </div>
     </div>
 
     <div *ngIf="userTypeChange== 'Lecturer' " class="form-group row">
+
       <label for="courseLecturer" class="col-2 col-form-label">Course</label>
+
       <div class="col-10">
-        <select multiple class="form-control" formControlName="course" (change)="sendCourse($event.target.value)"
-                type="text" id="courseLecturer" required>
-          <option *ngFor="let item of courses"
-                  [value]="item.course_id">
+
+        <select multiple class="form-control" formControlName="course"  (change)="sendCourse($event.target.value)" type="text" id="courseLecturer" required ngModel>
+
+          <option *ngFor="let item of courses" [ngValue]="item.course_id">
+
             {{item.course_name}}
+
           </option>
+
         </select>
 
       </div>
@@ -101,13 +109,15 @@
     <!--</div>-->
 
 
-    <div *ngIf="userTypeChange== 'Student'  || userTypeChange== 'unselected'" class="form-check form-group row">
+    <div *ngIf="userTypeChange== 'Student'  || userTypeChange== 'Lecturer'" class="form-check form-group row">
 
     <div class="form-check" *ngFor="let item of modulesMatchingCourses">
 
-      <label class="form-check-label" for="enum_answer_{{item.module_name}}">
+      <label class="form-check-label" for="{{item.module_name}}">
 
-        <input (change)="testingCheck($event, item)" class="form-check-input" id="enum_answer_{{item.module_name}}" [value]='item.module_name' type="checkbox" name="module">
+        <input  multiple  class="form-check-input" formControlName="selectedCourse" (change)="seeTest()"
+
+                id="{{item.module_name}}" [value]='item.module_name' type="checkbox" name="module" ngModel>
 
         {{item.module_name}}
 
@@ -134,17 +144,16 @@
     <!--</div>-->
 
 
-    <div *ngIf="userTypeChange== 'Lecturer' || userTypeChange== 'Student'" class="form-group ">
-      <div class="form-check" *ngFor="let module of modules; let i = index;">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="{{modulesMatchingCourses.value}}"
-                 value="{{modulesMatchingCourses.value}}"
-                 (change)="checkValue($event, module)"
-                 [checked]="modulesMatchingCourses.checked"/>
-          {{module.module_name}}
-        </label>
-      </div>
-    </div>
+    <!--<div *ngIf="userTypeChange== 'Lecturer' || userTypeChange== 'Student'" class="form-group ">-->
+      <!--<div class="form-check" *ngFor="let module of modules; let i = index;">-->
+        <!--<label class="form-check-label">-->
+          <!--<input multiple  class="form-check-input" type="checkbox" name="{{modulesMatchingCourses.value}}"-->
+                 <!--value="{{modulesMatchingCourses.value}}" (change)="checkValue($event, module)"-->
+                 <!--[checked]="modulesMatchingCourses.checked"/>-->
+          <!--{{module.module_name}}-->
+        <!--</label>-->
+      <!--</div>-->
+    <!--</div>-->
 
 
     <div class="form-group row">
@@ -224,6 +233,7 @@
 
   </form>
 
+  <p>Form value: {{ userForm.value | json }}</p>
 
 </div>
 

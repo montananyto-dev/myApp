@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {FormGroup, Validators} from '@angular/forms';
+import {FormsModule,ReactiveFormsModule,FormGroup, Validators} from '@angular/forms';
 import {UserTypeService} from '../../../services/user-type/user-type.service';
 import {UserService} from '../../../services/user/user.service';
 import 'rxjs/add/operator/map';
@@ -23,6 +23,7 @@ export class AddUserComponent implements OnInit {
     userType: new FormControl(),
     course: new FormControl(),
     module: new FormControl(),
+    selectedCourse: new FormControl(),
     firstName: new FormControl('', Validators.pattern('[a-zA-Z]+')), // input field that can contain only three letters (no numbers or special characters):
     lastName: new FormControl('', Validators.pattern('[a-zA-Z]+')),
     dateOfBirth: new FormControl(),
@@ -53,7 +54,8 @@ export class AddUserComponent implements OnInit {
   userTypeChange: String = 'unselected';
 
 
-  SelectedModulesForStudent;
+  SelectedOrganisation = this.organisation;
+  SelectedUserType = this.userType;
 
 
 
@@ -136,6 +138,8 @@ retrieveOrganisations(){
 
     console.log('userType: ' + e );
 
+    this.modulesMatchingCourses =null;
+
     if (e === 'Student') {
       this.userTypeChange = 'Student';
     } else if (e === 'Admin') {
@@ -145,12 +149,44 @@ retrieveOrganisations(){
     }
   }
 
+  sendCourse(courseId){
+
+    var array =  this.userForm.controls['course'].value;
+
+    for (let i=0; i < array.length; i++) {
+
+      console.log("course id: " + array[i]);
+
+    }
+    this.retrieveModuleFromCourse(array);
+  }
+
+seeTest(test){
+
+    //console.log(test);
+
+  var array =  this.userForm.controls['selectedCourse'].value;
+
+  console.log(array);
+
+  for (let i=0; i < array.length; i++) {
+
+    console.log("course id: " + array[i]);
+
+  }
+
+}
+
+
+
+
+
   retrieveModuleFromCourse(course) {
     console.log(course);
     return this.http.get(this.apiUrl2 + '/' + course).subscribe(object => {
       this.selectionDataJson = object;
       this.modulesMatchingCourses = this.selectionDataJson;
-      console.log(this.selectionDataJson);
+      //console.log(this.selectionDataJson);
     });
   }
 

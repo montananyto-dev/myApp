@@ -86,6 +86,7 @@ const appRoutes: Routes = [
     ViewCourseComponent,
     AddOrganisationComponent
 
+
   ],
   imports: [
     BrowserModule,
