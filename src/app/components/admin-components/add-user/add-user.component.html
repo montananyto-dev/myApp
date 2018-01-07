@@ -1,129 +1,81 @@
 <app-side-bar></app-side-bar>
 
-
-<!--<div class="form-group">-->
-
-<!--<form #userForm="ngForm" (ngSubmit)="addUser(userForm.value)">-->
-
-
-<!--<div class="col-5">-->
-<!--<input type="text" class="form-control" name="organisation" placeholder="organisation" ngModel required>-->
-<!--</div>-->
-
-<!--<div class="col-5">-->
-<!--<input type="text" class="form-control" name="userType" placeholder="userType" ngModel required>-->
-<!--</div>-->
-
-
-<!--<div class="col-5">-->
-<!--<input type="text" class="form-control" name="firstName" placeholder="firstName" ngModel required>-->
-<!--</div>-->
-
-
-<!--<div class="col-5">-->
-<!--<input type="text" class="form-control" name="lastName" placeholder="lastName" ngModel required>-->
-<!--</div>-->
-
-<!--<div class="col-5">-->
-<!--<input type="password" class="form-control" name="password" placeholder="password" ngModel required>-->
-<!--</div>-->
-
-
-<!--<div class="col-5">-->
-<!--<input type="email" class="form-control" name="email" placeholder="email" ngModel required>-->
-<!--</div>-->
-
-
-<!--<div class="col-5">-->
-<!--<input type="tel" class="form-control" name="phoneNumber" placeholder="phoneNumber" ngModel required>-->
-<!--</div>-->
-<!--<button type="submit" class="btn btn-success">add user</button>-->
-
-<!--</form>-->
-<!--</div>-->
 <div class="container">
 
   <form [formGroup]="userForm" no validate>
+
+
+
+
+
+
     <div class="form-group row">
+
       <label for="userType" class="col-2 col-form-label">UserType</label>
+
       <div class="col-10">
-        <select #userType class="form-control" formControlName="userType" (change)="sendUserType(userType.value)"
-                type="text" id="userType" required>
-          <option *ngFor="let userType of userTypes"
-                  [value]="userType.user_type_role">
+
+        <select #userType class="form-control" formControlName="userType" (change)="checkUserType(userType.value)" type="text" id="userType" required>
+
+          <option *ngFor="let userType of userTypes" [value]="userType.user_type_role">
+
             {{userType.user_type_role}}
+
           </option>
 
         </select>
+
       </div>
+
     </div>
 
-    <div *ngIf="userTypeChange== 'Student'  || userTypeChange== 'unselected' " class="form-group row">
+
+
+
+
+    <div formGroupName ="courseModule">
+
+    <div *ngIf="userTypeChange== 'Student'  || userTypeChange== 'unselected' " class="form-group row" >
+
       <label for="courseStudent" class="col-2 col-form-label">Course</label>
+
       <div class="col-10">
-        <select class="form-control" formControlName="course" (change)="retrieveModuleFromCourse($event.target.value)"
-                type="text"
-                id="courseStudent" required>
 
-          <option *ngFor="let item of courses" [value]="item.course_id">
+        <select class="form-control" formControlName="course" (change)="sendCourse($event)" type="text" id="courseStudent"  required>
 
-            {{item.course_name}}
+          <option *ngFor="let course of courses" [value]="course.course_id" >
+
+            {{course.course_name}}
 
           </option>
 
         </select>
 
       </div>
+
     </div>
 
-    <div *ngIf="userTypeChange== 'Lecturer' " class="form-group row">
+
+
+
+
+    <div  *ngIf="userTypeChange== 'Lecturer' " class="form-group row"  >
 
       <label for="courseLecturer" class="col-2 col-form-label">Course</label>
 
       <div class="col-10">
 
-        <select multiple class="form-control" formControlName="course"  (change)="sendCourse($event.target.value)" type="text" id="courseLecturer" required ngModel>
+        <select multiple class="form-control" formControlName="course" (change)="sendCourse($event)" type="text" id="courseLecturer"  required>
 
-          <option *ngFor="let item of courses" [ngValue]="item.course_id">
+          <option *ngFor="let course of courses" [value]="course.course_id" >
 
-            {{item.course_name}}
+            {{course.course_name}}
 
           </option>
 
         </select>
 
       </div>
-    </div>
-
-
-    <!--<div *ngIf="userTypeChange== 'Student'  || userTypeChange== 'unselected'  " class="form-group row">-->
-      <!--<label for="module" class="col-2 col-form-label">Module</label>-->
-      <!--<div class="col-10">-->
-        <!--<select class="form-control" formControlName="module" type="text" id="module" required>-->
-          <!--<option *ngFor="let item of modulesMatchingCourses"-->
-                  <!--[value]="item.module_name">-->
-            <!--{{item.module_name}}-->
-          <!--</option>-->
-        <!--</select>-->
-      <!--</div>-->
-    <!--</div>-->
-
-
-    <div *ngIf="userTypeChange== 'Student'  || userTypeChange== 'Lecturer'" class="form-check form-group row">
-
-    <div class="form-check" *ngFor="let item of modulesMatchingCourses">
-
-      <label class="form-check-label" for="{{item.module_name}}">
-
-        <input  multiple  class="form-check-input" formControlName="selectedCourse" (change)="seeTest()"
-
-                id="{{item.module_name}}" [value]='item.module_name' type="checkbox" name="module" ngModel>
-
-        {{item.module_name}}
-
-      </label>
-
-    </div>
 
     </div>
 
@@ -131,109 +83,193 @@
 
 
 
-    <!--<div *ngIf="userTypeChange== 'Lecturer' " class="form-group ">-->
-    <!--<label for="course" class="col-2 col-form-label">Courses</label>-->
-    <!--<div class="form-check" *ngFor="let course of courses; let i = index;">-->
-    <!--<div class="col-10">-->
-    <!--<input multiple class="form-check-input" type="checkbox" (change)="sendCourse(course.course_id)"-->
-    <!--name="{{course.value}}" value="{{course.value}}" (change)="checkValue($event, course)"-->
-    <!--[checked]="course.checked"/>{{course.course_name}}-->
+      <div  *ngIf="userTypeChange== 'Student'  || userTypeChange== 'Lecturer'" class="form-check form-group row"  >
 
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+        <div class="form-check" *ngFor="let module of modulesMatchingCourses">
+
+          <label class="form-check-label" for="{{module.module_name}}">
+
+            <!--(ngModelChange)="module.selected = $event ? 1 : 0" [ngModel]="module.selected == 1 ? true : module.selected == 0 ? false : null"-->
+
+            <input class="form-check-input" (change)="selectModule($event,module,module.module_name)"
+
+                   [value]="module.module_name"
+                   type="checkbox"
+                   name="module"
+                   id="{{module.module_name}}">
+
+            {{module.module_name}}
+
+          </label>
+
+        </div>
+
+      </div>
+
+    </div>
 
 
-    <!--<div *ngIf="userTypeChange== 'Lecturer' || userTypeChange== 'Student'" class="form-group ">-->
-      <!--<div class="form-check" *ngFor="let module of modules; let i = index;">-->
-        <!--<label class="form-check-label">-->
-          <!--<input multiple  class="form-check-input" type="checkbox" name="{{modulesMatchingCourses.value}}"-->
-                 <!--value="{{modulesMatchingCourses.value}}" (change)="checkValue($event, module)"-->
-                 <!--[checked]="modulesMatchingCourses.checked"/>-->
-          <!--{{module.module_name}}-->
-        <!--</label>-->
-      <!--</div>-->
-    <!--</div>-->
+
+
+
+
+
 
 
     <div class="form-group row">
+
       <label for="organisation" class="col-2 col-form-label">Organisation</label>
+
       <div class="col-10">
+
         <select class="form-control" formControlName="organisation" type="text" id="organisation" required>
+
           <option *ngFor="let organisation of organisations" [value]="organisation.organisation_name">
+
             {{organisation.organisation_name}}
+
           </option>
+
         </select>
+
       </div>
+
     </div>
 
 
+
+
+
+
     <div class="form-group row">
+
       <label for="firstName" class="col-2 col-form-label">First Name</label>
+
       <div class="col-10">
+
         <input class="form-control" formControlName="firstName" type="text" id="firstName" required>
+
       </div>
 
     </div>
 
 
+
+
+
+
     <div class="form-group row">
+
       <label for="lastName" class="col-2 col-form-label">Last Name</label>
+
       <div class="col-10">
+
         <input class="form-control" formControlName="lastName" type="text" id="lastName" required>
+
       </div>
+
     </div>
 
 
+
+
     <div class="form-group row">
+
       <label for="dateOfBirth" class="col-2 col-form-label">Date of Birth</label>
+
       <div class="col-10">
+
         <input class="form-control" formControlName="dateOfBirth" type="date" id="dateOfBirth" required>
+
       </div>
+
     </div>
 
 
-    <div class="form-group row">
-      <label for="password" class="col-2 col-form-label">Password</label>
+
+
+
+
+    <div formGroupName="password" >
+
+    <div class="form-group row" >
+
+      <label for="passwordInput" class="col-2 col-form-label">Password</label>
+
       <div class="col-10">
-        <input class="form-control" formControlName="password" type="password" id="password" required>
+
+        <input class="form-control" formControlName="passwordInput" type="password" id="passwordInput" required>
+
       </div>
+
     </div>
 
-    <div class="form-group row">
-      <label for="passwordConfirmation" class="col-2 col-form-label">Password Confirmation</label>
+
+    <div class="form-group row" >
+
+      <label for="passwordConfirm" class="col-2 col-form-label">Password Confirmation</label>
+
       <div class="col-10">
-        <input class="form-control" formControlName="passwordConfirmation" type="password" id="passwordConfirmation"
-               required>
+
+        <input class="form-control" formControlName="passwordConfirm" type="password" id="passwordConfirm" required>
+
       </div>
+
     </div>
 
+    </div>
+
+
+
+
+
+
+
+
     <div class="form-group row">
+
       <label for="email" class="col-2 col-form-label">Email</label>
+
       <div class="col-10">
+
         <input class="form-control" formControlName="email" type="email" id="email" required>
+
       </div>
+
     </div>
 
+
     <div class="form-group row">
+
       <label for="phoneNumber" class="col-2 col-form-label">Phone number</label>
+
       <div class="col-10">
+
         <input class="form-control" formControlName="phoneNumber" type="tel" id="phoneNumber" required>
+
       </div>
+
     </div>
+
 
     <div class="form-group row">
-      <label for="department" class="col-2 col-form-label">Departement</label>
+
+      <label for="department" class="col-2 col-form-label">Department</label>
+
       <div class="col-10">
-        <input class="form-control" formControlName="department" type="text" id="department">
+
+        <input class="form-control" formControlName="department" type="text" id="department" required>
+
       </div>
+
     </div>
 
-    <button type="submit" class="btn btn-success" (click)="onSubmit(userForm.value)">Submit</button>
+
+    <button type="submit" class="btn btn-success" [disabled]="userForm.invalid" (click)="onSubmit(userForm.value)">Submit</button>
 
   </form>
 
-  <p>Form value: {{ userForm.value | json }}</p>
+  <pre>Form value: {{ userForm.value | json }}</pre>
 
 </div>
 
