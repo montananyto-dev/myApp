@@ -35,14 +35,22 @@ export class LoginFormComponent implements OnInit {
     this.inputUserName = event.target.elements[0].value;
     this.inputPassword = event.target.elements[1].value;
 
+    console.log(this.inputUserName);
+    console.log(this.inputPassword);
+
+    console.log(this.usersDataJson);
+
     this.usersDataJson.forEach(element => {
 
-      if (element['first_name'] === this.inputUserName && element['password'] === this.inputPassword) {
+      if (element['user_first_name'] === this.inputUserName && element['user_password'] === this.inputPassword) {
+        console.log('working');
         this.user.setCurrentUser(this.inputUserName);
         this.user.setUserLoggedIn();
         this.router.navigateByUrl('/home');
       } else {
+        console.log('not working');
         return ErrorEvent;
+
       }
     });
   }

@@ -2,11 +2,7 @@
 
 <div class="container">
 
-  <form [formGroup]="userForm" no validate>
-
-
-
-
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)" novalidate>
 
 
     <div class="form-group row">
@@ -15,9 +11,16 @@
 
       <div class="col-10">
 
-        <select #userType class="form-control" formControlName="userType" (change)="checkUserType(userType.value)" type="text" id="userType" required>
+        <!--[ngClass]="{-->
 
-          <option *ngFor="let userType of userTypes" [value]="userType.user_type_role">
+        <!--'has-danger': userForm.controls.userType.invalid && userForm.controls.userType.untouched,-->
+        <!--'has-success': userForm.controls.userType.valid && userForm.controls.userType.dirty-->
+        <!--}">-->
+
+        <select #userType class="form-control" formControlName="userType" (change)="checkUserType(userType.value)"
+                type="text" id="userType" required>
+
+          <option *ngFor="let userType of userTypes" [value]="userType.user_type_id">
 
             {{userType.user_type_role}}
 
@@ -30,68 +33,57 @@
     </div>
 
 
+    <div formGroupName="courseModule">
 
+      <div *ngIf="userTypeChange == 1   " class="form-group row">
 
+        <label for="courseStudent" class="col-2 col-form-label">Course</label>
 
-    <div formGroupName ="courseModule">
+        <div class="col-10">
 
-    <div *ngIf="userTypeChange== 'Student'  || userTypeChange== 'unselected' " class="form-group row" >
+          <select class="form-control" formArrayName="course" (change)="sendCourseStudent($event)" type="text"
+                  id="courseStudent" required>
 
-      <label for="courseStudent" class="col-2 col-form-label">Course</label>
+            <option value="undefined" disabled>Please, select the module</option>
 
-      <div class="col-10">
+            <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
 
-        <select class="form-control" formControlName="course" (change)="sendCourse($event)" type="text" id="courseStudent"  required>
+          </select>
 
-          <option *ngFor="let course of courses" [value]="course.course_id" >
-
-            {{course.course_name}}
-
-          </option>
-
-        </select>
+        </div>
 
       </div>
 
-    </div>
 
+      <div *ngIf="userTypeChange== 2  " class="form-group row">
 
+        <label for="courseLecturer" class="col-2 col-form-label">Course</label>
 
+        <div class="col-10">
 
+          <select multiple [(ngModel)]="selectedCourses" [ngModelOptions]="{standalone: true}" class="form-control"
+                  formArrayName="course" (change)="sendCourseLecturer($event)" type="text" id="courseLecturer" required>
 
-    <div  *ngIf="userTypeChange== 'Lecturer' " class="form-group row"  >
+            <option disabled selected>Please, select the modules</option>
 
-      <label for="courseLecturer" class="col-2 col-form-label">Course</label>
+            <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
 
-      <div class="col-10">
+          </select>
 
-        <select multiple class="form-control" formControlName="course" (change)="sendCourse($event)" type="text" id="courseLecturer"  required>
+          <div>{{selectedCourses}}</div>
 
-          <option *ngFor="let course of courses" [value]="course.course_id" >
-
-            {{course.course_name}}
-
-          </option>
-
-        </select>
+        </div>
 
       </div>
 
-    </div>
 
-
-
-
-
-      <div  *ngIf="userTypeChange== 'Student'  || userTypeChange== 'Lecturer'" class="form-check form-group row"  >
+      <div *ngIf="userTypeChange == 1  || userTypeChange == 2" class="form-check form-group row">
 
         <div class="form-check" *ngFor="let module of modulesMatchingCourses">
 
           <label class="form-check-label" for="{{module.module_name}}">
 
-            <!--(ngModelChange)="module.selected = $event ? 1 : 0" [ngModel]="module.selected == 1 ? true : module.selected == 0 ? false : null"-->
-
-            <input class="form-check-input" (change)="selectModule($event,module,module.module_name)"
+            <input class="form-check-input" formArrayName="module" (change)="selectModule($event,module.module_id)"
 
                    [value]="module.module_name"
                    type="checkbox"
@@ -109,13 +101,6 @@
     </div>
 
 
-
-
-
-
-
-
-
     <div class="form-group row">
 
       <label for="organisation" class="col-2 col-form-label">Organisation</label>
@@ -124,7 +109,9 @@
 
         <select class="form-control" formControlName="organisation" type="text" id="organisation" required>
 
-          <option *ngFor="let organisation of organisations" [value]="organisation.organisation_name">
+          <option [value]="" disabled selected>Please, select the organisation</option>
+
+          <option *ngFor="let organisation of organisations" [value]="organisation.organisation_id">
 
             {{organisation.organisation_name}}
 
@@ -137,25 +124,17 @@
     </div>
 
 
-
-
-
-
     <div class="form-group row">
 
       <label for="firstName" class="col-2 col-form-label">First Name</label>
 
       <div class="col-10">
 
-        <input class="form-control" formControlName="firstName" type="text" id="firstName" required>
+        <input class="form-control" formControlName="firstName" type="text" id="firstName" ngModel required>
 
       </div>
 
     </div>
-
-
-
-
 
 
     <div class="form-group row">
@@ -164,13 +143,11 @@
 
       <div class="col-10">
 
-        <input class="form-control" formControlName="lastName" type="text" id="lastName" required>
+        <input class="form-control" formControlName="lastName" type="text" id="lastName" ngModel required>
 
       </div>
 
     </div>
-
-
 
 
     <div class="form-group row">
@@ -179,51 +156,41 @@
 
       <div class="col-10">
 
-        <input class="form-control" formControlName="dateOfBirth" type="date" id="dateOfBirth" required>
+        <input class="form-control" formControlName="dateOfBirth" type="date" id="dateOfBirth" ngModel required>
 
       </div>
 
     </div>
 
 
+    <div formGroupName="password">
+
+      <div class="form-group row">
+
+        <label for="passwordInput" class="col-2 col-form-label">Password</label>
+
+        <div class="col-10">
+
+          <input class="form-control" formControlName="passwordInput" type="password" id="passwordInput" ngModel required>
+
+        </div>
+
+      </div>
 
 
+      <div class="form-group row">
 
+        <label for="passwordConfirm" class="col-2 col-form-label">Password Confirmation</label>
 
-    <div formGroupName="password" >
+        <div class="col-10">
 
-    <div class="form-group row" >
+          <input class="form-control" formControlName="passwordConfirm" type="password" id="passwordConfirm" ngModel required>
 
-      <label for="passwordInput" class="col-2 col-form-label">Password</label>
-
-      <div class="col-10">
-
-        <input class="form-control" formControlName="passwordInput" type="password" id="passwordInput" required>
+        </div>
 
       </div>
 
     </div>
-
-
-    <div class="form-group row" >
-
-      <label for="passwordConfirm" class="col-2 col-form-label">Password Confirmation</label>
-
-      <div class="col-10">
-
-        <input class="form-control" formControlName="passwordConfirm" type="password" id="passwordConfirm" required>
-
-      </div>
-
-    </div>
-
-    </div>
-
-
-
-
-
-
 
 
     <div class="form-group row">
@@ -232,7 +199,7 @@
 
       <div class="col-10">
 
-        <input class="form-control" formControlName="email" type="email" id="email" required>
+        <input class="form-control" formControlName="email" type="email" id="email" ngModel required>
 
       </div>
 
@@ -245,7 +212,7 @@
 
       <div class="col-10">
 
-        <input class="form-control" formControlName="phoneNumber" type="tel" id="phoneNumber" required>
+        <input class="form-control" formControlName="phoneNumber" type="tel" id="phoneNumber" ngModel required>
 
       </div>
 
@@ -258,14 +225,14 @@
 
       <div class="col-10">
 
-        <input class="form-control" formControlName="department" type="text" id="department" required>
+        <input class="form-control" formControlName="department" type="text" id="department" ngModel required>
 
       </div>
 
     </div>
 
 
-    <button type="submit" class="btn btn-success" [disabled]="userForm.invalid" (click)="onSubmit(userForm.value)">Submit</button>
+    <button type="submit" class="btn btn-success" [disabled]="userForm.invalid">Submit</button>
 
   </form>
 

@@ -18,19 +18,17 @@
         <th>Password</th>
         <th>Email</th>
         <th>Phone number</th>
-        <th>Course</th>
-        <th>Departement</th>
+        <th>Department</th>
       </tr>
 
       <tr *ngFor = "let item of users">
 
-        <td>{{item.first_name}}</td>
-        <td>{{item.last_name}}</td>
-        <td>{{item.password}}</td>
-        <td>{{item.email}}</td>
-        <td>{{item.phone_number}}</td>
-        <td>{{ item.course }}</td>
-        <td>{{ item.departement}}</td>
+        <td>{{item.user_first_name}}</td>
+        <td>{{item.user_last_name}}</td>
+        <td>{{item.user_password}}</td>
+        <td>{{item.user_email}}</td>
+        <td>{{item.user_phone_number}}</td>
+        <td>{{item.user_department}}</td>
       </tr>
     </table>
   <!--</div>-->

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl,FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
 import {UserTypeService} from '../../../services/user-type/user-type.service';
 import {UserService} from '../../../services/user/user.service';
 import 'rxjs/add/operator/map';
@@ -20,7 +20,7 @@ export class AddUserComponent implements OnInit {
 
   userForm: FormGroup;
 
-  public addUserApi = 'http://slim.kingstonse.org/home/add/users';
+  public addUserApi = 'http://slim.kingstonse.org/add/user';
   public apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
   usersDataJson: any;
@@ -30,31 +30,25 @@ export class AddUserComponent implements OnInit {
   userTypeDataJson: any;
   organisationDataJson: any;
 
+
   users;
   allModules;
   modulesMatchingCourses;
   courses;
   userTypes;
   organisations;
-  userTypeChange: String = 'unselected';
+  userTypeChange: number = 0;
+
+  selectedCourses: any[];
 
 
-  constructor(private user: UserService,
-              private course: CourseService,
-              private userType: UserTypeService,
-              private organisation: OrganisationService,
-              private module: ModuleService,
+  constructor(private userService: UserService,
+              private courseService: CourseService,
+              private userTypeService: UserTypeService,
+              private organisationService: OrganisationService,
+              private moduleService: ModuleService,
               private http: HttpClient,
               private formBuilder: FormBuilder) {
-  }
-
-  ngOnInit() {
-
-    this.retrieveUsers();
-    this.retrieveCourses();
-    this.retrieveModules();
-    this.retrieveUserTypes();
-    this.retrieveOrganisations();
 
     this.userForm = this.formBuilder.group({
 
@@ -65,76 +59,156 @@ export class AddUserComponent implements OnInit {
       dateOfBirth: new FormControl(),
 
       courseModule: this.formBuilder.group({
-        course: new FormControl(),
-        module: this.formBuilder.array([]),
+        course: this.formBuilder.array([], Validators.required),
+        module: this.formBuilder.array([], Validators.required),
       }),
-
-
 
       password: this.formBuilder.group({
         passwordInput: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')), // An <input> element with type="password" that must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter:
         passwordConfirm: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')),
-      }, passwordMatchValidator),
+      }, this.passwordMatchValidator),
 
-      email: new FormControl(),
-      phoneNumber: new FormControl(),
+      email: new FormControl('', Validators.email),
+      phoneNumber: new FormControl('',Validators.pattern('^[0-9()-]+$')),
       department: new FormControl()
     })
 
-    function passwordMatchValidator(inputs: FormGroup) {
-      return inputs.get('passwordInput').value === inputs.get('passwordConfirm').value
-        ? null : {'mismatch': true};
-    }
+
   }
+
+  ngOnInit() {
+
+    this.retrieveUsers();
+    this.retrieveCourses();
+    this.retrieveModules();
+    this.retrieveUserTypes();
+    this.retrieveOrganisations();
+  }
+
+  passwordMatchValidator(password: FormGroup) {
+
+    console.log('test');
+
+    return password.get('passwordInput').value === password.get('passwordConfirm').value
+      ? null : {'mismatch': true};
+
+  }
+
+  // passwordMatchValidator(c: AbstractControl): { invalid: boolean } {
+  //
+  //   console.log('check password');
+  //   if (c.get('passwordInput').value !== c.get('passwordConfirm').value) {
+  //     return {invalid: true};
+  //   }
+  // }
+
+
 
 
   checkUserType(userType) {
 
-    console.log('userType: ' + userType);
+    console.log('userTypeID: ' + userType);
 
-    if (userType === 'Student') {
+    if (userType == 1) {
 
-      this.userTypeChange = 'Student';
+      this.userTypeChange = 1;
+      this.resetFormControlCourse();
+      this.resetFormControlModule();
+      this.modulesMatchingCourses = null;
+      this.userForm.controls['courseModule'].enable();
 
-    } else if (userType === 'Admin') {
+    } else if (userType == 2) {
 
-      this.userTypeChange = 'Admin';
+      this.userTypeChange = 2;
+      this.resetFormControlCourse();
+      this.resetFormControlModule();
+      this.modulesMatchingCourses = null;
+      this.userForm.controls['courseModule'].enable();
 
     } else {
 
-      this.userTypeChange = 'Lecturer';
+      this.userTypeChange = 3;
+      this.resetFormControlCourse();
+      this.resetFormControlModule();
+      this.modulesMatchingCourses = null;
+      this.userForm.controls['courseModule'].disable();
 
     }
   }
 
+  resetFormControlCourse() {
 
+    const courseControl = <FormArray>this.userForm.controls['courseModule'].get('course');
 
-  sendCourse(event) {
+    for (let i = courseControl.length - 1; i >= 0; i--) {
+      courseControl.removeAt(i)
+    }
+  }
+
+  resetFormControlModule() {
+
+    const moduleControl = <FormArray>this.userForm.controls['courseModule'].get('module');
+
+    for (let i = moduleControl.length - 1; i >= 0; i--) {
+      moduleControl.removeAt(i)
+    }
+  }
+
+  sendCourseStudent(event) {
+
+    this.resetFormControlCourse();
+    this.resetFormControlModule();
+
+    const courseControl = <FormArray>this.userForm.controls['courseModule'].get('course');
+
+    courseControl.push(new FormControl(event.target.value, Validators.required));
+
 
     var courseID = this.userForm.get('courseModule').value.course;
 
     for (let i = 0; i < courseID.length; i++) {
+
       console.log("course id: " + courseID[i]);
+
     }
     this.retrieveModuleFromCourse(courseID);
   }
 
+  sendCourseLecturer(event) {
 
-  selectModule(event, module,module_name:string) {
+    console.log(event);
+
+    this.resetFormControlCourse();
+    this.resetFormControlModule();
+
+
+    for (let i = 0; i < this.selectedCourses.length; i++) {
+
+      console.log("course id: " + this.selectedCourses[i]);
+
+      const courseControl = <FormArray>this.userForm.controls['courseModule'].get('course');
+
+      courseControl.push(new FormControl(this.selectedCourses[i], Validators.required));
+
+    }
+    this.retrieveModuleFromCourse(this.selectedCourses);
+  }
+
+  selectModule(event, module_id: number) {
 
     const moduleControl = <FormArray>this.userForm.controls['courseModule'].get('module');
 
-    if(event.target.checked){
+    if (event.target.checked) {
       // Add a new control in the arrayForm
-      moduleControl.push(new FormControl(module_name));
+      moduleControl.push(new FormControl(module_id));
 
-    }else{
+    } else {
       // find the unselected element
       let i: number = 0;
 
       moduleControl.controls.forEach((ctrl: FormControl) => {
 
-        if(ctrl.value == event.target.value) {
+        if (ctrl.value == event.target.value) {
           // Remove the unselected element from the arrayForm
           moduleControl.removeAt(i);
 
@@ -144,19 +218,7 @@ export class AddUserComponent implements OnInit {
       });
     }
 
-    // if (event.target.checked) {
-    //
-    //   this.selectedModule.push(module);
-    //
-    // } else {
-    //
-    //   this.selectedModule.splice(this.selectedModule.indexOf(module), 1);
-    //
-    // }
-    // console.log(this.selectedModule);
-
   }
-
 
   retrieveModuleFromCourse(courseIds) {
 
@@ -167,56 +229,67 @@ export class AddUserComponent implements OnInit {
     });
   }
 
+  onSubmit = function (dataForm) {
 
-  onSubmit = function (submit) {
+    if (this.userForm.valid) {
 
-    console.log(JSON.stringify(submit));
-    return this.http.post(this.addUserApi, JSON.stringify(submit),
-      {
-        headers: {
-          'Accept': 'application/ json',
-          'Content-Type': 'application/json'
-        }
-      }).subscribe
-    (data => {
+      this.http.post(this.addUserApi, JSON.stringify(dataForm),
+        {
+          headers: {
+            'Accept': 'application/ json',
+            'Content-Type': 'application/json'
+          }
+        }).subscribe
+      (data => {
+
+        //print out the data return by the server
         console.log(data);
-      },
-      err => {
-        console.log('Error occured');
+
+        //reset the form after submission
+        this.userForm.reset();
+        this.retrieveUsers();
+
+
+      }, err => {
+
+        console.log(err);
+        console.error("Could not be added");
+
       });
+
+    }
   };
 
-
   retrieveOrganisations() {
-    this.organisation.getOrganisations().subscribe(data => {
+    this.organisationService.getOrganisations().subscribe(data => {
       this.organisationDataJson = data;
       this.organisations = data;
     })
   }
 
   retrieveUsers() {
-    this.user.getAllUsers().subscribe(data => {
+    this.userService.getAllUsers().subscribe(data => {
       this.usersDataJson = data;
       this.users = data;
     })
   }
 
   retrieveCourses() {
-    this.course.getAllCourses().subscribe(data => {
+    this.courseService.getAllCourses().subscribe(data => {
       this.courseDataJson = data;
       this.courses = data;
     })
   }
 
   retrieveModules() {
-    this.module.getAllModules().subscribe(data => {
+    this.moduleService.getAllModules().subscribe(data => {
       this.moduleDataJson = data;
       this.allModules = data;
     })
   }
 
   retrieveUserTypes() {
-    this.userType.getAllUserTypes().subscribe(data => {
+    this.userTypeService.getAllUserTypes().subscribe(data => {
       this.userTypeDataJson = data;
       this.userTypes = data;
     })
