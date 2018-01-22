@@ -2,13 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
-
 import { UserService } from '../../../services/user/user.service';
-import { HttpClient} from '@angular/common/http';
-import {OrganisationService} from '../../../services/organisation/organisation.service';
-import {ModuleService} from '../../../services/module/module.service';
-import {UserTypeService} from '../../../services/user-type/user-type.service';
-import {CourseService} from '../../../services/course/course.service';
+
 
 @Component({
   selector: 'app-login-form',
@@ -35,20 +30,15 @@ export class LoginFormComponent implements OnInit {
     this.inputUserName = event.target.elements[0].value;
     this.inputPassword = event.target.elements[1].value;
 
-    console.log(this.inputUserName);
-    console.log(this.inputPassword);
-
-    console.log(this.usersDataJson);
-
     this.usersDataJson.forEach(element => {
 
       if (element['user_first_name'] === this.inputUserName && element['user_password'] === this.inputPassword) {
-        console.log('working');
         this.user.setCurrentUser(this.inputUserName);
         this.user.setUserLoggedIn();
         this.router.navigateByUrl('/home');
+
       } else {
-        console.log('not working');
+
         return ErrorEvent;
 
       }

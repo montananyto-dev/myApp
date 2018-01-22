@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {AbstractControl,FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
 import {UserTypeService} from '../../../services/user-type/user-type.service';
 import {UserService} from '../../../services/user/user.service';
 import 'rxjs/add/operator/map';
@@ -10,13 +10,13 @@ import {OrganisationService} from '../../../services/organisation/organisation.s
 import {ModuleService} from '../../../services/module/module.service';
 
 
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-
 
   userForm: FormGroup;
 
@@ -30,15 +30,14 @@ export class AddUserComponent implements OnInit {
   userTypeDataJson: any;
   organisationDataJson: any;
 
-
   users;
   allModules;
   modulesMatchingCourses;
   courses;
   userTypes;
   organisations;
-  userTypeChange: number = 0;
 
+  userTypeChange: number = 0;
   selectedCourses: any[];
 
 
@@ -54,27 +53,23 @@ export class AddUserComponent implements OnInit {
 
       userType: new FormControl(),
       organisation: new FormControl(),
-      firstName: new FormControl('', Validators.pattern('[a-zA-Z]+')), // input field that can contain only three letters (no numbers or special characters):
-      lastName: new FormControl('', Validators.pattern('[a-zA-Z]+')),
+      firstName: new FormControl('', Validators.pattern('[a-zA-Z]+')), // input field that can contain only letters (no numbers or special characters)
+      lastName: new FormControl('', Validators.pattern('[a-zA-Z]+')),// input field that can contain only letters (no numbers or special characters)
       dateOfBirth: new FormControl(),
-
       courseModule: this.formBuilder.group({
         course: this.formBuilder.array([], Validators.required),
         module: this.formBuilder.array([], Validators.required),
       }),
-
       password: this.formBuilder.group({
-        passwordInput: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')), // An <input> element with type="password" that must contain 8 or more characters that are of at least one number, and one uppercase and lowercase letter:
-        passwordConfirm: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')),
-      }, this.passwordMatchValidator),
+        passwordInput: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')), // "Password" that must contain 8 or more characters with at least one number, and one uppercase and lowercase letter
+        passwordConfirm: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')),// "Password" that must contain 8 or more characters with at least one number, and one uppercase and lowercase letter
+      }, {validator: this.passwordMatchValidator}),
 
       email: new FormControl('', Validators.email),
-      phoneNumber: new FormControl('',Validators.pattern('^[0-9()-]+$')),
+      phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$')),
       department: new FormControl()
     })
-
-
-  }
+  };
 
   ngOnInit() {
 
@@ -87,23 +82,10 @@ export class AddUserComponent implements OnInit {
 
   passwordMatchValidator(password: FormGroup) {
 
-    console.log('test');
-
     return password.get('passwordInput').value === password.get('passwordConfirm').value
       ? null : {'mismatch': true};
 
   }
-
-  // passwordMatchValidator(c: AbstractControl): { invalid: boolean } {
-  //
-  //   console.log('check password');
-  //   if (c.get('passwordInput').value !== c.get('passwordConfirm').value) {
-  //     return {invalid: true};
-  //   }
-  // }
-
-
-
 
   checkUserType(userType) {
 
@@ -242,12 +224,19 @@ export class AddUserComponent implements OnInit {
         }).subscribe
       (data => {
 
-        //print out the data return by the server
-        console.log(data);
-
         //reset the form after submission
         this.userForm.reset();
         this.retrieveUsers();
+        this.userForm.controls['courseModule'].disable();
+        this.resetFormControlCourse();
+        this.resetFormControlModule();
+        this.modulesMatchingCourses = null;
+
+
+        //print out the data return by the server
+        console.log(data);
+
+
 
 
       }, err => {

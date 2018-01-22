@@ -16,7 +16,7 @@ import { SideBarComponent } from './components/admin-components/side-bar/side-ba
 import { ViewOrganisationComponent } from './components/admin-components/view-organisation/view-organisation.component';
 import { ViewModuleComponent } from './components/admin-components/view-module/view-module.component';
 import { ViewCourseComponent } from './components/admin-components/view-course/view-course.component';
-import { AuthentificationGuard } from './guards/authentification.guard';
+import { AuthenticationGuard } from './guards/authentification.guard';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
@@ -29,6 +29,8 @@ import { UserTypeService } from './services/user-type/user-type.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddOrganisationComponent } from './components/admin-components/add-organisation/add-organisation.component';
+import { AddModuleComponent } from './components/admin-components/add-module/add-module.component';
+import { AddCourseComponent } from './components/admin-components/add-course/add-course.component';
 
 const appRoutes: Routes = [
   {
@@ -40,7 +42,7 @@ const appRoutes: Routes = [
     component: LoginFormComponent
   }, {
     path: 'home',
-   canActivate: [AuthentificationGuard],  /* access to home page once logged in */
+   canActivate: [AuthenticationGuard],  /* access to home page once logged in */
     component: HomeComponent
   }, {
     path: 'add/user',
@@ -65,6 +67,14 @@ const appRoutes: Routes = [
   {
     path: 'add/organisation',
     component: AddOrganisationComponent
+  },
+  {
+    path: 'add/module',
+    component: AddModuleComponent
+  },
+  {
+    path:'add/course',
+    component: AddCourseComponent
   }
 
 ];
@@ -84,7 +94,9 @@ const appRoutes: Routes = [
     ViewOrganisationComponent,
     ViewModuleComponent,
     ViewCourseComponent,
-    AddOrganisationComponent
+    AddOrganisationComponent,
+    AddModuleComponent,
+    AddCourseComponent
 
 
   ],
@@ -98,7 +110,7 @@ const appRoutes: Routes = [
     ReactiveFormsModule
 
   ],
-  providers: [UserService, OrganisationService, ModuleService, UserTypeService, CourseService, AuthentificationGuard],
+  providers: [UserService, OrganisationService, ModuleService, UserTypeService, CourseService, AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule implements OnInit {

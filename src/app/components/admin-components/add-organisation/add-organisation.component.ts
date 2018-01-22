@@ -61,7 +61,7 @@ export class AddOrganisationComponent implements OnInit {
         err => {
 
           console.log(err);
-          console.error("Could not be added");
+          console.error("The organisation could not be added");
 
         });
 

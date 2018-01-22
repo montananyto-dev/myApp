@@ -1,0 +1,43 @@
+<app-side-bar></app-side-bar>
+
+<div class="container">
+
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit(courseForm.value)" novalidate>
+
+
+
+    <div class="form-group row">
+
+      <label for="courseName" class="col-2 col-form-label">Course Name</label>
+
+      <div class="col-10">
+
+        <input class="form-control" formControlName="courseName" type="text" id="courseName" ngModel required>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-group row">
+
+      <label for="courseDescription" class="col-2 col-form-label">Module Description</label>
+
+      <div class="col-10">
+
+        <input class="form-control" formControlName="courseDescription" type="text" id="courseDescription" ngModel required>
+
+      </div>
+
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success" [disabled]="courseForm.invalid">Submit</button>
+
+  </form>
+
+  <pre>Form value: {{ courseForm.value | json }}</pre>
+
+</div>
+
