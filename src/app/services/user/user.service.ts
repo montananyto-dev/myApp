@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Observable } from "rxjs/Observable";
-import { HttpClient } from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {Observable} from "rxjs/Observable";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class UserService {
@@ -16,11 +16,14 @@ export class UserService {
 
   getAllUsers(): Observable<any> {
     return this.http.get(this.userApi);
+
   }
+
 
   setUserLoggedIn() {
     this.isUserLoggedIn = true;
   }
+
   getUserLoggedIn() {
     return this.isUserLoggedIn;
   }
@@ -29,6 +32,7 @@ export class UserService {
     this.users = users;
 
   }
+
   // getAllUsers() {
   //   return this.users;
   // }

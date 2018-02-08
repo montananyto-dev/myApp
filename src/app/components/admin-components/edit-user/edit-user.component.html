@@ -1,0 +1,50 @@
+<app-side-bar></app-side-bar>
+
+<div class="container">
+
+  <form class='form-control' [formGroup]="editUserForm" novalidate>
+
+  <table class="table table-responsive table-sm">
+
+      <tr>
+        <th>Id</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>Phone number</th>
+        <th>Department</th>
+
+      </tr>
+
+      <tr *ngFor="let user of users,index as i" >
+
+        <td><input  (input)="setId($event.target.value)" formArrayName="userIdForm"  type="text" class="input-text form-control" [value]="user.user_id"  disabled></td>
+
+        <td><input  (input)="setFirstName($event.target.value)" formArrayName="userFirstNameForm" type="text" class="input-text form-control"  [value]="user.user_first_name" [attr.disabled]="readOnlyBoolean[i]?'':null" [required]="requiredBoolean[i]"></td>
+
+        <td><input  (input)="setLastName($event.target.value)" formArrayName="userLastNameForm" type="text" class="input-text form-control"  [value]="user.user_last_name" [attr.disabled]="readOnlyBoolean[i]?'':null" [required]="requiredBoolean[i]"></td>
+
+        <td><input  (input)="setEmail($event.target.value)" formArrayName="userEmailForm" type="email" class="input-text form-control"  [value]="user.user_email" [attr.disabled]="readOnlyBoolean[i]?'':null"  [required]="requiredBoolean[i]">
+
+        <td><input  (input)="setPhoneNumber($event.target.value)" formArrayName="userPhoneNumberForm" type="number" class="input-text form-control"  [value]="user.user_phone_number" [attr.disabled]="readOnlyBoolean[i]?'':null" [required]="requiredBoolean[i]"></td>
+
+        <td><input  (input)="setDepartment($event.target.value)" formArrayName="userDepartmentForm" type="text"  class="input-text form-control" [value]="user.user_department" [attr.disabled]="readOnlyBoolean[i]?'':null" [required]="requiredBoolean[i]"></td>
+
+        <td><button [hidden]="editButton[i]" (click)="editUser(i,user)">Edit</button></td>
+
+        <td><button [hidden]="saveButton[i]" (click)="saveUser(i,editUserForm.value)" >Save</button></td>
+
+        <td><button [hidden]="cancelButton[i]" (click)="cancelUser(i)" >Cancel</button></td>
+
+      </tr>
+
+  </table>
+
+  </form>
+
+</div>
+
+<pre>Form value: {{ editUserForm.value | json }}</pre>
+
+
+

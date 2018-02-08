@@ -74,8 +74,6 @@ export class AddModuleComponent implements OnInit {
 
   addModule() {
 
-
-
     const control = <FormArray>this.moduleForm.controls['module'];
     control.push(this.initModuleRow());
     this.numberOfModules = this.numberOfModules + 1;

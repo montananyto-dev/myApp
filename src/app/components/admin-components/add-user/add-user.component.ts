@@ -232,12 +232,8 @@ export class AddUserComponent implements OnInit {
         this.resetFormControlModule();
         this.modulesMatchingCourses = null;
 
-
         //print out the data return by the server
         console.log(data);
-
-
-
 
       }, err => {
 

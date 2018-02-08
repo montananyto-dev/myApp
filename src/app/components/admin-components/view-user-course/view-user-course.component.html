@@ -1,0 +1,53 @@
+<app-side-bar></app-side-bar>
+
+<div class="container">
+
+  <div class="form-group row">
+
+    <label for="courseStudent" class="col-2 col-form-label">Course</label>
+
+    <div class="col-10">
+
+      <select class="form-control" (change)="retrieveUsersFromCourse($event.target.value)" type="text"
+              id="courseStudent"
+              required>
+
+        <option value="undefined" disabled>Please, select the module</option>
+
+        <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
+
+      </select>
+
+    </div>
+
+  </div>
+
+
+  <div *ngIf="displayUsers">
+
+    <table class="table table-responsive table-sm">
+      <tr>
+        <th>First name</th>
+        <th>last name</th>
+        <th>Password</th>
+        <th>Email</th>
+        <th>Phone number</th>
+        <th>Department</th>
+      </tr>
+
+      <tr *ngFor="let item of users">
+
+        <td>{{item.user_first_name}}</td>
+        <td>{{item.user_last_name}}</td>
+        <td>{{item.user_password}}</td>
+        <td>{{item.user_email}}</td>
+        <td>{{item.user_phone_number}}</td>
+        <td>{{item.user_department}}</td>
+        <td *ngIf="!displayUsers">{{users}}</td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="container" *ngIf="!displayUsers">{{users}}</div>
+
+</div>

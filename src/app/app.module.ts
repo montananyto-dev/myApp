@@ -31,6 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddOrganisationComponent } from './components/admin-components/add-organisation/add-organisation.component';
 import { AddModuleComponent } from './components/admin-components/add-module/add-module.component';
 import { AddCourseComponent } from './components/admin-components/add-course/add-course.component';
+import { ViewUserCourseComponent } from './components/admin-components/view-user-course/view-user-course.component';
+import { EditUserComponent } from './components/admin-components/edit-user/edit-user.component';
 
 const appRoutes: Routes = [
   {
@@ -75,6 +77,14 @@ const appRoutes: Routes = [
   {
     path:'add/course',
     component: AddCourseComponent
+  },
+  {
+    path:'view/usercourse',
+    component: ViewUserCourseComponent
+  },
+  {
+    path:'edit/user',
+    component: EditUserComponent
   }
 
 ];
@@ -96,7 +106,9 @@ const appRoutes: Routes = [
     ViewCourseComponent,
     AddOrganisationComponent,
     AddModuleComponent,
-    AddCourseComponent
+    AddCourseComponent,
+    ViewUserCourseComponent,
+    EditUserComponent
 
 
   ],
