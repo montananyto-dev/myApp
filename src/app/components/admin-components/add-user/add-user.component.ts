@@ -23,13 +23,6 @@ export class AddUserComponent implements OnInit {
   public addUserApi = 'http://slim.kingstonse.org/add/user';
   public apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
-  usersDataJson: any;
-  selectionDataJson: any;
-  courseDataJson: any;
-  moduleDataJson: any;
-  userTypeDataJson: any;
-  organisationDataJson: any;
-
   users;
   allModules;
   modulesMatchingCourses;
@@ -50,7 +43,6 @@ export class AddUserComponent implements OnInit {
               private formBuilder: FormBuilder) {
 
     this.userForm = this.formBuilder.group({
-
       userType: new FormControl(),
       organisation: new FormControl(),
       firstName: new FormControl('', Validators.pattern('[a-zA-Z]+')), // input field that can contain only letters (no numbers or special characters)
@@ -71,6 +63,13 @@ export class AddUserComponent implements OnInit {
     })
   };
 
+  passwordMatchValidator(password: FormGroup) {
+
+    return password.get('passwordInput').value === password.get('passwordConfirm').value
+      ? null : {'mismatch': true};
+
+  }
+
   ngOnInit() {
 
     this.retrieveUsers();
@@ -80,16 +79,11 @@ export class AddUserComponent implements OnInit {
     this.retrieveOrganisations();
   }
 
-  passwordMatchValidator(password: FormGroup) {
 
-    return password.get('passwordInput').value === password.get('passwordConfirm').value
-      ? null : {'mismatch': true};
-
-  }
 
   checkUserType(userType) {
 
-    console.log('userTypeID: ' + userType);
+    //console.log('userTypeID: ' + userType);
 
     if (userType == 1) {
 
@@ -150,7 +144,7 @@ export class AddUserComponent implements OnInit {
 
     for (let i = 0; i < courseID.length; i++) {
 
-      console.log("course id: " + courseID[i]);
+      //console.log("course id: " + courseID[i]);
 
     }
     this.retrieveModuleFromCourse(courseID);
@@ -158,7 +152,7 @@ export class AddUserComponent implements OnInit {
 
   sendCourseLecturer(event) {
 
-    console.log(event);
+    //console.log(event);
 
     this.resetFormControlCourse();
     this.resetFormControlModule();
@@ -166,7 +160,7 @@ export class AddUserComponent implements OnInit {
 
     for (let i = 0; i < this.selectedCourses.length; i++) {
 
-      console.log("course id: " + this.selectedCourses[i]);
+      //console.log("course id: " + this.selectedCourses[i]);
 
       const courseControl = <FormArray>this.userForm.controls['courseModule'].get('course');
 
@@ -205,8 +199,7 @@ export class AddUserComponent implements OnInit {
   retrieveModuleFromCourse(courseIds) {
 
     return this.http.get(this.apiUrl2 + '/' + courseIds).subscribe(object => {
-      this.selectionDataJson = object;
-      this.modulesMatchingCourses = this.selectionDataJson;
+      this.modulesMatchingCourses = object;
 
     });
   }
@@ -233,7 +226,7 @@ export class AddUserComponent implements OnInit {
         this.modulesMatchingCourses = null;
 
         //print out the data return by the server
-        console.log(data);
+       // console.log(data);
 
       }, err => {
 
@@ -247,35 +240,30 @@ export class AddUserComponent implements OnInit {
 
   retrieveOrganisations() {
     this.organisationService.getOrganisations().subscribe(data => {
-      this.organisationDataJson = data;
       this.organisations = data;
     })
   }
 
   retrieveUsers() {
     this.userService.getAllUsers().subscribe(data => {
-      this.usersDataJson = data;
       this.users = data;
     })
   }
 
   retrieveCourses() {
     this.courseService.getAllCourses().subscribe(data => {
-      this.courseDataJson = data;
       this.courses = data;
     })
   }
 
   retrieveModules() {
     this.moduleService.getAllModules().subscribe(data => {
-      this.moduleDataJson = data;
       this.allModules = data;
     })
   }
 
   retrieveUserTypes() {
     this.userTypeService.getAllUserTypes().subscribe(data => {
-      this.userTypeDataJson = data;
       this.userTypes = data;
     })
   }

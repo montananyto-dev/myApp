@@ -1,5 +1,13 @@
 <app-side-bar></app-side-bar>
 
+<!--[ngClass]="{-->
+
+<!--'has-danger': userForm.controls.userType.invalid && userForm.controls.userType.untouched,-->
+<!--'has-success': userForm.controls.userType.valid && userForm.controls.userType.dirty-->
+<!--}">-->
+
+
+
 <div class="container">
 
   <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)" novalidate>
@@ -10,12 +18,6 @@
       <label for="userType" class="col-2 col-form-label">UserType</label>
 
       <div class="col-10">
-
-        <!--[ngClass]="{-->
-
-        <!--'has-danger': userForm.controls.userType.invalid && userForm.controls.userType.untouched,-->
-        <!--'has-success': userForm.controls.userType.valid && userForm.controls.userType.dirty-->
-        <!--}">-->
 
         <select #userType class="form-control" formControlName="userType" (change)="checkUserType(userType.value)"
                 type="text" id="userType" required>
@@ -44,7 +46,7 @@
           <select class="form-control" formArrayName="course" (change)="sendCourseStudent($event)" type="text"
                   id="courseStudent" required>
 
-            <option value="undefined" disabled>Please, select the module</option>
+            <option value="undefined" disabled>Please, select the course</option>
 
             <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
 
@@ -55,7 +57,7 @@
       </div>
 
 
-      <div *ngIf="userTypeChange== 2  " class="form-group row">
+      <div *ngIf="userTypeChange == 2  " class="form-group row">
 
         <label for="courseLecturer" class="col-2 col-form-label">Course</label>
 
@@ -69,8 +71,6 @@
             <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
 
           </select>
-
-          <div>{{selectedCourses}}</div>
 
         </div>
 

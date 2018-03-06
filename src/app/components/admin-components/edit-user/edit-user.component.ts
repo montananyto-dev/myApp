@@ -174,7 +174,7 @@ export class EditUserComponent implements OnInit {
       console.log('invalid');
     }else {
 
-      this.http.post(this.editUserApi, dataForm,
+      this.http.put(this.editUserApi, dataForm,
         {
           headers: {
             'Accept': 'application/ json',
