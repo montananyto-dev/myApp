@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import 'rxjs/add/operator/map';
 
-
 import {UserService} from '../../../services/user/user.service';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
@@ -20,22 +19,16 @@ export class ViewUserComponent {
   usersDataJson: any;
 
   constructor(private router: Router, private user: UserService) {
-
   }
-
   ngOnInit() {
     this.retrieveUsers();
   }
-
   retrieveUsers() {
-
     this.user.getAllUsers().subscribe(data => {
       this.usersDataJson = data;
       this.users = data;
-
     })
   }
-
 // showUsers() {
 // this.displayUsers = !this.displayUsers;
 // }

@@ -92,25 +92,9 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FooterComponent,
-    HeaderComponent,
-    LoginFormComponent,
-    HomeComponent,
-    NavbarComponent,
-    AddUserComponent,
-    ViewUserComponent,
-    SideBarComponent,
-    ViewOrganisationComponent,
-    ViewModuleComponent,
-    ViewCourseComponent,
-    AddOrganisationComponent,
-    AddModuleComponent,
-    AddCourseComponent,
-    ViewUserCourseComponent,
-    EditUserComponent
-
-
+    AppComponent, FooterComponent, HeaderComponent, LoginFormComponent, HomeComponent, NavbarComponent,
+    AddUserComponent, ViewUserComponent, SideBarComponent, ViewOrganisationComponent, ViewModuleComponent, ViewCourseComponent,
+    AddOrganisationComponent, AddModuleComponent, AddCourseComponent, ViewUserCourseComponent, EditUserComponent
   ],
   imports: [
     BrowserModule,
@@ -120,11 +104,11 @@ const appRoutes: Routes = [
     AngularFontAwesomeModule,
     MalihuScrollbarModule.forRoot(),
     ReactiveFormsModule
-
   ],
   providers: [UserService, OrganisationService, ModuleService, UserTypeService, CourseService, AuthenticationGuard],
   bootstrap: [AppComponent]
 })
+
 export class AppModule implements OnInit {
 
   constructor(private router: Router,
