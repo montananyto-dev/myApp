@@ -24,10 +24,5 @@ export class ViewUserComponent {
       this.users = data;
     })
   }
-<<<<<<< HEAD
-// showUsers() {
-// this.displayUsers = !this.displayUsers;
-// }
-=======
->>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
+
 }
