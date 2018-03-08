@@ -19,12 +19,16 @@ export class AddUserComponent implements OnInit {
   userForm: FormGroup;
   public addUserApi = 'http://slim.kingstonse.org/add/user';
   public apiUrl2 = 'http://slim.kingstonse.org/return/specific';
+<<<<<<< HEAD
   usersDataJson: any;
   selectionDataJson: any;
   courseDataJson: any;
   moduleDataJson: any;
   userTypeDataJson: any;
   organisationDataJson: any;
+=======
+
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
   users;
   allModules;
   modulesMatchingCourses;
@@ -43,12 +47,11 @@ export class AddUserComponent implements OnInit {
               private formBuilder: FormBuilder) {
 
     this.userForm = this.formBuilder.group({
-
       userType: new FormControl(),
       organisation: new FormControl(),
-      firstName: new FormControl('', Validators.pattern('[a-zA-Z]+')), // input field that can contain only letters (no numbers or special characters)
-      lastName: new FormControl('', Validators.pattern('[a-zA-Z]+')),// input field that can contain only letters (no numbers or special characters)
-      dateOfBirth: new FormControl(),
+      firstName: new FormControl('', Validators.pattern('[a-zA-Z]{2,30}$')), // input field that can contain only letters (no numbers or special characters) with a min 2 and max 30
+      lastName: new FormControl('', Validators.pattern('[a-zA-Z]{2,30}$')),// input field that can contain only letters (no numbers or special characters) with a min 2 and max 30
+      dateOfBirth: new FormControl('',Validators.pattern('')),
       courseModule: this.formBuilder.group({
         course: this.formBuilder.array([], Validators.required),
         module: this.formBuilder.array([], Validators.required),}),
@@ -58,9 +61,17 @@ export class AddUserComponent implements OnInit {
       }, {validator: this.passwordMatchValidator}),
       email: new FormControl('', Validators.email),
       phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$')),
-      department: new FormControl()
+      department: new FormControl('',Validators.pattern('^[a-zA-Z]{5,25}$'))
     })
   };
+
+
+  passwordMatchValidator(password: FormGroup) {
+
+    return password.get('passwordInput').value === password.get('passwordConfirm').value
+      ? null : {'mismatch': true};
+
+  }
 
   ngOnInit() {
 
@@ -71,16 +82,9 @@ export class AddUserComponent implements OnInit {
     this.retrieveOrganisations();
   }
 
-  passwordMatchValidator(password: FormGroup) {
-
-    return password.get('passwordInput').value === password.get('passwordConfirm').value
-      ? null : {'mismatch': true};
-
-  }
-
   checkUserType(userType) {
 
-    console.log('userTypeID: ' + userType);
+    //console.log('userTypeID: ' + userType);
 
     if (userType == 1) {
 
@@ -130,15 +134,36 @@ export class AddUserComponent implements OnInit {
     const courseControl = <FormArray>this.userForm.controls['courseModule'].get('course');
     courseControl.push(new FormControl(event.target.value, Validators.required));
     var courseID = this.userForm.get('courseModule').value.course;
+<<<<<<< HEAD
+=======
+
+    for (let i = 0; i < courseID.length; i++) {
+
+      //console.log("course id: " + courseID[i]);
+
+    }
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
     this.retrieveModuleFromCourse(courseID);
   }
 
   sendCourseLecturer(event) {
+<<<<<<< HEAD
+=======
+
+    //console.log(event);
+
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
     this.resetFormControlCourse();
     this.resetFormControlModule();
 
     for (let i = 0; i < this.selectedCourses.length; i++) {
+<<<<<<< HEAD
       console.log("course id: " + this.selectedCourses[i]);
+=======
+
+      //console.log("course id: " + this.selectedCourses[i]);
+
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
       const courseControl = <FormArray>this.userForm.controls['courseModule'].get('course');
       courseControl.push(new FormControl(this.selectedCourses[i], Validators.required));
     }
@@ -166,8 +191,13 @@ export class AddUserComponent implements OnInit {
   }
   retrieveModuleFromCourse(courseIds) {
     return this.http.get(this.apiUrl2 + '/' + courseIds).subscribe(object => {
+<<<<<<< HEAD
       this.selectionDataJson = object;
       this.modulesMatchingCourses = this.selectionDataJson;
+=======
+      this.modulesMatchingCourses = object;
+
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
     });
   }
 
@@ -189,7 +219,12 @@ export class AddUserComponent implements OnInit {
         this.resetFormControlModule();
         this.modulesMatchingCourses = null;
         //print out the data return by the server
+<<<<<<< HEAD
         console.log(data);
+=======
+       // console.log(data);
+
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
       }, err => {
         console.log(err);
         console.error("Could not be added");
@@ -200,31 +235,26 @@ export class AddUserComponent implements OnInit {
 
   retrieveOrganisations() {
     this.organisationService.getOrganisations().subscribe(data => {
-      this.organisationDataJson = data;
       this.organisations = data;
     })
   }
   retrieveUsers() {
     this.userService.getAllUsers().subscribe(data => {
-      this.usersDataJson = data;
       this.users = data;
     })
   }
   retrieveCourses() {
     this.courseService.getAllCourses().subscribe(data => {
-      this.courseDataJson = data;
       this.courses = data;
     })
   }
   retrieveModules() {
     this.moduleService.getAllModules().subscribe(data => {
-      this.moduleDataJson = data;
       this.allModules = data;
     })
   }
   retrieveUserTypes() {
     this.userTypeService.getAllUserTypes().subscribe(data => {
-      this.userTypeDataJson = data;
       this.userTypes = data;
     })
   }

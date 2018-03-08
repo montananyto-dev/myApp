@@ -1,5 +1,13 @@
 <app-side-bar></app-side-bar>
 
+<!--[ngClass]="{-->
+
+<!--'has-danger': userForm.controls.userType.invalid && userForm.controls.userType.untouched,-->
+<!--'has-success': userForm.controls.userType.valid && userForm.controls.userType.dirty-->
+<!--}">-->
+
+
+
 <div class="container">
 
   <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)" novalidate>
@@ -10,12 +18,6 @@
       <label for="userType" class="col-2 col-form-label">UserType</label>
 
       <div class="col-10">
-
-        <!--[ngClass]="{-->
-
-        <!--'has-danger': userForm.controls.userType.invalid && userForm.controls.userType.untouched,-->
-        <!--'has-success': userForm.controls.userType.valid && userForm.controls.userType.dirty-->
-        <!--}">-->
 
         <select #userType class="form-control" formControlName="userType" (change)="checkUserType(userType.value)"
                 type="text" id="userType" required>
@@ -39,14 +41,25 @@
         <div class="col-10">
           <select class="form-control" formArrayName="course" (change)="sendCourseStudent($event)" type="text"
                   id="courseStudent" required>
+<<<<<<< HEAD
             <option value="undefined" disabled>Please, select the module</option>
+=======
+
+            <option value="undefined" disabled>Please, select the course</option>
+
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
             <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
           </select>
         </div>
       </div>
 
 
+<<<<<<< HEAD
       <div *ngIf="userTypeChange== 2  " class="form-group row">
+=======
+      <div *ngIf="userTypeChange == 2  " class="form-group row">
+
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
         <label for="courseLecturer" class="col-2 col-form-label">Course</label>
         <div class="col-10">
           <select multiple [(ngModel)]="selectedCourses" [ngModelOptions]="{standalone: true}" class="form-control"
@@ -54,7 +67,11 @@
             <option disabled selected>Please, select the modules</option>
             <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
           </select>
+<<<<<<< HEAD
           <div>{{selectedCourses}}</div>
+=======
+
+>>>>>>> bcec9b15620bf069791e0d6f81b32cf60e3c4aab
         </div>
       </div>
 
