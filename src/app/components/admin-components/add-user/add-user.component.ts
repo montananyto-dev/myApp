@@ -45,9 +45,9 @@ export class AddUserComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       userType: new FormControl(),
       organisation: new FormControl(),
-      firstName: new FormControl('', Validators.pattern('[a-zA-Z]+')), // input field that can contain only letters (no numbers or special characters)
-      lastName: new FormControl('', Validators.pattern('[a-zA-Z]+')),// input field that can contain only letters (no numbers or special characters)
-      dateOfBirth: new FormControl(),
+      firstName: new FormControl('', Validators.pattern('[a-zA-Z]{2,30}$')), // input field that can contain only letters (no numbers or special characters) with a min 2 and max 30
+      lastName: new FormControl('', Validators.pattern('[a-zA-Z]{2,30}$')),// input field that can contain only letters (no numbers or special characters) with a min 2 and max 30
+      dateOfBirth: new FormControl('',Validators.pattern('')),
       courseModule: this.formBuilder.group({
         course: this.formBuilder.array([], Validators.required),
         module: this.formBuilder.array([], Validators.required),
@@ -59,9 +59,10 @@ export class AddUserComponent implements OnInit {
 
       email: new FormControl('', Validators.email),
       phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$')),
-      department: new FormControl()
+      department: new FormControl('',Validators.pattern('^[a-zA-Z]{5,25}$'))
     })
   };
+
 
   passwordMatchValidator(password: FormGroup) {
 
@@ -78,8 +79,6 @@ export class AddUserComponent implements OnInit {
     this.retrieveUserTypes();
     this.retrieveOrganisations();
   }
-
-
 
   checkUserType(userType) {
 
