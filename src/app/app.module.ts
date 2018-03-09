@@ -34,6 +34,9 @@ import { AddCourseComponent } from './components/admin-components/add-course/add
 import { ViewUserCourseComponent } from './components/admin-components/view-user-course/view-user-course.component';
 import { EditUserComponent } from './components/admin-components/edit-user/edit-user.component';
 
+
+
+
 const appRoutes: Routes = [
   {
     path: '',
@@ -98,9 +101,9 @@ const appRoutes: Routes = [
     LoginFormComponent,
     HomeComponent,
     NavbarComponent,
+    SideBarComponent,
     AddUserComponent,
     ViewUserComponent,
-    SideBarComponent,
     ViewOrganisationComponent,
     ViewModuleComponent,
     ViewCourseComponent,
@@ -108,7 +111,8 @@ const appRoutes: Routes = [
     AddModuleComponent,
     AddCourseComponent,
     ViewUserCourseComponent,
-    EditUserComponent
+    EditUserComponent,
+
 
 
   ],
