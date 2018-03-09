@@ -20,15 +20,7 @@ export class AddUserComponent implements OnInit {
   public addUserApi = 'http://slim.kingstonse.org/add/user';
   public apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
-  usersDataJson: any;
   selectionDataJson: any;
-  courseDataJson: any;
-  moduleDataJson: any;
-  userTypeDataJson: any;
-  organisationDataJson: any;
-
-
-
   users;
   allModules;
   modulesMatchingCourses;
@@ -51,30 +43,28 @@ export class AddUserComponent implements OnInit {
       organisation: new FormControl(),
       firstName: new FormControl('', Validators.pattern('[a-zA-Z]{2,30}$')), // input field that can contain only letters (no numbers or special characters) with a min 2 and max 30
       lastName: new FormControl('', Validators.pattern('[a-zA-Z]{2,30}$')),// input field that can contain only letters (no numbers or special characters) with a min 2 and max 30
-      dateOfBirth: new FormControl('',Validators.pattern('')),
+      dateOfBirth: new FormControl('', Validators.pattern('')),
       courseModule: this.formBuilder.group({
         course: this.formBuilder.array([], Validators.required),
-        module: this.formBuilder.array([], Validators.required),}),
+        module: this.formBuilder.array([], Validators.required),
+      }),
       password: this.formBuilder.group({
         passwordInput: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')), // "Password" that must contain 8 or more characters with at least one number, and one uppercase and lowercase letter
         passwordConfirm: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')),// "Password" that must contain 8 or more characters with at least one number, and one uppercase and lowercase letter
       }, {validator: this.passwordMatchValidator}),
       email: new FormControl('', Validators.email),
       phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$')),
-      department: new FormControl('',Validators.pattern('^[a-zA-Z]{5,25}$'))
+      department: new FormControl('', Validators.pattern('^[a-zA-Z]{5,25}$'))
     })
   };
 
 
   passwordMatchValidator(password: FormGroup) {
-
     return password.get('passwordInput').value === password.get('passwordConfirm').value
       ? null : {'mismatch': true};
-
   }
 
   ngOnInit() {
-
     this.retrieveUsers();
     this.retrieveCourses();
     this.retrieveModules();
@@ -84,10 +74,7 @@ export class AddUserComponent implements OnInit {
 
   checkUserType(userType) {
 
-    //console.log('userTypeID: ' + userType);
-
     if (userType == 1) {
-
       this.userTypeChange = 1;
       this.resetFormControlCourse();
       this.resetFormControlModule();
@@ -95,7 +82,6 @@ export class AddUserComponent implements OnInit {
       this.userForm.controls['courseModule'].enable();
 
     } else if (userType == 2) {
-
       this.userTypeChange = 2;
       this.resetFormControlCourse();
       this.resetFormControlModule();
@@ -103,13 +89,11 @@ export class AddUserComponent implements OnInit {
       this.userForm.controls['courseModule'].enable();
 
     } else {
-
       this.userTypeChange = 3;
       this.resetFormControlCourse();
       this.resetFormControlModule();
       this.modulesMatchingCourses = null;
       this.userForm.controls['courseModule'].disable();
-
     }
   }
 
@@ -135,28 +119,15 @@ export class AddUserComponent implements OnInit {
     courseControl.push(new FormControl(event.target.value, Validators.required));
     var courseID = this.userForm.get('courseModule').value.course;
 
-
-    for (let i = 0; i < courseID.length; i++) {
-
-      //console.log("course id: " + courseID[i]);
-
-    }
-
     this.retrieveModuleFromCourse(courseID);
   }
 
-  sendCourseLecturer(event) {
-
-    //console.log(event);
+  sendCourseLecturer() {
 
     this.resetFormControlCourse();
     this.resetFormControlModule();
 
     for (let i = 0; i < this.selectedCourses.length; i++) {
-
-      console.log("course id: " + this.selectedCourses[i]);
-
-      //console.log("course id: " + this.selectedCourses[i]);
 
       const courseControl = <FormArray>this.userForm.controls['courseModule'].get('course');
       courseControl.push(new FormControl(this.selectedCourses[i], Validators.required));
@@ -183,14 +154,12 @@ export class AddUserComponent implements OnInit {
     }
 
   }
+
   retrieveModuleFromCourse(courseIds) {
     return this.http.get(this.apiUrl2 + '/' + courseIds).subscribe(object => {
-
       this.selectionDataJson = object;
       this.modulesMatchingCourses = this.selectionDataJson;
-
       this.modulesMatchingCourses = object;
-
     });
   }
 
@@ -212,16 +181,11 @@ export class AddUserComponent implements OnInit {
         this.resetFormControlModule();
         this.modulesMatchingCourses = null;
         //print out the data return by the server
-
         console.log(data);
-
-       // console.log(data);
-
       }, err => {
         console.log(err);
         console.error("Could not be added");
       });
-
     }
   };
 

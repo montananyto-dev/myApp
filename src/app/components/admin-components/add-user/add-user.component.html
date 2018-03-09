@@ -1,11 +1,5 @@
 <app-side-bar></app-side-bar>
 
-<!--[ngClass]="{-->
-
-<!--'has-danger': userForm.controls.userType.invalid && userForm.controls.userType.untouched,-->
-<!--'has-success': userForm.controls.userType.valid && userForm.controls.userType.dirty-->
-<!--}">-->
-
 <div class="container">
   <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)" novalidate>
     <div class="form-group row">
@@ -13,7 +7,6 @@
       <div class="col-10">
         <select #userType class="form-control" formControlName="userType" (change)="checkUserType(userType.value)"
                 type="text" id="userType" required>
-
           <option *ngFor="let userType of userTypes" [value]="userType.user_type_id">
             {{userType.user_type_role}}
           </option>
@@ -27,14 +20,11 @@
         <div class="col-10">
           <select class="form-control" formArrayName="course" (change)="sendCourseStudent($event)" type="text"
                   id="courseStudent" required>
-
             <option value="undefined" disabled>Please, select the module</option>
-
             <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
           </select>
         </div>
       </div>
-
 
       <div *ngIf="userTypeChange== 2  " class="form-group row">
         <label for="courseLecturer" class="col-2 col-form-label">Course</label>
@@ -47,7 +37,6 @@
           <div>{{selectedCourses}}</div>
         </div>
       </div>
-
 
       <div *ngIf="userTypeChange == 1  || userTypeChange == 2" class="form-check form-group row">
         <div class="form-check" *ngFor="let module of modulesMatchingCourses">
@@ -63,7 +52,6 @@
       </div>
     </div>
 
-
     <div class="form-group row">
       <label for="organisation" class="col-2 col-form-label">Organisation</label>
       <div class="col-10">
@@ -76,14 +64,15 @@
       </div>
     </div>
 
-
     <div class="form-group row">
       <label for="firstName" class="col-2 col-form-label">First Name</label>
       <div class="col-10">
         <input class="form-control" formControlName="firstName" type="text" id="firstName" ngModel required>
       </div>
+      <!--<div class="has-danger" *ngIf=" userForm.controls.firstName.invalid && userForm.controls.firstName.dirty ">-->
+        <!--Field is invalid-->
+      <!--</div>-->
     </div>
-
 
     <div class="form-group row">
       <label for="lastName" class="col-2 col-form-label">Last Name</label>
@@ -92,14 +81,12 @@
       </div>
     </div>
 
-
     <div class="form-group row">
       <label for="dateOfBirth" class="col-2 col-form-label">Date of Birth</label>
       <div class="col-10">
         <input class="form-control" formControlName="dateOfBirth" type="date" id="dateOfBirth" ngModel required>
       </div>
     </div>
-
 
     <div formGroupName="password">
       <div class="form-group row">
@@ -109,7 +96,6 @@
         </div>
       </div>
 
-
       <div class="form-group row">
         <label for="passwordConfirm" class="col-2 col-form-label">Password Confirmation</label>
         <div class="col-10">
@@ -118,14 +104,12 @@
       </div>
     </div>
 
-
     <div class="form-group row">
       <label for="email" class="col-2 col-form-label">Email</label>
       <div class="col-10">
         <input class="form-control" formControlName="email" type="email" id="email" ngModel required>
       </div>
     </div>
-
 
     <div class="form-group row">
       <label for="phoneNumber" class="col-2 col-form-label">Phone number</label>
@@ -134,14 +118,12 @@
       </div>
     </div>
 
-
     <div class="form-group row">
       <label for="department" class="col-2 col-form-label">Department</label>
       <div class="col-10">
         <input class="form-control" formControlName="department" type="text" id="department" ngModel required>
       </div>
     </div>
-
 
     <button type="submit" class="btn btn-success" [disabled]="userForm.invalid">Submit</button>
   </form>
