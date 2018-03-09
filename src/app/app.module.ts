@@ -105,7 +105,7 @@ const appRoutes: Routes = [
     MalihuScrollbarModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [UserService, OrganisationService, ModuleService, UserTypeService, CourseService, AuthenticationGuard],
+  providers: [UserService, OrganisationService, ModuleService, UserTypeService, CourseService, AuthenticationGuard,HttpClientModule,HttpClient ],
   bootstrap: [AppComponent]
 })
 
