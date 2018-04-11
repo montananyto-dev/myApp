@@ -33,6 +33,11 @@ import { AddModuleComponent } from './components/admin-components/add-module/add
 import { AddCourseComponent } from './components/admin-components/add-course/add-course.component';
 import { ViewUserCourseComponent } from './components/admin-components/view-user-course/view-user-course.component';
 import { EditUserComponent } from './components/admin-components/edit-user/edit-user.component';
+import { DashboardComponent } from './components/user-components/dashboard/dashboard.component';
+import { NavbarUserComponent } from './components/user-components/navbar-user/navbar-user.component';
+import { SidebarUserComponent } from './components/user-components/sidebar-user/sidebar-user.component';
+import { AddProjectComponent } from './components/user-components/add-project/add-project.component';
+import {UserModelService} from "./services/user-model/user-model.service";
 
 const appRoutes: Routes = [
   {
@@ -44,7 +49,7 @@ const appRoutes: Routes = [
     component: LoginFormComponent
   }, {
     path: 'home',
-   canActivate: [AuthenticationGuard],  /* access to home page once logged in */
+    canActivate: [AuthenticationGuard],  /* access to home page once logged in */
     component: HomeComponent
   }, {
     path: 'add/user',
@@ -85,6 +90,10 @@ const appRoutes: Routes = [
   {
     path:'edit/user',
     component: EditUserComponent
+  },{
+    path:'dashboard',component:DashboardComponent
+  },{
+    path:'dashboard/add/project',component:AddProjectComponent
   }
 
 ];
@@ -94,7 +103,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent, FooterComponent, HeaderComponent, LoginFormComponent, HomeComponent, NavbarComponent,
     AddUserComponent, ViewUserComponent, SideBarComponent, ViewOrganisationComponent, ViewModuleComponent, ViewCourseComponent,
-    AddOrganisationComponent, AddModuleComponent, AddCourseComponent, ViewUserCourseComponent, EditUserComponent
+    AddOrganisationComponent, AddModuleComponent, AddCourseComponent, ViewUserCourseComponent, EditUserComponent, DashboardComponent, NavbarUserComponent, SidebarUserComponent, AddProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -105,7 +114,7 @@ const appRoutes: Routes = [
     MalihuScrollbarModule.forRoot(),
     ReactiveFormsModule
   ],
-  providers: [UserService, OrganisationService, ModuleService, UserTypeService, CourseService, AuthenticationGuard,HttpClientModule,HttpClient ],
+  providers: [UserService, OrganisationService, ModuleService,UserModelService, UserTypeService, CourseService, AuthenticationGuard,HttpClientModule,HttpClient ],
   bootstrap: [AppComponent]
 })
 
@@ -115,7 +124,8 @@ export class AppModule implements OnInit {
               private user: UserService,
               private module: ModuleService,
               private http: HttpClient,
-              private userType: UserTypeService) {
+              private userType: UserTypeService,
+              private userModel: UserModelService) {
   }
 
   ngOnInit() {

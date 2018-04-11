@@ -1,0 +1,78 @@
+<div class="container-fluid">
+  <div class="row d-flex d-md-block flex-nowrap wrapper">
+    <div class="col-md-3 float-left col-1 pl-0 pr-0 collapse width hide" id="sidebar">
+      <div class="list-group border-0 card text-center text-md-left">
+
+        <a class="list-group-item d-inline-block collapsed empty" data-toggle="collapse" data-parent="#sidebar"></a>
+
+        <a href="#menu1" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false"><i class="fa fa-folder-open">
+        </i> <span class="d-none d-md-inline">Project</span> </a>
+        <div class="collapse" id="menu1">
+
+          <a [routerLink]="['/dashboard/add/project']" class="list-group-item" data-parent="#menu1">Add a project</a>
+          <a [routerLink]="['/view/project']" class="list-group-item" data-parent="#menu1">View All Project</a>
+          <a [routerLink]="['/view/project']" class="list-group-item" data-parent="#menu1">Edit a project</a>
+
+        </div>
+
+        <a href="#menu2" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar"
+           aria-expanded="false"><i class="fa fa-book">
+        </i> <span class="d-none d-md-inline">Courses</span> </a>
+        <div class="collapse" id="menu2">
+          <a routerLink="/view/course" class="list-group-item" data-parent="#menu1">View All Courses</a>
+          <a routerLink="/add/course" class="list-group-item" data-parent="#menu1">Add a Course</a>
+          <a href="#" class="list-group-item" data-parent="#menu1">Edit a Course</a>
+          <a href="#" class="list-group-item" data-parent="#menu1">Delete Course</a>
+        </div>
+
+        <a href="#menu3" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar"
+           aria-expanded="false"><i class="fa fa-book">
+        </i> <span class="d-none d-md-inline">Modules</span> </a>
+        <div class="collapse" id="menu3">
+          <a routerLink="/view/module" class="list-group-item" data-parent="#menu1">View All Modules</a>
+          <a href="#" class="list-group-item" data-parent="#menu1">View Modules per Course</a>
+          <a routerLink="/add/module" class="list-group-item" data-parent="#menu1">Add a Module</a>
+          <a href="#" class="list-group-item" data-parent="#menu1">Edit a Module</a>
+          <a href="#" class="list-group-item" data-parent="#menu1">Delete a Module</a>
+        </div>
+
+        <a href="#menu4" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar"
+           aria-expanded="false"><i class="fa fa-sitemap">
+        </i> <span class="d-none d-md-inline">Organisations</span> </a>
+        <div class="collapse" id="menu4">
+          <a routerLink="/view/organisation" class="list-group-item" data-parent="#menu1">View All Organisations</a>
+          <a routerLink="/add/organisation" class="list-group-item" data-parent="#menu1">Add Organisation</a>
+          <a href="#" class="list-group-item" data-parent="#menu1">Edit Organisation</a>
+          <a href="#" class="list-group-item" data-parent="#menu1">Archive Organisation</a>
+        </div>
+
+       <!-- <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-film"></i>
+          <span class="d-none d-md-inline">Item 2</span></a>
+-->
+      <!--  <a href="#menu5" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar"
+           aria-expanded="false">
+          <i class="fa fa-book"></i> <span class="d-none d-md-inline">Item 3 </span></a>
+-->
+       <!-- <div class="collapse" id="menu5">
+          <a href="#" class="list-group-item" data-parent="#menu3">3.1</a>
+          <a href="#menu3sub2" class="list-group-item" data-toggle="collapse" aria-expanded="false">3.2 </a>
+          <div class="collapse" id="menu3sub2">
+            <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 a</a>
+            <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 b</a>
+            <a href="#" class="list-group-item" data-parent="#menu3sub2">3.2 c</a>
+          </div>
+          <a href="#" class="list-group-item" data-parent="#menu3">3.3</a>
+        </div>-->
+      <!--  <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-heart"></i>
+          <span class="d-none d-md-inline">Item 4</span></a>
+        <a href="#" class="list-group-item d-inline-block collapsed" data-parent="#sidebar"><i class="fa fa-list"></i>
+          <span class="d-none d-md-inline">Item 5</span></a>-->
+
+      </div>
+    </div>
+
+    <app-navbar-user></app-navbar-user>
+
+
+  </div>
+</div>

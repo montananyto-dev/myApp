@@ -1,0 +1,7 @@
+li.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+.navbar-brand{
+
+  padding-left: 10px;
+}
