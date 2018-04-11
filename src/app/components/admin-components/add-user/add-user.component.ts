@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormArray, FormGroup, Validators} from '@angular/forms';
-import {UserTypeService} from '../../../services/user-type/user-type.service';
-import {UserService} from '../../../services/user/user.service';
+import {UserTypeService} from '../../../services/admin-services/user-type/user-type.service';
+import {UserService} from '../../../services/admin-services/user/user.service';
 import 'rxjs/add/operator/map';
 import {HttpClient} from '@angular/common/http';
-import {CourseService} from '../../../services/course/course.service';
-import {OrganisationService} from '../../../services/organisation/organisation.service';
-import {ModuleService} from '../../../services/module/module.service';
+import {CourseService} from '../../../services/admin-services/course/course.service';
+import {OrganisationService} from '../../../services/admin-services/organisation/organisation.service';
+import {ModuleService} from '../../../services/admin-services/module/module.service';
 
 @Component({
   selector: 'app-add-user',

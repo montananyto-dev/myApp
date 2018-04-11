@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserProjectService} from "../../../services/user_services/user-project/user-project.service";
 
 @Component({
   selector: 'app-add-project',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddProjectComponent implements OnInit {
 
-  constructor() { }
+  projects;
+
+  constructor(private project:UserProjectService) { }
 
   ngOnInit() {
+    this.retrieveProjects();
   }
-
+  retrieveProjects() {
+    this.project.getProject().subscribe(data => {
+      this.projects = data;
+    })
+  }
 }

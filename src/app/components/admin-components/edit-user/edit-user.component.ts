@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UserService} from "../../../services/user/user.service";
+import {UserService} from "../../../services/admin-services/user/user.service";
 import {Form, FormArray, FormArrayName, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {DoCheck} from '@angular/core';
 import {until} from "selenium-webdriver";

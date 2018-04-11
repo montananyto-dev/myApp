@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {ModuleService} from '../../../services/module/module.service';
+import {ModuleService} from '../../../services/admin-services/module/module.service';
 
 @Component({
   selector: 'app-view-module',

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {CourseService} from "../../../services/course/course.service";
-import {ModuleService} from "../../../services/module/module.service";
+import {CourseService} from "../../../services/admin-services/course/course.service";
+import {ModuleService} from "../../../services/admin-services/module/module.service";
 import {HttpClient} from "@angular/common/http";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
-import {OrganisationService} from "../../../services/organisation/organisation.service";
-import {UserService} from "../../../services/user/user.service";
-import {UserTypeService} from "../../../services/user-type/user-type.service";
+import {OrganisationService} from "../../../services/admin-services/organisation/organisation.service";
+import {UserService} from "../../../services/admin-services/user/user.service";
+import {UserTypeService} from "../../../services/admin-services/user-type/user-type.service";
 
 @Component({
   selector: 'app-add-course',

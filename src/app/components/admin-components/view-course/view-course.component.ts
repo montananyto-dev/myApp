@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {CourseService} from '../../../services/course/course.service';
+import {CourseService} from '../../../services/admin-services/course/course.service';
 
 @Component({
   selector: 'app-view-course',

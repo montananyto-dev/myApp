@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserModelService} from "../../../services/user_services/user-model/user-model.service";
 
 
 @Component({
@@ -9,10 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _currentUser: UserModelService) {
+  }
 
   ngOnInit() {
 
   }
-
 }
+

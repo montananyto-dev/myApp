@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
 import {UserModelService} from "../../../services/user_services/user-model/user-model.service";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-navbar-user',
-  templateUrl: './navbar-user.component.html',
-  styleUrls: ['./navbar-user.component.css']
+  selector: 'app-navbar',
+  templateUrl: './navbar-admin.component.html',
+  styleUrls: ['./navbar-admin.component.css']
 })
-export class NavbarUserComponent implements OnInit {
+export class NavbarAdminComponent implements OnInit {
 
   userName = this._currentUser.getUser_first_name();
 

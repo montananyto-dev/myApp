@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormGroup, Validators} from "@angular/forms";
 import {FormControl} from '@angular/forms';
 import {HttpClient} from "@angular/common/http";
-import {OrganisationService} from "../../../services/organisation/organisation.service";
+import {OrganisationService} from "../../../services/admin-services/organisation/organisation.service";
 
 
 @Component({

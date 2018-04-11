@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 import 'rxjs/add/operator/map';
-import { UserService } from '../../../services/user/user.service';
-import {UserModelService} from "../../../services/user-model/user-model.service";
+import {UserService} from '../../services/admin-services/user/user.service';
+import {UserModelService} from "../../services/user_services/user-model/user-model.service";
 
 @Component({
   selector: 'app-login-form',
@@ -11,13 +11,14 @@ import {UserModelService} from "../../../services/user-model/user-model.service"
 })
 export class LoginFormComponent implements OnInit {
 
-  public  usersDataJson: any;
-  private inputUserName:string;
-  private inputPassword:string;
+  public usersDataJson: any;
+  private inputUserName: string;
+  private inputPassword: string;
 
-  constructor(private router: Router, private userService: UserService, private _currentUser:UserModelService) {
+  constructor(private router: Router, private userService: UserService, private _currentUser: UserModelService) {
 
   }
+
   ngOnInit() {
     this.retrieveUsers();
   }
@@ -34,36 +35,35 @@ export class LoginFormComponent implements OnInit {
 
         this._currentUser.setUser_id(Number(element['user_id']));
         this._currentUser.setOrganisation_id(Number(element['organisation_id']));
-        this._currentUser.setUser_type_id( Number(element['user_type_id']));
+        this._currentUser.setUser_type_id(Number(element['user_type_id']));
         this._currentUser.setUser_first_name(element['user_first_name']);
-        this._currentUser.setUser_last_name(element['user_last_name']) ;
-        this._currentUser.setUser_password(element['user_password']) ;
-        this._currentUser.setUser_email(element['user_email']) ;
-        this._currentUser.setUser_phone_number(element['user_phone_number']) ;
+        this._currentUser.setUser_last_name(element['user_last_name']);
+        this._currentUser.setUser_password(element['user_password']);
+        this._currentUser.setUser_email(element['user_email']);
+        this._currentUser.setUser_phone_number(element['user_phone_number']);
         this._currentUser.setUser_department(element['user_department']);
         this._currentUser.setUser_about_me(element['user_about_me']);
         this._currentUser.setUser_date_of_birth(element['user_date_of_birth']);
         this._currentUser.setIsUserLoggedIn(true);
 
-        if(element["user_type_id"] == 3) {
+        if (element["user_type_id"] == 3) {
           this.router.navigateByUrl('/home');
-        }else{
-          this.router.navigateByUrl('dashboard');
+        } else {
+          this.router.navigateByUrl('/dashboard');
         }
       } else {
-
         return ErrorEvent;
-
       }
     });
   }
 
-  retrieveUsers(){
+  retrieveUsers() {
 
     this.userService.getAllUsers().subscribe(data => {
       this.usersDataJson = data;
 
-    })};
+    })
+  };
 
 }
 

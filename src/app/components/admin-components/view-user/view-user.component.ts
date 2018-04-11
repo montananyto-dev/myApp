@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import 'rxjs/add/operator/map';
 
-import {UserService} from '../../../services/user/user.service';
+import {UserService} from '../../../services/admin-services/user/user.service';
 
 
 @Component({

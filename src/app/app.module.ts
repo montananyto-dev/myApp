@@ -5,11 +5,8 @@ import {Router, RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { FooterComponent } from './components/login-components/footer/footer.component';
-import { HeaderComponent } from './components/login-components/header/header.component';
-import { LoginFormComponent } from './components/login-components/login-form/login-form.component';
-import { HomeComponent } from './components/admin-components/home/home.component';
-import { NavbarComponent } from './components/admin-components/navbar/navbar.component';
+import { LoginFormComponent } from './components/login-component/login-form.component';
+import { NavbarAdminComponent } from './components/admin-components/navbar-admin/navbar-admin.component';
 import { AddUserComponent } from './components/admin-components/add-user/add-user.component';
 import { ViewUserComponent } from './components/admin-components/view-user/view-user.component';
 import { SideBarComponent } from './components/admin-components/side-bar/side-bar.component';
@@ -19,13 +16,12 @@ import { ViewCourseComponent } from './components/admin-components/view-course/v
 import { AuthenticationGuard } from './guards/authentification.guard';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 
-import { UserService } from './services/user/user.service';
-import { OrganisationService } from './services/organisation/organisation.service';
-import { ModuleService } from './services/module/module.service';
-import {CourseService} from './services/course/course.service';
-import { UserTypeService } from './services/user-type/user-type.service';
+import { UserService } from './services/admin-services/user/user.service';
+import { OrganisationService } from './services/admin-services/organisation/organisation.service';
+import { ModuleService } from './services/admin-services/module/module.service';
+import {CourseService} from './services/admin-services/course/course.service';
+import { UserTypeService } from './services/admin-services/user-type/user-type.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddOrganisationComponent } from './components/admin-components/add-organisation/add-organisation.component';
@@ -37,20 +33,17 @@ import { DashboardComponent } from './components/user-components/dashboard/dashb
 import { NavbarUserComponent } from './components/user-components/navbar-user/navbar-user.component';
 import { SidebarUserComponent } from './components/user-components/sidebar-user/sidebar-user.component';
 import { AddProjectComponent } from './components/user-components/add-project/add-project.component';
-import {UserModelService} from "./services/user-model/user-model.service";
+import {UserModelService} from "./services/user_services/user-model/user-model.service";
+import { HomeAdminComponent } from './components/admin-components/home-admin/home-admin.component';
+import { HomeUserComponent } from './components/user-components/home-user/home-user.component';
 
 const appRoutes: Routes = [
   {
-    path: '',
-    component: LoginFormComponent
+    path: '', component: LoginFormComponent
   },
-  {
-    path: 'login',
-    component: LoginFormComponent
-  }, {
-    path: 'home',
-    canActivate: [AuthenticationGuard],  /* access to home page once logged in */
-    component: HomeComponent
+   {
+    path: 'home', canActivate: [AuthenticationGuard],  /* access to home page once logged in */
+    component: HomeAdminComponent
   }, {
     path: 'add/user',
     component: AddUserComponent
@@ -91,9 +84,11 @@ const appRoutes: Routes = [
     path:'edit/user',
     component: EditUserComponent
   },{
-    path:'dashboard',component:DashboardComponent
+    path:'dashboard',
+    component:DashboardComponent
   },{
-    path:'dashboard/add/project',component:AddProjectComponent
+    path:'dashboard/add/project',
+    component:AddProjectComponent
   }
 
 ];
@@ -101,9 +96,27 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, FooterComponent, HeaderComponent, LoginFormComponent, HomeComponent, NavbarComponent,
-    AddUserComponent, ViewUserComponent, SideBarComponent, ViewOrganisationComponent, ViewModuleComponent, ViewCourseComponent,
-    AddOrganisationComponent, AddModuleComponent, AddCourseComponent, ViewUserCourseComponent, EditUserComponent, DashboardComponent, NavbarUserComponent, SidebarUserComponent, AddProjectComponent
+    AppComponent,
+    LoginFormComponent,
+    NavbarAdminComponent,
+    AddUserComponent,
+    ViewUserComponent,
+    SideBarComponent,
+    ViewOrganisationComponent,
+    ViewModuleComponent,
+    ViewCourseComponent,
+    AddOrganisationComponent,
+    AddModuleComponent,
+    AddCourseComponent,
+    ViewUserCourseComponent,
+    EditUserComponent,
+    DashboardComponent,
+    NavbarUserComponent,
+    NavbarAdminComponent,
+    SidebarUserComponent,
+    AddProjectComponent,
+    HomeAdminComponent,
+    HomeUserComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +124,6 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    MalihuScrollbarModule.forRoot(),
     ReactiveFormsModule
   ],
   providers: [UserService, OrganisationService, ModuleService,UserModelService, UserTypeService, CourseService, AuthenticationGuard,HttpClientModule,HttpClient ],
