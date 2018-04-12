@@ -1,32 +1,39 @@
-<nav class="navbar navbar-expand-md navbar-light bg-faded">
-  <a href="#" data-target="#sidebar" data-toggle="collapse"><i class="fa fa-navicon fa-2x py-2 p-1"></i></a>
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div class="navbar-admin">
 
-  <a class="navbar-brand">Kingston Project</a>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active "><a class="nav-link" (click)="navigateToDashboard()"><span class="fa fa-home"> Home</span></a>
-      </li>
-
-      <li class="nav-item active"><a class="nav-link" (click)="navigateToProfile()"> <span class="fa fa-user"> Profile</span>
-      </a></li>
-
-    </ul>
-    <ul class="navbar-nav float-lg-right">
-      <li class="nav-item active"><a class="nav-link -align-right">Welcome {{user_first_name}} {{user_last_name}} <span
-        class="sr-only"></span></a></li>
-    </ul>
-
-    <button type="button" class="btn btn-default btn-sm" type="submit" (click)="logout()">
-      <span class="glyphicon glyphicon-log-out"></span> Log out
+  <nav class="navbar navbar-expand-md navbar-light bg-faded admin">
+    <a href="#" data-target="#sidebar" data-toggle="collapse"><i class="fa fa-navicon fa-2x py-2 p-1"></i></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
 
-  </div>
+    <a class="navbar-brand">Kingston Project</a>
 
-</nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active "><a class="nav-link" routerLink="/home"><span class="fa fa-home red">Home</span></a>
+        </li>
+
+        <li class="nav-item active"><a class="nav-link" routerLink="/admin/profile"> <span
+          class="fa fa-user"> Profile</span>
+        </a></li>
+
+
+      </ul>
+      <ul class="navbar-nav float-lg-right">
+        <li class="nav-item active"><a class="nav-link -align-right">Welcome {{user_first_name}} {{user_last_name}}
+          <span
+            class="sr-only"></span></a></li>
+      </ul>
+
+      <button type="button" class="btn btn-default btn-sm" type="submit" (click)="adminLogout()">
+        <span class="glyphicon glyphicon-log-out"></span> Log out
+      </button>
+
+    </div>
+
+  </nav>
+</div>

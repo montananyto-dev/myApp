@@ -14,6 +14,7 @@ export class LoginFormComponent implements OnInit {
   public usersDataJson: any;
   private inputUserName: string;
   private inputPassword: string;
+  private userTypeId:number;
 
   constructor(private router: Router, private userService: UserService, private _currentUser: UserModelService) {
 
@@ -46,10 +47,16 @@ export class LoginFormComponent implements OnInit {
         this._currentUser.setUser_date_of_birth(element['user_date_of_birth']);
         this._currentUser.setIsUserLoggedIn(true);
 
-        if (element["user_type_id"] == 3) {
-          this.router.navigateByUrl('/home');
+        this.userTypeId = this._currentUser.getUser_type_id();
+
+        if (this.userTypeId.toString() === "3") {
+
+          this.router.navigateByUrl('home');
+
         } else {
+
           this.router.navigateByUrl('dashboard');
+
         }
       } else {
         return ErrorEvent;

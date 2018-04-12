@@ -19,19 +19,20 @@ export class NavbarAdminComponent implements OnInit {
 
   }
 
+  //
+  // navigateToHome(){
+  //   this.router.navigateByUrl('home');
+  //
+  // }
+  //
+  // navigateToProfile(){
+  //   this.router.navigateByUrl('admin/profile');
+  // }
 
-  navigateToDashboard(){
-    this.router.navigateByUrl('home');
-  }
-
-  navigateToProfile(){
-    this.router.navigateByUrl('admin/profile');
-  }
-
-  logout(){
-    console.log("called");
+  adminLogout(){
     this._currentUser.setIsUserLoggedIn(false);
     this.router.navigateByUrl('login');
+    location.reload();
   }
 
 }

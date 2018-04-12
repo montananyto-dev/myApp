@@ -1,22 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {Router, RouterModule, Routes} from '@angular/router';
+import {Router,RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
+import { NavbarAdminComponent } from './components/admin-components/navbar-admin/navbar-admin.component';
+import { SidebarAdminComponent } from './components/admin-components/sidebar-admin/sidebar-admin.component';
+import { HomeAdminComponent } from './components/admin-components/home-admin/home-admin.component';
+
+import { NavbarUserComponent } from './components/user-components/navbar-user/navbar-user.component';
+import { SidebarUserComponent } from './components/user-components/sidebar-user/sidebar-user.component';
+import { DashboardComponent } from './components/user-components/dashboard/dashboard.component';
 
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './components/login-component/login-form.component';
-import { NavbarAdminComponent } from './components/admin-components/navbar-admin/navbar-admin.component';
 import { AddUserComponent } from './components/admin-components/add-user/add-user.component';
 import { ViewUserComponent } from './components/admin-components/view-user/view-user.component';
-import { SidebarAdminComponent } from './components/admin-components/sidebar-admin/sidebar-admin.component';
 import { ViewOrganisationComponent } from './components/admin-components/view-organisation/view-organisation.component';
 import { ViewModuleComponent } from './components/admin-components/view-module/view-module.component';
 import { ViewCourseComponent } from './components/admin-components/view-course/view-course.component';
 import { AuthenticationGuard } from './guards/authentification.guard';
-
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
 import { UserService } from './services/admin-services/user/user.service';
 import { OrganisationService } from './services/admin-services/organisation/organisation.service';
 import { ModuleService } from './services/admin-services/module/module.service';
@@ -29,19 +33,15 @@ import { AddModuleComponent } from './components/admin-components/add-module/add
 import { AddCourseComponent } from './components/admin-components/add-course/add-course.component';
 import { ViewUserCourseComponent } from './components/admin-components/view-user-course/view-user-course.component';
 import { EditUserComponent } from './components/admin-components/edit-user/edit-user.component';
-import { DashboardComponent } from './components/user-components/dashboard/dashboard.component';
-
-import { NavbarUserComponent } from './components/user-components/navbar-user/navbar-user.component';
-import { SidebarUserComponent } from './components/user-components/sidebar-user/sidebar-user.component';
-
 import { AddProjectComponent } from './components/user-components/add-project/add-project.component';
 import {UserModelService} from "./services/user_services/user-model/user-model.service";
-import { HomeAdminComponent } from './components/admin-components/home-admin/home-admin.component';
-import { HomeUserComponent } from './components/user-components/home-user/home-user.component';
 import {UserProjectService} from "./services/user_services/user-project/user-project.service";
 import { ViewProjectComponent } from './components/user-components/view-project/view-project.component';
 import { ProfileUserComponent } from './components/user-components/profile-user/profile-user.component';
+
+
 import { ProfileAdminComponent } from './components/admin-components/profile-admin/profile-admin.component';
+import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from "@angular/common";
 
 const appRoutes: Routes = [
 
@@ -51,7 +51,7 @@ const appRoutes: Routes = [
     path: 'login', component: LoginFormComponent
   },
    {
-    path: 'home', canActivate: [AuthenticationGuard],  /* access to home page once logged in */
+    path: 'home', /* canActivate: [AuthenticationGuard],  access to home page once logged in */
     component: HomeAdminComponent
   }, {
     path: 'add/user',
@@ -140,20 +140,21 @@ const appRoutes: Routes = [
 
     AddProjectComponent,
     HomeAdminComponent,
-    HomeUserComponent,
     ViewProjectComponent,
     ProfileUserComponent,
     ProfileAdminComponent
   ],
   imports: [
-    BrowserModule,
     RouterModule.forRoot(appRoutes),
+    BrowserModule,
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,
     ReactiveFormsModule
   ],
   providers: [
+    // { provide: LocationStrategy, useClass: HashLocationStrategy },
+    // { provide: APP_BASE_HREF, useValue: '/' },
     UserProjectService,
     UserService,
     OrganisationService,

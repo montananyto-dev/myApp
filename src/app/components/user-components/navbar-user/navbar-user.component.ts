@@ -28,10 +28,10 @@ export class NavbarUserComponent implements OnInit {
     this.router.navigateByUrl('user/profile');
   }
 
-  logout(){
-    console.log("called");
+  logoutUser(){
     this._currentUser.setIsUserLoggedIn(false);
     this.router.navigateByUrl('');
+    location.reload();
   }
 
 }

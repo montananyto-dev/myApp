@@ -37,6 +37,8 @@ export class ProfileUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.currentUser.getIsUserLoggedIn());
+    console.log(this.currentUser.getUser_type_id());
   }
 
 }

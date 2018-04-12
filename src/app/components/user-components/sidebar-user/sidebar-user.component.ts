@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar-user',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarUserComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router:RouterModule) { }
 
   ngOnInit() {
   }

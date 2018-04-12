@@ -19,6 +19,7 @@ export class ViewProjectComponent implements OnInit {
   retrieveProjects() {
     this.project.getProject().subscribe(data => {
       this.projects = data;
+
       console.log(data);
     })
   }

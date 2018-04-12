@@ -11,6 +11,8 @@ export class HomeAdminComponent implements OnInit {
   constructor(private _currentUser:UserModelService) { }
 
   ngOnInit() {
+    console.log(this._currentUser.getIsUserLoggedIn());
+    console.log(this._currentUser.getUser_type_id());
   }
 
 }
