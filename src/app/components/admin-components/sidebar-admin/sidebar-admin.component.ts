@@ -3,12 +3,12 @@ import {UserModelService} from "../../../services/user_services/user-model/user-
 
 
 @Component({
-  selector: 'app-side-bar',
-  templateUrl: './side-bar.component.html',
-  styleUrls: ['./side-bar.component.css'],
+  selector: 'app-sidebar-admin',
+  templateUrl: './sidebar-admin.component.html',
+  styleUrls: ['./sidebar-admin.component.css'],
 
 })
-export class SideBarComponent implements OnInit {
+export class SidebarAdminComponent implements OnInit {
 
   constructor(private _currentUser: UserModelService) {
   }

@@ -4,3 +4,20 @@ li.dropdown:hover > .dropdown-menu {
 .navbar-brand{
   padding-left: 10px;
 }
+
+button.btn.btn-default.btn-sm {
+  border: 1px solid black;
+}
+
+button.btn.btn-default.btn-sm:hover {
+  color: grey;
+}
+
+button.nav-link {
+  border: none;
+}
+
+span.fa.fa-user:hover,span.fa.fa-home:hover {
+  cursor: pointer;
+  color:grey;
+}

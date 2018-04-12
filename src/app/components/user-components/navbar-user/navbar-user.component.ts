@@ -9,12 +9,23 @@ import {UserModelService} from "../../../services/user_services/user-model/user-
 })
 export class NavbarUserComponent implements OnInit {
 
-  userName = this._currentUser.getUser_first_name();
+  user_first_name = this._currentUser.getUser_first_name();
+  user_last_name = this._currentUser.getUser_last_name();
+
 
   constructor(private _currentUser:UserModelService,private router:Router) { }
 
   ngOnInit() {
 
+  }
+
+
+  navigateToDashboard(){
+    this.router.navigateByUrl('dashboard');
+  }
+
+  navigateToProfile(){
+    this.router.navigateByUrl('user/profile');
   }
 
   logout(){

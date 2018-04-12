@@ -9,7 +9,7 @@ import { LoginFormComponent } from './components/login-component/login-form.comp
 import { NavbarAdminComponent } from './components/admin-components/navbar-admin/navbar-admin.component';
 import { AddUserComponent } from './components/admin-components/add-user/add-user.component';
 import { ViewUserComponent } from './components/admin-components/view-user/view-user.component';
-import { SideBarComponent } from './components/admin-components/side-bar/side-bar.component';
+import { SidebarAdminComponent } from './components/admin-components/sidebar-admin/sidebar-admin.component';
 import { ViewOrganisationComponent } from './components/admin-components/view-organisation/view-organisation.component';
 import { ViewModuleComponent } from './components/admin-components/view-module/view-module.component';
 import { ViewCourseComponent } from './components/admin-components/view-course/view-course.component';
@@ -30,16 +30,25 @@ import { AddCourseComponent } from './components/admin-components/add-course/add
 import { ViewUserCourseComponent } from './components/admin-components/view-user-course/view-user-course.component';
 import { EditUserComponent } from './components/admin-components/edit-user/edit-user.component';
 import { DashboardComponent } from './components/user-components/dashboard/dashboard.component';
+
 import { NavbarUserComponent } from './components/user-components/navbar-user/navbar-user.component';
 import { SidebarUserComponent } from './components/user-components/sidebar-user/sidebar-user.component';
+
 import { AddProjectComponent } from './components/user-components/add-project/add-project.component';
 import {UserModelService} from "./services/user_services/user-model/user-model.service";
 import { HomeAdminComponent } from './components/admin-components/home-admin/home-admin.component';
 import { HomeUserComponent } from './components/user-components/home-user/home-user.component';
+import {UserProjectService} from "./services/user_services/user-project/user-project.service";
+import { ViewProjectComponent } from './components/user-components/view-project/view-project.component';
+import { ProfileUserComponent } from './components/user-components/profile-user/profile-user.component';
+import { ProfileAdminComponent } from './components/admin-components/profile-admin/profile-admin.component';
 
 const appRoutes: Routes = [
+
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
+
   {
-    path: '', component: LoginFormComponent
+    path: 'login', component: LoginFormComponent
   },
    {
     path: 'home', canActivate: [AuthenticationGuard],  /* access to home page once logged in */
@@ -84,11 +93,24 @@ const appRoutes: Routes = [
     path:'edit/user',
     component: EditUserComponent
   },{
+    path:'add/project',
+    component:AddProjectComponent
+  },
+  {
+    path:'view/project',
+    component:ViewProjectComponent
+  },
+  {
     path:'dashboard',
     component:DashboardComponent
-  },{
-    path:'dashboard/add/project',
-    component:AddProjectComponent
+  },
+  {
+    path:'user/profile',
+    component:ProfileUserComponent
+  },
+  {
+    path:'admin/profile',
+    component:ProfileAdminComponent
   }
 
 ];
@@ -98,10 +120,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginFormComponent,
-    NavbarAdminComponent,
     AddUserComponent,
     ViewUserComponent,
-    SideBarComponent,
     ViewOrganisationComponent,
     ViewModuleComponent,
     ViewCourseComponent,
@@ -111,12 +131,19 @@ const appRoutes: Routes = [
     ViewUserCourseComponent,
     EditUserComponent,
     DashboardComponent,
-    NavbarUserComponent,
+
     NavbarAdminComponent,
+    SidebarAdminComponent,
+
+    NavbarUserComponent,
     SidebarUserComponent,
+
     AddProjectComponent,
     HomeAdminComponent,
-    HomeUserComponent
+    HomeUserComponent,
+    ViewProjectComponent,
+    ProfileUserComponent,
+    ProfileAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -126,7 +153,17 @@ const appRoutes: Routes = [
     AngularFontAwesomeModule,
     ReactiveFormsModule
   ],
-  providers: [UserService, OrganisationService, ModuleService,UserModelService, UserTypeService, CourseService, AuthenticationGuard,HttpClientModule,HttpClient ],
+  providers: [
+    UserProjectService,
+    UserService,
+    OrganisationService,
+    ModuleService,
+    UserModelService,
+    UserTypeService,
+    CourseService,
+    AuthenticationGuard,
+    HttpClientModule,
+    HttpClient ],
   bootstrap: [AppComponent]
 })
 

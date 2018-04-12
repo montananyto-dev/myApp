@@ -49,7 +49,7 @@ export class LoginFormComponent implements OnInit {
         if (element["user_type_id"] == 3) {
           this.router.navigateByUrl('/home');
         } else {
-          this.router.navigateByUrl('/dashboard');
+          this.router.navigateByUrl('dashboard');
         }
       } else {
         return ErrorEvent;

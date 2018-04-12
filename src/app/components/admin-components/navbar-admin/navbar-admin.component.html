@@ -1,5 +1,4 @@
-
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav class="navbar navbar-expand-md navbar-light bg-faded">
   <a href="#" data-target="#sidebar" data-toggle="collapse"><i class="fa fa-navicon fa-2x py-2 p-1"></i></a>
   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
           data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -12,15 +11,21 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active"><a class="nav-link" [routerLink]="['dashboard']">Home <span class="sr-only">(current)</span></a></li>
+      <li class="nav-item active "><a class="nav-link" (click)="navigateToDashboard()"><span class="fa fa-home"> Home</span></a>
+      </li>
+
+      <li class="nav-item active"><a class="nav-link" (click)="navigateToProfile()"> <span class="fa fa-user"> Profile</span>
+      </a></li>
+
     </ul>
     <ul class="navbar-nav float-lg-right">
-      <li class="nav-item active"><a class="nav-link -align-right">Welcome {{userName}} <span class="sr-only"></span></a></li>
+      <li class="nav-item active"><a class="nav-link -align-right">Welcome {{user_first_name}} {{user_last_name}} <span
+        class="sr-only"></span></a></li>
     </ul>
 
-    <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="logout()">Logout</button>
-    </form>
+    <button type="button" class="btn btn-default btn-sm" type="submit" (click)="logout()">
+      <span class="glyphicon glyphicon-log-out"></span> Log out
+    </button>
 
   </div>
 
