@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {UserProjectService} from "../../../services/user_services/user-project/user-project.service";
-import {Form, FormBuilder, FormControl, Validators} from "@angular/forms";
+import { FormArray, FormBuilder, FormControl, Validators} from "@angular/forms";
 import {UserModelService} from "../../../services/user_services/user-model/user-model.service";
 import {HttpClient} from "@angular/common/http";
-import * as url from "url";
+
 import {UserService} from "../../../services/admin-services/user/user.service";
-import {Validator} from "codelyzer/walkerFactory/walkerFn";
 
 @Component({
   selector: 'app-add-project',
@@ -24,7 +23,7 @@ export class AddProjectComponent implements OnInit {
   user_full_name = this.user_first_name + " " + this.user_last_name;
   addProjectApi = "http://slim.kingstonse.org/add/project";
   button_class = "fa fa-plus";
-
+  numberOfTeamMembers = 0;
 
   ngOnInit() {
     this.retrieveProjects();
@@ -35,7 +34,6 @@ export class AddProjectComponent implements OnInit {
               private user: UserService) {
 
     this.projectForm = this.formBuilder.group({
-
       projectName: new FormControl(),
       projectDescription: new FormControl(),
       projectDueDate: new FormControl(),
@@ -54,6 +52,39 @@ export class AddProjectComponent implements OnInit {
       this.button_class = "fa fa-plus"
     }
   }
+
+  initModuleRow(){
+    return this.formBuilder.group({
+      teamMemberName: ['', Validators.required],
+      teamMemberId: [''],
+    });
+
+  }
+
+  deleteTeamMemberForm(index: number) {
+    const control = <FormArray>this.projectForm.controls['teamMembers'];
+    control.removeAt(index);
+    this.numberOfTeamMembers = this.numberOfTeamMembers - 1;
+  }
+
+  addTeamMemberForm(){
+
+      const control = <FormArray>this.projectForm.controls['teamMembers'];
+      control.push(this.initModuleRow());
+      this.numberOfTeamMembers = this.numberOfTeamMembers + 1;
+      console.log(this.numberOfTeamMembers);
+
+  }
+
+  searchUserName(userValue){
+
+    for(var i=0; i < this.users.length; i++){
+
+      if(userValue.toLowerCase().contains(this.users[i].user_first_name+ " "+this.users[i].user_last_name)){
+        console.log(this.users[i].user_first_name+ " "+this.users[i].user_last_name);
+      }
+      }
+    }
 
   onSubmit(dataForm) {
 
@@ -85,7 +116,9 @@ export class AddProjectComponent implements OnInit {
   retrieveUsers() {
     this.user.getAllUsers().subscribe(data => {
       this.users = data;
+      console.log(data);
     })
 
   }
+
 }

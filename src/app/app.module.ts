@@ -43,7 +43,6 @@ import { ProfileUserComponent } from './components/user-components/profile-user/
 
 
 import { ProfileAdminComponent } from './components/admin-components/profile-admin/profile-admin.component';
-import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { ViewProjectComponent } from './components/user-components/view-project/view-project.component';
 
 const appRoutes: Routes = [
@@ -150,6 +149,7 @@ const appRoutes: Routes = [
     ProfileUserComponent,
     ProfileAdminComponent,
     ViewProjectComponent
+
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -160,8 +160,6 @@ const appRoutes: Routes = [
     ReactiveFormsModule
   ],
   providers: [
-    // { provide: LocationStrategy, useClass: HashLocationStrategy },
-    // { provide: APP_BASE_HREF, useValue: '/' },
     UserProjectService,
     UserService,
     OrganisationService,

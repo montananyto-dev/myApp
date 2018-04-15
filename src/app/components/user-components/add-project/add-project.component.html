@@ -2,34 +2,33 @@
 
 <div class="container">
 
-<h3>Add a project</h3>
-<button class="button"  (click)="toggle()"><i class="{{button_class}}"></i></button>
+  <h3>Add a project</h3>
+  <button class="button" (click)="toggle()"><i class="{{button_class}}"></i></button>
 
+  <div *ngIf="show" class="container">
 
-<div *ngIf="show" class="container" >
+    <form [formGroup]="projectForm" (ngSubmit)="onSubmit(projectForm.value)" novalidate>
 
-  <form [formGroup]="projectForm" (ngSubmit)="onSubmit(projectForm.value)" novalidate>
-
-    <div class="form-group row">
-      <label for="projectName" class="col-2 col-form-label" >Name</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="projectName" type="text" id="projectName" ngModel required >
+      <div class="form-group row">
+        <label for="projectName" class="col-2 col-form-label">Name</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="projectName" type="text" id="projectName" ngModel required>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="projectDescription" class="col-2 col-form-label">Description</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="projectDescription" type="text" id="projectDescription" ngModel required >
+      <div class="form-group row">
+        <label for="projectDescription" class="col-2 col-form-label">Description</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="projectDescription" type="text" id="projectDescription" ngModel required>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="projectDueDate" class="col-2 col-form-label">Due Date</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="projectDueDate" type="date" id="projectDueDate" ngModel required>
+      <div class="form-group row">
+        <label for="projectDueDate" class="col-2 col-form-label">Due Date</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="projectDueDate" type="date" id="projectDueDate" ngModel required>
+        </div>
       </div>
-    </div>
 
       <div class="form-group row">
         <label for="projectDuration" class="col-2 col-form-label">Duration</label>
@@ -41,27 +40,54 @@
       <div class="form-group row">
         <label for="projectCreator" class="col-2 col-form-label">Creator</label>
         <div class="col-6">
-          <input class="form-control" formControlName="projectCreator" type="text" id="projectCreator" [(ngModel)] ="user_full_name" required>
+          <input class="form-control" formControlName="projectCreator" type="text" id="projectCreator" [(ngModel)]="user_full_name" required>
         </div>
       </div>
 
-    <div class="form-group row">
-      <label for="inviteMembers" class="col-2 col-form-label">Invite Members</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="teamMembers" type="text" id="inviteMembers" ngModel required>
+
+      <input class="form-control" formControlName="userId" type="text" id="userId" [(ngModel)]="user_id" hidden
+             required>
+
+      <div formArrayName="teamMembers">
+
+        <button type="button" (click)="addTeamMemberForm()" class="fa fa-plus" [disabled]="numberOfTeamMembers >=4">Add
+          a new Team Member
+        </button>
+
+        <div *ngFor="let moduleRow of projectForm.controls['teamMembers'].controls; let i=index" [formGroupName]="i">
+
+
+
+            <h4>Team Member {{ i + 1 }}</h4>
+
+            <div class="form-group row">
+
+              <label for="teamMemberName" class="col-2 col-form-label">Team Member</label>
+
+              <div class="col-10">
+
+                <input #userValue class="form-control" formControlName="teamMemberName" type="text" id="teamMemberName" (keyup)="searchUserName(userValue.value)" required>
+                <input class="form-control" formControlName="teamMemberId" type="text" id="teamMemberId" hidden>
+
+              </div>
+
+            </div>
+
+            <button *ngIf="projectForm.controls['teamMembers'].controls.length >= 1" (click)="deleteTeamMemberForm(i)" class="btn btn-danger">Remove member</button>
+
+
+        </div>
+
       </div>
-    </div>
-
-        <input class="form-control" formControlName="userId" type="text" id="userId" [(ngModel)]="user_id"  hidden required>
 
 
+      <button type="submit" class="btn btn-success" [disabled]="projectForm.invalid">Submit</button>
 
-        <button type="submit" class="btn btn-success" [disabled]="projectForm.invalid">Submit</button>
+    </form>
 
-  </form>
-
-  <pre>Form value: {{ projectForm.value | json }}</pre>
+  </div>
 
 </div>
 
-</div>
+<pre>Form value: {{ projectForm.value | json }}</pre>
+
