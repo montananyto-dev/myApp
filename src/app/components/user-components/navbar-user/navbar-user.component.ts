@@ -20,14 +20,6 @@ export class NavbarUserComponent implements OnInit {
   }
 
 
-  navigateToDashboard(){
-    this.router.navigateByUrl('dashboard');
-  }
-
-  navigateToProfile(){
-    this.router.navigateByUrl('user/profile');
-  }
-
   logoutUser(){
     this._currentUser.setIsUserLoggedIn(false);
     this.router.navigateByUrl('');

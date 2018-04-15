@@ -60,10 +60,8 @@ export class AddProjectComponent implements OnInit {
       (data => {
 
         this.projectForm.reset();
-        console.log(data);
 
       }, err => {
-        console.log(err);
         console.error(err);
       });
     }

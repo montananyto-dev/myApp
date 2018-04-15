@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserModelService} from "../../../services/user_services/user-model/user-model.service";
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 
@@ -20,7 +20,7 @@ export class ProfileUserComponent implements OnInit {
   public user_about_me = this.currentUser.getUser_about_me();
   public user_date_of_birth = this.currentUser.getUser_date_of_birth();
 
-  constructor(private currentUser:UserModelService,private formBuilder:FormBuilder) {
+  constructor(private currentUser: UserModelService, private formBuilder: FormBuilder) {
 
     this.profileForm = this.formBuilder.group({
 
@@ -28,7 +28,7 @@ export class ProfileUserComponent implements OnInit {
       lastName: new FormControl('', Validators.pattern('[a-zA-Z]{2,30}$')),// input field that can contain only letters (no numbers or special characters) with a min 2 and max 30
       email: new FormControl('', Validators.email),
       dateOfBirth: new FormControl('', Validators.pattern('')),
-      aboutMe: new FormControl('',Validators.required),
+      aboutMe: new FormControl('', Validators.required),
       phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$')),
       department: new FormControl('', Validators.pattern('^[a-zA-Z]{5,25}$'))
     })
@@ -37,8 +37,7 @@ export class ProfileUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.currentUser.getIsUserLoggedIn());
-    console.log(this.currentUser.getUser_type_id());
+
   }
 
 }

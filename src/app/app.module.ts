@@ -4,6 +4,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Router,RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+
+
 import { NavbarAdminComponent } from './components/admin-components/navbar-admin/navbar-admin.component';
 import { SidebarAdminComponent } from './components/admin-components/sidebar-admin/sidebar-admin.component';
 import { HomeAdminComponent } from './components/admin-components/home-admin/home-admin.component';
@@ -36,12 +38,13 @@ import { EditUserComponent } from './components/admin-components/edit-user/edit-
 import { AddProjectComponent } from './components/user-components/add-project/add-project.component';
 import {UserModelService} from "./services/user_services/user-model/user-model.service";
 import {UserProjectService} from "./services/user_services/user-project/user-project.service";
-import { ViewProjectComponent } from './components/user-components/view-project/view-project.component';
+import { ViewAllProjectComponent } from './components/user-components/view-all-project/view-all-project.component';
 import { ProfileUserComponent } from './components/user-components/profile-user/profile-user.component';
 
 
 import { ProfileAdminComponent } from './components/admin-components/profile-admin/profile-admin.component';
 import {APP_BASE_HREF, HashLocationStrategy, LocationStrategy} from "@angular/common";
+import { ViewProjectComponent } from './components/user-components/view-project/view-project.component';
 
 const appRoutes: Routes = [
 
@@ -97,8 +100,8 @@ const appRoutes: Routes = [
     component:AddProjectComponent
   },
   {
-    path:'view/project',
-    component:ViewProjectComponent
+    path:'view/all/project',
+    component:ViewAllProjectComponent
   },
   {
     path:'dashboard',
@@ -111,6 +114,9 @@ const appRoutes: Routes = [
   {
     path:'admin/profile',
     component:ProfileAdminComponent
+  },{
+  path:'view/project',
+    component:ViewProjectComponent
   }
 
 ];
@@ -140,9 +146,10 @@ const appRoutes: Routes = [
 
     AddProjectComponent,
     HomeAdminComponent,
-    ViewProjectComponent,
+    ViewAllProjectComponent,
     ProfileUserComponent,
-    ProfileAdminComponent
+    ProfileAdminComponent,
+    ViewProjectComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ParamMap,ActivatedRoute} from "@angular/router";
 import {UserProjectService} from "../../../services/user_services/user-project/user-project.service";
 
 @Component({
@@ -9,18 +10,26 @@ import {UserProjectService} from "../../../services/user_services/user-project/u
 export class ViewProjectComponent implements OnInit {
 
 
-  projects:JSON;
+  projectID:string;
+  projects : any;
 
-  constructor(private project:UserProjectService) { }
+
+  constructor(private route: ActivatedRoute,private project: UserProjectService) {
+
+    this.route.queryParams.subscribe(params => {
+      this.projectID = params['projectID'];
+
+      console.log(this.projectID);
+    });
+  }
 
   ngOnInit() {
-    this.retrieveProjects();
+    this.getProjectByID();
   }
-  retrieveProjects() {
-    this.project.getProject().subscribe(data => {
-      this.projects = data;
 
+  getProjectByID(){
+    this.project.getProjectByid(this.projectID).subscribe(data=>{
       console.log(data);
-    })
+    });
   }
 }

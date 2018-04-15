@@ -1,0 +1,25 @@
+<app-sidebar-user></app-sidebar-user>
+
+
+<table class="table table-responsive table-sm">
+  <tr>
+    <th>Project Number</th>
+    <th>Project name</th>
+    <th>Project description</th>
+    <th>Project creator</th>
+    <th>Project due date</th>
+
+  </tr>
+
+  <tr *ngFor = "let item of projects">
+
+    <td>{{item.project_id}}</td>
+    <td>{{ item.project_name }}</td>
+    <td>{{ item.project_description }}</td>
+    <td>{{ item.project_creator }}</td>
+    <td>{{ item.project_due_date }}</td>
+
+    <button class="{{item.project_id}}" [routerLink]="['/view/project']" [queryParams]="{projectID: item.project_id}"  >View project details</button>
+  </tr>
+</table>
+
