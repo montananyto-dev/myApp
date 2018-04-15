@@ -75,12 +75,8 @@ export class AddCourseComponent implements OnInit {
         console.log(data);
 
       }, err => {
-
         console.log(err);
-        console.error("The course could not be added");
-
       });
-
     }
   };
 

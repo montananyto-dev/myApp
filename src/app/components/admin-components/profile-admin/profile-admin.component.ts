@@ -9,7 +9,6 @@ import {UserModelService} from "../../../services/user_services/user-model/user-
 })
 export class ProfileAdminComponent implements OnInit {
 
-
   profileForm;
 
   public user_first_name = this.currentUser.getUser_first_name();
@@ -37,7 +36,11 @@ export class ProfileAdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.user_date_of_birth);
+
+  }
+
+  onSubmit(){
+
   }
 
 }

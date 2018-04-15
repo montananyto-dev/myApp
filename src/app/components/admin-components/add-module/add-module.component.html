@@ -2,7 +2,7 @@
 
 <div class="container">
 
-  <form [formGroup]="moduleForm" (click)="isValid && onConfirm()" (ngSubmit)="onSubmit(moduleForm.value)" novalidate>
+  <form [formGroup]="moduleForm" (ngSubmit)="onSubmit(moduleForm.value)" novalidate>
 
 
     <div class="form-group row">
@@ -28,7 +28,7 @@
       <button  type="button" (click)="addModule()" class="btn btn-primary" [disabled]="numberOfModules >=4">Add a new Module</button>
       <br>
 
-      <div *ngFor="let moduleRow of moduleForm.controls.module.controls; let i=index" [formGroupName]="i">
+      <div *ngFor="let moduleRow of moduleForm.controls['module'].controls; let i=index" [formGroupName]="i">
 
         <h4>Module {{ i + 1 }}</h4>
 
@@ -69,7 +69,7 @@
         </div>
 
 
-        <button *ngIf="moduleForm.controls.module.controls.length >= 1" (click)="deleteModule(i)" class="btn btn-danger">
+        <button *ngIf="moduleForm.controls['module'].controls.length >= 1" (click)="deleteModule(i)" class="btn btn-danger">
           Delete Module
         </button>
 

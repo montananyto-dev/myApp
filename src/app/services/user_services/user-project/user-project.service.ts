@@ -21,7 +21,7 @@ export class UserProjectService {
     return this.http.get(this.projectUserIDApi+"/"+this.user_id);
   }
 
-  getProjectByid(projectID:string): Observable<any>{
+  getProjectById(projectID:string): Observable<any>{
     return this.http.get(this.projectProjectIDApi+"/"+projectID);
 
   }

@@ -14,10 +14,10 @@ import {UserTypeService} from "../../../services/admin-services/user-type/user-t
 })
 export class AddModuleComponent implements OnInit {
 
-  public addCourseApi = 'http://slim.kingstonse.org/add/module';
-  public apiUrl2 = 'http://slim.kingstonse.org/return/specific';
+  private addModuleApi = 'http://slim.kingstonse.org/add/module';
+  private apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
-  moduleForm: FormGroup;
+   moduleForm: FormGroup;
 
   usersDataJson: any;
   courseDataJson: any;
@@ -89,7 +89,12 @@ export class AddModuleComponent implements OnInit {
 
   onSubmit = function (dataForm) {
 
+    console.log(dataForm);
+
     if (this.moduleForm.valid) {
+
+      console.log("Valid form");
+      console.log(JSON.stringify(dataForm));
 
       this.http.post(this.addModuleApi, JSON.stringify(dataForm),
         {
@@ -100,16 +105,16 @@ export class AddModuleComponent implements OnInit {
         }).subscribe
       (data => {
 
-        //reset the form after submission
-        this.moduleForm.reset();
-
         //print out the data return by the server
         console.log(data);
 
-      }, err => {
 
+        //reset the form after submission
+        this.moduleForm.reset();
+
+
+      }, err => {
         console.log(err);
-        console.error("Could not be added");
 
       });
 
@@ -125,13 +130,9 @@ export class AddModuleComponent implements OnInit {
       this.selectionDataJson = object;
       this.modulesMatchingCourses = this.selectionDataJson;
       this.numberOfModules = this.modulesMatchingCourses.length;
-      console.log('numberOfModule: ' + this.numberOfModules)
 
-      if (object.toString() === 'This course do not have any module') {
-
+      if (this.numberOfModules == 36) {
         this.numberOfModules = 0;
-        console.log('numberOfModule: ' + this.numberOfModules)
-
       }
     });
 

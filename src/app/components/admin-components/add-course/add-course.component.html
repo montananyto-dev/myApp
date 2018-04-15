@@ -4,8 +4,6 @@
 
   <form [formGroup]="courseForm" (ngSubmit)="onSubmit(courseForm.value)" novalidate>
 
-
-
     <div class="form-group row">
 
       <label for="courseName" class="col-2 col-form-label">Course Name</label>
@@ -18,7 +16,6 @@
 
     </div>
 
-
     <div class="form-group row">
 
       <label for="courseDescription" class="col-2 col-form-label">Course Description</label>
@@ -30,8 +27,6 @@
       </div>
 
     </div>
-
-
 
     <button type="submit" class="btn btn-success" [disabled]="courseForm.invalid">Submit</button>
 
