@@ -7,3 +7,12 @@
 .ng-invalid[required] {
   border: 1px solid #a90614;
 }
+
+label {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+input[type=checkbox], input[type=radio] {
+  margin-right: 10px;
+
+}

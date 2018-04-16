@@ -30,7 +30,7 @@ export class ViewUserModuleComponent implements OnInit {
     this.http.get(this.viewUserByModuleApi + moduleId).subscribe(object => {
 
       if (object.toLocaleString().includes("No users for this module")) {
-        this.users = "No users for this module";
+        this.users = "There is no users for this module";
         this.displayUsers = false;
       } else {
         this.usersDataJson = object;

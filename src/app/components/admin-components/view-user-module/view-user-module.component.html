@@ -6,7 +6,7 @@
 
     <label for="moduleStudent" class="offset-2 col-2 col-form-label">Module</label>
 
-    <div class="col-4">
+    <div class="col-6">
 
       <select class="form-control" (change)="retrieveUsersFromModule($event.target.value)" type="text" id="moduleStudent" required>
 
@@ -44,6 +44,7 @@
     </table>
 
   </div>
-  <div class="container" *ngIf="!displayUsers">{{users}}</div>
+
+  <div class="span6" style="float: none;display: table;margin: 0 auto;" *ngIf="!displayUsers">{{users}}</div>
 
 </div>

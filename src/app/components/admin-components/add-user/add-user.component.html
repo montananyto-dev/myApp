@@ -38,16 +38,14 @@
         </div>
       </div>
 
-      <div *ngIf="userTypeChange == 1  || userTypeChange == 2" class="form-check form-group row">
-        <div class="form-check" *ngFor="let module of modulesMatchingCourses">
+      <div *ngIf="userTypeChange == 1  || userTypeChange == 2" class="form-group row">
+        <label class="offset-1 col-2 col-form-label">Modules</label>
+        <div class="form-check">
+        <div  *ngFor="let module of modulesMatchingCourses">
           <label class="form-check-label" for="{{module.module_name}}">
-            <input class="form-check-input" formArrayName="module" (change)="selectModule($event,module.module_id)"
-                   [value]="module.module_name"
-                   type="checkbox"
-                   name="module"
-                   id="{{module.module_name}}">
-            {{module.module_name}}
+            <input class="check-box" formArrayName="module" (change)="selectModule($event,module.module_id)" [value]="module.module_name" type="checkbox" name="module" id="{{module.module_name}}">{{module.module_name}}
           </label>
+        </div>
         </div>
       </div>
     </div>
@@ -127,6 +125,13 @@
       </div>
     </div>
   </form>
+
+    <div class="form-group row">
+      <div class="col-md-12 text-center">
+        <div *ngIf= "userInserted">The user has been inserted</div>
+      </div>
+    </div>
+
 
   </div>
 

@@ -23,3 +23,6 @@ span.fa.fa-user:hover,span.fa.fa-home:hover {
   color:grey;
 }
 
+.navbar-admin {
+  margin-bottom: 50px;
+}

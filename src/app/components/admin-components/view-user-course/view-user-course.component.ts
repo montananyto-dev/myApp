@@ -33,7 +33,7 @@ export class ViewUserCourseComponent implements OnInit {
 
       if (object.toLocaleString().includes("No users for this module")) {
 
-        this.users = "No users for this module";
+        this.users = "There is no users for this course";
         this.displayUsers = false;
       } else {
         this.usersDataJson = object;

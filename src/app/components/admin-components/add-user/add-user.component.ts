@@ -29,6 +29,7 @@ export class AddUserComponent implements OnInit {
   organisations;
   userTypeChange: number = 0;
   selectedCourses: any[];
+  userInserted:Boolean = false;
 
   constructor(private userService: UserService,
               private courseService: CourseService,
@@ -180,6 +181,8 @@ export class AddUserComponent implements OnInit {
         this.resetFormControlCourse();
         this.resetFormControlModule();
         this.modulesMatchingCourses = null;
+
+        this.showDivInserted();
         //print out the data return by the server
         console.log(data);
       }, err => {
@@ -188,6 +191,17 @@ export class AddUserComponent implements OnInit {
       });
     }
   };
+
+
+  showDivInserted(): void {
+    //show box msg
+    this.userInserted = true;
+    //wait 3 Seconds and hide
+    setTimeout(function() {
+      this.userInserted = false;
+      console.log(this.userInserted);
+    }, 3000);
+  }
 
   retrieveOrganisations() {
     this.organisationService.getOrganisations().subscribe(data => {
