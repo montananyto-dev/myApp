@@ -17,27 +17,20 @@ export class AddModuleComponent implements OnInit {
   private addModuleApi = 'http://slim.kingstonse.org/add/module';
   private apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
-   moduleForm: FormGroup;
-
+  moduleForm: FormGroup;
   usersDataJson: any;
   courseDataJson: any;
   moduleDataJson: any;
   userTypeDataJson: any;
   organisationDataJson: any;
-
-  buttonStatus = true;
-
   selectionDataJson: any;
   modulesMatchingCourses;
-
-  numberOfModules = 0;
-
+  numberOfModules = 4;
   users;
   allModules;
   courses;
   userTypes;
   organisations;
-
 
   constructor(private userService: UserService,
               private courseService: CourseService,
@@ -48,9 +41,8 @@ export class AddModuleComponent implements OnInit {
               private formBuilder: FormBuilder) {
 
     this.moduleForm = this.formBuilder.group({
-
       course: new FormControl(),
-      module: this.formBuilder.array([],Validators.required)
+      module: this.formBuilder.array([], Validators.required)
     })
   };
 
@@ -73,7 +65,6 @@ export class AddModuleComponent implements OnInit {
   }
 
   addModule() {
-
     const control = <FormArray>this.moduleForm.controls['module'];
     control.push(this.initModuleRow());
     this.numberOfModules = this.numberOfModules + 1;
@@ -86,16 +77,10 @@ export class AddModuleComponent implements OnInit {
     this.numberOfModules = this.numberOfModules - 1;
   }
 
-
   onSubmit = function (dataForm) {
 
-    console.log(dataForm);
-
     if (this.moduleForm.valid) {
-
-      console.log("Valid form");
       console.log(JSON.stringify(dataForm));
-
       this.http.post(this.addModuleApi, JSON.stringify(dataForm),
         {
           headers: {
@@ -104,40 +89,39 @@ export class AddModuleComponent implements OnInit {
           }
         }).subscribe
       (data => {
-
-        //print out the data return by the server
         console.log(data);
-
-
-        //reset the form after submission
         this.moduleForm.reset();
-
-
       }, err => {
         console.log(err);
 
       });
-
     }
   };
 
   retrieveModuleFromCourse(courseIds) {
-
-    console.log('courseID: ' + courseIds);
-
+    this.resetFormArrayModules();
     this.http.get(this.apiUrl2 + '/' + courseIds).subscribe(object => {
-
       this.selectionDataJson = object;
       this.modulesMatchingCourses = this.selectionDataJson;
       this.numberOfModules = this.modulesMatchingCourses.length;
+
+      if (this.numberOfModules == 4) {
+        this.resetFormArrayModules();
+      }
 
       if (this.numberOfModules == 36) {
         this.numberOfModules = 0;
       }
     });
-
   }
 
+
+  resetFormArrayModules(){
+    const control = <FormArray>this.moduleForm.controls['module'];
+    while(control.length !== 0){
+      control.removeAt(0);
+    }
+  }
   retrieveOrganisations() {
     this.organisationService.getOrganisations().subscribe(data => {
       this.organisationDataJson = data;

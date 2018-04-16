@@ -6,79 +6,50 @@
 
 
     <div class="form-group row">
-
       <label for="course" class="col-2 col-form-label">Course</label>
-
       <div class="col-6">
-
         <select #course class="form-control" formControlName="course" (change)="retrieveModuleFromCourse(course.value)" type="text" id="course" required>
-
           <option value="undefined" disabled>Please, select the module</option>
-
           <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
-
         </select>
-
       </div>
 
     </div>
 
     <div formArrayName="module" >
-
       <button  type="button" (click)="addModule()" class="btn btn-primary btn-sm" [disabled]="numberOfModules >=4">Add a new Module</button>
       <br>
-
       <div *ngFor="let moduleRow of moduleForm.controls['module'].controls; let i=index" [formGroupName]="i">
-
         <h4>Module {{ i + 1 }}</h4>
-
         <div class="form-group row">
-
           <label for="moduleName" class="col-2 col-form-label">Module Name</label>
-
           <div class="col-6">
-
             <input class="form-control" formControlName="moduleName" type="text" id="moduleName"  required>
-
           </div>
-
         </div>
 
         <div class="form-group row">
-
           <label for="moduleDescription" class="col-2 col-form-label">Module Description</label>
-
           <div class="col-6">
-
             <input class="form-control" formControlName="moduleDescription" type="text" id="moduleDescription" required>
-
           </div>
-
         </div>
 
         <div class="form-group row">
-
           <label for="moduleYear" class="col-2 col-form-label">Module Year</label>
-
           <div class="col-6">
-
             <input class="form-control" formControlName="moduleYear" type="date" id="moduleYear"  required>
-
           </div>
-
         </div>
 
 
-        <button *ngIf="moduleForm.controls['module'].controls.length >= 1" (click)="deleteModule(i)" class="btn btn-danger btn-sm">
+        <button *ngIf="moduleForm.controls['module'].controls.length >= 1" (click)="deleteModule(i)" class="btn btn-outline-danger btn-sm">
           Delete Module
         </button>
 
       </div>
-
     </div>
-
     <button type="submit" class="btn btn-outline-success" [disabled]="moduleForm.invalid" >Submit</button>
-
   </form>
 
 </div>
