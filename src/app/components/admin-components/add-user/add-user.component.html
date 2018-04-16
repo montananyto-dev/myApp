@@ -14,12 +14,11 @@
       </div>
     </div>
 
-    <div formGroupName="courseModule">
+    <div formGroupName="courseModule" class="courseModule">
       <div *ngIf="userTypeChange == 1   " class="form-group row">
         <label for="courseStudent" class="col-2 col-form-label">Course</label>
         <div class="col-6">
-          <select class="form-control" formArrayName="course" (change)="sendCourseStudent($event)" type="text"
-                  id="courseStudent" required>
+          <select class="form-control" formArrayName="course" (change)="sendCourseStudent($event)" type="text" id="courseStudent" required>
             <option value="undefined" disabled>Please, select the module</option>
             <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
           </select>
@@ -34,7 +33,6 @@
             <option disabled selected>Please, select the modules</option>
             <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
           </select>
-          <div>{{selectedCourses}}</div>
         </div>
       </div>
 
@@ -69,9 +67,6 @@
       <div class="col-6">
         <input class="form-control" formControlName="firstName" type="text" id="firstName" ngModel required>
       </div>
-      <!--<div class="has-danger" *ngIf=" userForm.controls.firstName.invalid && userForm.controls.firstName.dirty ">-->
-        <!--Field is invalid-->
-      <!--</div>-->
     </div>
 
     <div class="form-group row">
@@ -124,7 +119,6 @@
         <input class="form-control" formControlName="department" type="text" id="department" ngModel required>
       </div>
     </div>
-
     <button type="submit" class="btn btn-outline-success" [disabled]="userForm.invalid">Submit</button>
   </form>
 
