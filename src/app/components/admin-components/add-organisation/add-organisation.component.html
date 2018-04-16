@@ -2,58 +2,69 @@
 
 <div class="container">
 
-  <form (ngSubmit)="onSubmit(organisationForm.value)" [formGroup]="organisationForm" no validate>
+  <div class="container-fluid">
 
-    <div class="form-group row">
-      <label for="organisation_name" class="col-2 col-form-label">Name</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="organisation_name" type="text" id="organisation_name" required>
+    <form (ngSubmit)="onSubmit(organisationForm.value)" [formGroup]="organisationForm" no validate>
+
+      <div class="form-group row">
+        <label for="organisation_name" class="offset-1 col-2 col-form-label">Name</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="organisation_name" type="text" id="organisation_name" required>
+        </div>
+
       </div>
 
-    </div>
 
-
-    <div class="form-group row">
-      <label for="organisation_address" class="col-2 col-form-label">Address</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="organisation_address" type="text" id="organisation_address" required>
+      <div class="form-group row">
+        <label for="organisation_address" class="offset-1 col-2 col-form-label">Address</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="organisation_address" type="text" id="organisation_address"
+                 required>
+        </div>
       </div>
-    </div>
 
 
-    <div class="form-group row">
-      <label for="organisation_type" class="col-2 col-form-label">Type</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="organisation_type" type="text" id="organisation_type" required>
+      <div class="form-group row">
+        <label for="organisation_type" class="offset-1 col-2 col-form-label">Type</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="organisation_type" type="text" id="organisation_type" required>
+        </div>
       </div>
-    </div>
 
 
-    <div class="form-group row">
-      <label for="organisation_phone_number" class="col-2 col-form-label">Phone number</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="organisation_phone_number" type="tel" id="organisation_phone_number" required>
+      <div class="form-group row">
+        <label for="organisation_phone_number" class="offset-1 col-2 col-form-label">Phone number</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="organisation_phone_number" type="tel"
+                 id="organisation_phone_number" required>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="organisation_email" class="col-2 col-form-label">Email</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="organisation_email" type="email" id="organisation_email" required>
+      <div class="form-group row">
+        <label for="organisation_email" class="offset-1 col-2 col-form-label">Email</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="organisation_email" type="email" id="organisation_email"
+                 required>
+        </div>
       </div>
-    </div>
 
-    <div class="form-group row">
-      <label for="organisation_country" class="col-2 col-form-label">Country</label>
-      <div class="col-6">
-        <input class="form-control" formControlName="organisation_country" type="text" id="organisation_country" required>
+      <div class="form-group row">
+        <label for="organisation_country" class="offset-1 col-2 col-form-label">Country</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="organisation_country" type="text" id="organisation_country"
+                 required>
+        </div>
       </div>
-    </div>
 
-    <button type="submit" class="btn btn-outline-success" >Submit</button>
+      <div class="form-group row">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-outline-success">Submit</button>
+        </div>
+      </div>
 
-  </form>
+    </form>
 
+  </div>
 </div>
 
 

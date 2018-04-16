@@ -4,9 +4,9 @@
 
   <div class="form-group row">
 
-    <label for="courseStudent" class="col-2 col-form-label">Course</label>
+    <label for="courseStudent" class="offset-2 col-2 col-form-label">Course</label>
 
-    <div class="col-4">
+    <div class="col-6">
 
       <select class="form-control" (change)="retrieveUsersFromCourse($event.target.value)" type="text"
               id="courseStudent"
@@ -46,6 +46,7 @@
     </table>
 
   </div>
+
   <div class="container" *ngIf="!displayUsers">{{users}}</div>
 
 </div>

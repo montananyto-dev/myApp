@@ -105,7 +105,8 @@ export class AddModuleComponent implements OnInit {
       this.modulesMatchingCourses = this.selectionDataJson;
       this.numberOfModules = this.modulesMatchingCourses.length;
 
-      if (this.numberOfModules == 4) {
+      console.log(this.numberOfModules);
+      if (this.numberOfModules > 4) {
         this.resetFormArrayModules();
       }
 

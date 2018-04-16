@@ -2,35 +2,32 @@
 
 <div class="container">
 
-  <form [formGroup]="courseForm" (ngSubmit)="onSubmit(courseForm.value)" novalidate>
+  <div class="container-fluid">
 
-    <div class="form-group row">
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit(courseForm.value)" novalidate>
 
-      <label for="courseName" class="col-2 col-form-label">Course Name</label>
-
-      <div class="col-6">
-
-        <input class="form-control" formControlName="courseName" type="text" id="courseName" ngModel required>
-
+      <div class="form-group row">
+        <label for="courseName" class="offset-1 col-2 col-form-label">Course Name</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="courseName" type="text" id="courseName" ngModel required>
+        </div>
       </div>
 
-    </div>
-
-    <div class="form-group row">
-
-      <label for="courseDescription" class="col-2 col-form-label">Course Description</label>
-
-      <div class="col-6">
-
-        <input class="form-control" formControlName="courseDescription" type="text" id="courseDescription" ngModel required>
-
+      <div class="form-group row">
+        <label for="courseDescription" class="offset-1 col-2 col-form-label">Course Description</label>
+        <div class="col-6">
+          <input class="form-control" formControlName="courseDescription" type="text" id="courseDescription" ngModel required>
+        </div>
       </div>
 
-    </div>
+      <div class="form-group row">
+        <div class="col-md-12 text-center">
+          <button type="submit" class="btn btn-outline-success" [disabled]="courseForm.invalid">Submit</button>
+        </div>
+      </div>
 
-    <button type="submit" class="btn btn-outline-success" [disabled]="courseForm.invalid">Submit</button>
+    </form>
 
-  </form>
+  </div>
 
 </div>
-

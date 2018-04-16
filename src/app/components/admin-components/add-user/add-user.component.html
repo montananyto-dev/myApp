@@ -1,9 +1,11 @@
 <app-sidebar-admin></app-sidebar-admin>
 
 <div class="container">
+  <div class="container-fluid">
+
   <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)" novalidate>
     <div class="form-group row">
-      <label for="userType" class="col-2 col-form-label">UserType</label>
+      <label for="userType" class="offset-1 col-2 col-form-label">UserType</label>
       <div class="col-6">
         <select #userType class="form-control" formControlName="userType" (change)="checkUserType(userType.value)"
                 type="text" id="userType" required>
@@ -16,7 +18,7 @@
 
     <div formGroupName="courseModule" class="courseModule">
       <div *ngIf="userTypeChange == 1   " class="form-group row">
-        <label for="courseStudent" class="col-2 col-form-label">Course</label>
+        <label for="courseStudent" class="offset-1 col-2 col-form-label">Course</label>
         <div class="col-6">
           <select class="form-control" formArrayName="course" (change)="sendCourseStudent($event)" type="text" id="courseStudent" required>
             <option value="undefined" disabled>Please, select the module</option>
@@ -26,7 +28,7 @@
       </div>
 
       <div *ngIf="userTypeChange== 2  " class="form-group row">
-        <label for="courseLecturer" class="col-2 col-form-label">Course</label>
+        <label for="courseLecturer" class="offset-1 col-2 col-form-label">Course</label>
         <div class="col-6">
           <select multiple [(ngModel)]="selectedCourses" [ngModelOptions]="{standalone: true}" class="form-control"
                   formArrayName="course" (change)="sendCourseLecturer($event)" type="text" id="courseLecturer" required>
@@ -51,7 +53,7 @@
     </div>
 
     <div class="form-group row">
-      <label for="organisation" class="col-2 col-form-label">Organisation</label>
+      <label for="organisation" class="offset-1 col-2 col-form-label">Organisation</label>
       <div class="col-6">
         <select class="form-control" formControlName="organisation" type="text" id="organisation" required>
           <option [value]="" disabled selected>Please, select the organisation</option>
@@ -63,21 +65,21 @@
     </div>
 
     <div class="form-group row">
-      <label for="firstName" class="col-2 col-form-label">First Name</label>
+      <label for="firstName" class="offset-1 col-2 col-form-label">First Name</label>
       <div class="col-6">
         <input class="form-control" formControlName="firstName" type="text" id="firstName" ngModel required>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="lastName" class="col-2 col-form-label">Last Name</label>
+      <label for="lastName" class="offset-1 col-2 col-form-label">Last Name</label>
       <div class="col-6">
         <input class="form-control" formControlName="lastName" type="text" id="lastName" ngModel required>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="dateOfBirth" class="col-2 col-form-label">Date of Birth</label>
+      <label for="dateOfBirth" class="offset-1 col-2 col-form-label">Date of Birth</label>
       <div class="col-6">
         <input class="form-control" formControlName="dateOfBirth" type="date" id="dateOfBirth" ngModel required>
       </div>
@@ -85,14 +87,14 @@
 
     <div formGroupName="password">
       <div class="form-group row">
-        <label for="passwordInput" class="col-2 col-form-label">Password</label>
+        <label for="passwordInput" class="offset-1 col-2 col-form-label">Password</label>
         <div class="col-6">
           <input class="form-control" formControlName="passwordInput" type="password" id="passwordInput" ngModel required>
         </div>
       </div>
 
       <div class="form-group row">
-        <label for="passwordConfirm" class="col-2 col-form-label">Password Confirmation</label>
+        <label for="passwordConfirm" class="offset-1 col-2 col-form-label">Password Confirmation</label>
         <div class="col-6">
           <input class="form-control" formControlName="passwordConfirm" type="password" id="passwordConfirm" ngModel required>
         </div>
@@ -100,27 +102,32 @@
     </div>
 
     <div class="form-group row">
-      <label for="email" class="col-2 col-form-label">Email</label>
+      <label for="email" class="offset-1 col-2 col-form-label">Email</label>
       <div class="col-6">
         <input class="form-control" formControlName="email" type="email" id="email" ngModel required>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="phoneNumber" class="col-2 col-form-label">Phone number</label>
+      <label for="phoneNumber" class="offset-1 col-2 col-form-label">Phone number</label>
       <div class="col-6">
         <input class="form-control" formControlName="phoneNumber" type="tel" id="phoneNumber" ngModel required>
       </div>
     </div>
 
     <div class="form-group row">
-      <label for="department" class="col-2 col-form-label">Department</label>
+      <label for="department" class="offset-1 col-2 col-form-label">Department</label>
       <div class="col-6">
         <input class="form-control" formControlName="department" type="text" id="department" ngModel required>
       </div>
     </div>
-    <button type="submit" class="btn btn-outline-success" [disabled]="userForm.invalid">Submit</button>
+    <div class="form-group row">
+      <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-outline-success" [disabled]="userForm.invalid">Submit</button>
+      </div>
+    </div>
   </form>
 
-</div>
+  </div>
 
+</div>
