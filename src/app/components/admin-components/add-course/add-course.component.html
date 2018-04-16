@@ -8,7 +8,7 @@
 
       <label for="courseName" class="col-2 col-form-label">Course Name</label>
 
-      <div class="col-10">
+      <div class="col-6">
 
         <input class="form-control" formControlName="courseName" type="text" id="courseName" ngModel required>
 
@@ -20,7 +20,7 @@
 
       <label for="courseDescription" class="col-2 col-form-label">Course Description</label>
 
-      <div class="col-10">
+      <div class="col-6">
 
         <input class="form-control" formControlName="courseDescription" type="text" id="courseDescription" ngModel required>
 
@@ -28,11 +28,9 @@
 
     </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="courseForm.invalid">Submit</button>
+    <button type="submit" class="btn btn-outline-success" [disabled]="courseForm.invalid">Submit</button>
 
   </form>
-
-  <pre>Form value: {{ courseForm.value | json }}</pre>
 
 </div>
 

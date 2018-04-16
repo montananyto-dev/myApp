@@ -13,6 +13,9 @@
 #sidebar i {
   margin-right: 6px;
 }
+a.list-group-item.d-inline-block.collapsed.empty {
+  height: 100px;
+}
 
 #sidebar .list-group-item {
   border-radius: 0;

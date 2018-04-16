@@ -44,6 +44,7 @@ import { ProfileUserComponent } from './components/user-components/profile-user/
 
 import { ProfileAdminComponent } from './components/admin-components/profile-admin/profile-admin.component';
 import { ViewProjectComponent } from './components/user-components/view-project/view-project.component';
+import { ViewUserModuleComponent } from './components/admin-components/view-user-module/view-user-module.component';
 
 const appRoutes: Routes = [
 
@@ -88,8 +89,12 @@ const appRoutes: Routes = [
     component: AddCourseComponent
   },
   {
-    path:'view/usercourse',
+    path:'view/userCourse',
     component: ViewUserCourseComponent
+  },
+  {
+    path:'view/userModule',
+    component: ViewUserModuleComponent
   },
   {
     path:'edit/user',
@@ -148,7 +153,8 @@ const appRoutes: Routes = [
     ViewAllProjectComponent,
     ProfileUserComponent,
     ProfileAdminComponent,
-    ViewProjectComponent
+    ViewProjectComponent,
+    ViewUserModuleComponent
 
   ],
   imports: [

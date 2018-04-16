@@ -13,12 +13,4 @@ export class ModuleService {
   getAllModules(): Observable<any> {
     return this.http.get(this.moduleApi);
   }
-
-  setModules(module) {
-    this.modules = module;
-
-  }
-  getModules() {
-    return this.modules;
-  }
 }

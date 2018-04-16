@@ -4,17 +4,15 @@
 
   <div class="form-group row">
 
-    <label for="courseStudent" class="col-2 col-form-label">Course</label>
+    <label for="moduleStudent" class="col-2 col-form-label">Module</label>
 
     <div class="col-4">
 
-      <select class="form-control" (change)="retrieveUsersFromCourse($event.target.value)" type="text"
-              id="courseStudent"
-              required>
+      <select class="form-control" (change)="retrieveUsersFromModule($event.target.value)" type="text" id="moduleStudent" required>
 
-        <option value="undefined" disabled>Please, select the course</option>
+        <option value="undefined" disabled>Please, select the module</option>
 
-        <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
+        <option *ngFor="let module of modules" [value]="module.module_id"> {{module.module_name}}</option>
 
       </select>
 

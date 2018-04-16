@@ -13,7 +13,7 @@ export class ViewUserCourseComponent implements OnInit {
   users;
   courseDataJson: any;
   usersDataJson: any;
-  viewUserByCourseApi = "http://slim.kingstonse.org/view/user";
+  viewUserByCourseApi = "http://slim.kingstonse.org/view/user/course/";
 
   displayUsers: boolean = false;
 
@@ -29,15 +29,13 @@ export class ViewUserCourseComponent implements OnInit {
 
     console.log('courseID: ' + courseId);
 
-    this.http.get(this.viewUserByCourseApi + '/' + courseId).subscribe(object => {
+    this.http.get(this.viewUserByCourseApi + courseId).subscribe(object => {
 
       if (object.toLocaleString().includes("No users for this module")) {
 
-        console.log("oooops");
         this.users = "No users for this module";
         this.displayUsers = false;
       } else {
-
         this.usersDataJson = object;
         this.users = this.usersDataJson;
         this.displayUsers = true;
