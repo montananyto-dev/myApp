@@ -8,3 +8,12 @@
   border: 1px solid #a90614;
 }
 
+.inserted {
+  border: 1px solid black;
+  display: inline;
+  max-width: 200px;
+  padding: 6px;
+  background-color: #42A948;
+  color: white;
+  border-radius: 5px;
+}

@@ -31,6 +31,7 @@ export class AddModuleComponent implements OnInit {
   courses;
   userTypes;
   organisations;
+  moduleInserted:Boolean = false;
 
   constructor(private userService: UserService,
               private courseService: CourseService,
@@ -91,6 +92,7 @@ export class AddModuleComponent implements OnInit {
       (data => {
         console.log(data);
         this.moduleForm.reset();
+        this.showDivInserted();
       }, err => {
         console.log(err);
 
@@ -116,6 +118,12 @@ export class AddModuleComponent implements OnInit {
     });
   }
 
+  showDivInserted(): void {
+    this.moduleInserted = true;
+    setTimeout(function() {
+      this.moduleInserted = false;
+    }.bind(this),3000);
+  }
 
   resetFormArrayModules(){
     const control = <FormArray>this.moduleForm.controls['module'];
@@ -123,6 +131,7 @@ export class AddModuleComponent implements OnInit {
       control.removeAt(0);
     }
   }
+
   retrieveOrganisations() {
     this.organisationService.getOrganisations().subscribe(data => {
       this.organisationDataJson = data;

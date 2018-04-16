@@ -29,7 +29,7 @@ export class AddCourseComponent implements OnInit {
   courses;
   userTypes;
   organisations;
-
+  courseInserted:Boolean = false;
 
   constructor(private userService: UserService,
               private courseService: CourseService,
@@ -68,10 +68,8 @@ export class AddCourseComponent implements OnInit {
         }).subscribe
       (data => {
 
-        //reset the form after submission
         this.courseForm.reset();
-
-        //print out the data return by the server
+        this.showDivInserted();
         console.log(data);
 
       }, err => {
@@ -80,7 +78,12 @@ export class AddCourseComponent implements OnInit {
     }
   };
 
-
+  showDivInserted(): void {
+    this.courseInserted = true;
+    setTimeout(function() {
+      this.courseInserted = false;
+    }.bind(this),3000);
+  }
 
   retrieveOrganisations() {
     this.organisationService.getOrganisations().subscribe(data => {

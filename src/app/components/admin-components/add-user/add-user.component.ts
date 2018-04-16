@@ -200,7 +200,7 @@ export class AddUserComponent implements OnInit {
     setTimeout(function() {
       this.userInserted = false;
       console.log(this.userInserted);
-    }, 3000);
+    }.bind(this),3000);
   }
 
   retrieveOrganisations() {

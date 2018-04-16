@@ -14,6 +14,7 @@ export class AddOrganisationComponent implements OnInit {
 
   addOrganisationApi = 'http://slim.kingstonse.org/add/organisation';
   organisationDataJson: any;
+  organisationInserted:Boolean = false;
 
   constructor(private http: HttpClient, private organisation: OrganisationService) {
   }
@@ -35,13 +36,8 @@ export class AddOrganisationComponent implements OnInit {
 
   onSubmit = function (dataForm) {
 
-
-    console.log(dataForm);
-
     if (this.organisationForm.valid) {
-
       this.http.post(this.addOrganisationApi, dataForm,
-
         {
           headers: {
             'Accept': 'application/ json',
@@ -49,24 +45,23 @@ export class AddOrganisationComponent implements OnInit {
           }
         }).subscribe
       (data => {
-
-          //print out the data return by the server
           console.log(data);
-
-          //reset the form after submission
           this.organisationForm.reset();
           this.retrieveOrganisations();
-
+          this.showDivInserted();
         },
         err => {
-
           console.log(err);
           console.error("The organisation could not be added");
-
         });
-
     };
+  }
 
+  showDivInserted(): void {
+    this.organisationInserted = true;
+    setTimeout(function() {
+      this.organisationInserted = false;
+    }.bind(this),3000);
   }
 
   retrieveOrganisations(){

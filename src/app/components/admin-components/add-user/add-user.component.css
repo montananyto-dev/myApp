@@ -14,5 +14,21 @@ label {
 }
 input[type=checkbox], input[type=radio] {
   margin-right: 10px;
-
 }
+
+
+.inserted {
+  border: 1px solid black;
+  display: inline;
+  max-width: 200px;
+  padding: 6px;
+  background-color: #42A948;
+  color: white;
+  border-radius: 5px;
+}
+
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
