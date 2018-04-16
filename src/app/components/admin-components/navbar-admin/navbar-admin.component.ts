@@ -31,7 +31,7 @@ export class NavbarAdminComponent implements OnInit {
 
   adminLogout(){
     this._currentUser.setIsUserLoggedIn(false);
-    this.router.navigateByUrl('login');
+    this.router.navigateByUrl('');
     location.reload();
   }
 
