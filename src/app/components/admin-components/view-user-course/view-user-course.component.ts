@@ -31,7 +31,7 @@ export class ViewUserCourseComponent implements OnInit {
 
     this.http.get(this.viewUserByCourseApi + courseId).subscribe(object => {
 
-      if (object.toLocaleString().includes("No users for this module")) {
+      if (object.toLocaleString().includes("No users for this course")) {
 
         this.users = "There is no users for this course";
         this.displayUsers = false;
