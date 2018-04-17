@@ -23,3 +23,22 @@
 td {
   min-width: 250px;
 }
+td.workflowTitle {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+div #task1 {
+  background-color: #ffa25d;
+}
+div #task2 {
+  background-color: #fffa8a;
+}
+
+div #task3 {
+  background-color: #deffa2;
+}
+
+div #task4 {
+  background-color: #81ca3d;
+}

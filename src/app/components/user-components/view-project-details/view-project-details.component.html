@@ -8,13 +8,13 @@
   <table class="table table-responsive table-borderless ">
     <thead>
     <tr >
-      <td *ngFor="let workflowStep of projectWorkflowStep">{{workflowStep.workflow_step_name}}</td>
+      <td class="workflowTitle" *ngFor="let workflowStep of projectWorkflowStep">{{workflowStep.workflow_step_name}}</td>
     </tr>
     </thead>
     <tbody>
     <tr>
 
-      <td class="1" >
+      <td class="workflow1" >
         <div class="task" id="task1" *ngFor="let task1 of taskStatus1">
 
           <label>{{task1.task_title}}</label>
@@ -22,7 +22,7 @@
         </div>
       </td>
 
-      <td class="2" >
+      <td class="title" >
         <div class="task" id="task2" *ngFor="let task2 of taskStatus2">
           <button class="button"  (click)="updateStatus(2,task2.task_status, task2.task_id,task2.project_id,'left')"><i class="fa fa-arrow-left"></i></button>
           {{task2.task_title}}
@@ -30,7 +30,7 @@
         </div>
       </td>
 
-      <td class="3" >
+      <td class="title" >
         <div class="task" id="task3" *ngFor="let task3 of taskStatus3">
           <button class="button" (click)="updateStatus(3,task3.task_status, task3.task_id,task3.project_id,'left')"><i class="fa fa-arrow-left"></i></button>
           {{task3.task_title}}
@@ -38,7 +38,7 @@
         </div>
       </td>
 
-      <td class="4" >
+      <td class="title" >
         <div class="task" id ="task4" *ngFor="let task4 of taskStatus4">
           <button class="button" (click)="updateStatus(4,task4.task_status, task4.task_id,task4.project_id,'left')"><i class="fa fa-arrow-left"></i></button>
           {{task4.task_title}}
@@ -51,4 +51,5 @@
   </table>
 
 
+</div>
 </div>

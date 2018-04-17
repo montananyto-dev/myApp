@@ -14,6 +14,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ViewProjectDetailsComponent implements OnInit {
 
+  actualProject:any;
   projectID: string;
   projectGoal: any;
   projectObjective: any;
@@ -91,7 +92,7 @@ export class ViewProjectDetailsComponent implements OnInit {
 
   getProject() {
     this.project.getProjectByProjectId(this.projectID).subscribe(project => {
-
+        this.actualProject = project;
     });
   }
 
