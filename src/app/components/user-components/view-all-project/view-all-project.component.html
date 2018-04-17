@@ -19,7 +19,7 @@
     <td>{{ item.project_creator }}</td>
     <td>{{ item.project_due_date  | date:'MM-dd-yyyy'}}</td>
 
-    <button class ="view_project" id="{{item.project_id}}" [routerLink]="['/view/project']" [queryParams]="{projectID: item.project_id}"  >View project</button>
+    <button class ="view_project" id="{{item.project_id}}" (click)="redirectTo(item.project_id)"  >View project</button>
   </tr>
 </table>
 

@@ -11,19 +11,16 @@ export class UserProjectService {
 
   public user_id = this._currentUser.getUser_id();
 
-
-
   constructor(private http: HttpClient,private _currentUser:UserModelService) {
 
   }
-  getProject(): Observable<any> {
+  getProjectByUserId(): Observable<any> {
 
     return this.http.get(this.projectUserIDApi+"/"+this.user_id);
   }
 
-  getProjectById(projectID:string): Observable<any>{
+  getProjectByProjectId(projectID:string): Observable<any>{
     return this.http.get(this.projectProjectIDApi+"/"+projectID);
-
   }
 
 }

@@ -45,6 +45,12 @@ import { ProfileUserComponent } from './components/user-components/profile-user/
 import { ProfileAdminComponent } from './components/admin-components/profile-admin/profile-admin.component';
 import { ViewProjectComponent } from './components/user-components/view-project/view-project.component';
 import { ViewUserModuleComponent } from './components/admin-components/view-user-module/view-user-module.component';
+import { ViewProjectDetailsComponent } from './components/user-components/view-project-details/view-project-details.component';
+import {ProjectGoalService} from "./services/user_services/user-project-goal/project-goal.service";
+import {ProjectCommentService} from "./services/user_services/user-project-comment/project-comment.service";
+import {ProjectObjectiveService} from "./services/user_services/user-project-objective/project-objective.service";
+import {ProjectWorkflowStepService} from "./services/user_services/user-project-workflow-step/project-workflow-step.service";
+import {ProjectTaskService} from "./services/user_services/user_project-task/project-task.service";
 
 const appRoutes: Routes = [
 
@@ -121,6 +127,10 @@ const appRoutes: Routes = [
   },{
   path:'view/project',
     component:ViewProjectComponent
+  },
+  {
+    path:'view/project/details/:projectID',
+    component:ViewProjectDetailsComponent
   }
 
 ];
@@ -154,7 +164,8 @@ const appRoutes: Routes = [
     ProfileUserComponent,
     ProfileAdminComponent,
     ViewProjectComponent,
-    ViewUserModuleComponent
+    ViewUserModuleComponent,
+    ViewProjectDetailsComponent
 
   ],
   imports: [
@@ -166,6 +177,11 @@ const appRoutes: Routes = [
     ReactiveFormsModule
   ],
   providers: [
+    ProjectGoalService,
+    ProjectCommentService,
+    ProjectObjectiveService,
+    ProjectWorkflowStepService,
+    ProjectTaskService,
     UserProjectService,
     UserService,
     OrganisationService,

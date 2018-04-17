@@ -108,7 +108,7 @@ export class AddProjectComponent implements OnInit {
   }
 
   retrieveProjects() {
-    this.project.getProject().subscribe(data => {
+    this.project.getProjectByUserId().subscribe(data => {
       this.projects = data;
     })
   }

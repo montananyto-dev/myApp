@@ -17,6 +17,11 @@ a.list-group-item.d-inline-block.collapsed.empty {
   height: 100px;
 }
 
+
+/*a.list-group-item.d-inline-block.collapsed.help {*/
+  /*height: 400px;*/
+/*}*/
+
 #sidebar .list-group-item {
   border-radius: 0;
   background-color: #333;

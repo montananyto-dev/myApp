@@ -26,7 +26,7 @@ export class ViewProjectComponent implements OnInit {
   }
 
   getProjectById(){
-    this.project.getProjectById(this.projectID).subscribe(data=>{
+    this.project.getProjectByProjectId(this.projectID).subscribe(data=>{
       console.log(data);
     });
   }

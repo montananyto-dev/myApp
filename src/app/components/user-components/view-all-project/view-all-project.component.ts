@@ -1,5 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import {UserProjectService} from "../../../services/user_services/user-project/user-project.service";
+import {Router, RouterModule} from "@angular/router";
 
 @Component({
   selector: 'app-view-project',
@@ -11,13 +13,20 @@ export class ViewAllProjectComponent implements OnInit {
 
   projects:JSON;
 
-  constructor(private project:UserProjectService) { }
+  constructor(private project:UserProjectService,private router:Router) { }
 
   ngOnInit() {
     this.retrieveProjects();
   }
+
+  redirectTo(projectID){
+
+    this.router.navigate(['view/project/details',projectID])
+  }
+
+
   retrieveProjects() {
-    this.project.getProject().subscribe(data => {
+    this.project.getProjectByUserId().subscribe(data => {
       this.projects = data;
     })
   }
