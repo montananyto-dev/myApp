@@ -1,0 +1,25 @@
+
+.table td, .table th {
+  text-align: center;
+  border-right: 1px black solid;
+  border-left:1px black solid;
+
+}
+.task{
+  border:1px solid black;
+  padding:10px;
+  margin-bottom:5px;
+  border-radius:10px;
+  width:250px;
+  height:160px;
+}
+.container{
+  margin-left:300px;
+}
+
+.button {
+  font-size: 10px;
+}
+td {
+  min-width: 250px;
+}
