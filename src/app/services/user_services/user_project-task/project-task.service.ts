@@ -1,22 +1,26 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable()
 export class ProjectTaskService {
 
-  public projectTaskByProjectIdApi = 'http://slim.kingstonse.org/view/task/';
-  public projectWorkflowStepApi = 'http://slim.kingstonse.org/view/task/';
+  public projectTaskByProjectIdApi = 'http://slim.kingstonse.org/view/allTasks/';
+  public projectTaskByProjectAndStatusIdApi = 'http://slim.kingstonse.org/view/taskByStatus/';
+  public projectTaskByProjectIdAndTaskId = 'http://slim.kingstonse.org/view/taskByProjectAndTaskId/';
 
   constructor(private http: HttpClient) {
   }
 
-  getTaskByProjectID(projectID: string): Observable<any> {
-    return this.http.get(this.projectTaskByProjectIdApi + projectID);
+  getTaskByProjectId(projectId: string): Observable<any> {
+    return this.http.get(this.projectTaskByProjectIdApi + projectId);
   }
 
-  getTaskByProjectIdAndStatusId(projectID: string,statusId: string,): Observable<any> {
-    return this.http.get(this.projectWorkflowStepApi + projectID +"/" +statusId);
+  getTaskByProjectIdAndStatusId(projectId: string, statusId: string,): Observable<any> {
+    return this.http.get(this.projectTaskByProjectAndStatusIdApi + projectId + "/" + statusId);
   }
 
+  getTaskByProjectIdAndTaskId(projectId: string, taskId: string,): Observable<any> {
+    return this.http.get(this.projectTaskByProjectIdAndTaskId + projectId + "/" + taskId);
+  }
 }

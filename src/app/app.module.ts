@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, OnInit} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {Router,RouterModule, Routes} from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -51,6 +51,19 @@ import {ProjectCommentService} from "./services/user_services/user-project-comme
 import {ProjectObjectiveService} from "./services/user_services/user-project-objective/project-objective.service";
 import {ProjectWorkflowStepService} from "./services/user_services/user-project-workflow-step/project-workflow-step.service";
 import {ProjectTaskService} from "./services/user_services/user_project-task/project-task.service";
+import {UserProjectTeamMembersService} from "./services/user_services/user-project-team-members/user-project-team-members.service";
+import { ViewTaskDetailsComponent } from './components/user-components/view-task-details/view-task-details.component';
+
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {
+  MatCommonModule,
+  MatDialogModule,
+  MatMenu,
+  MatMenuTrigger, MatSnackBar
+
+} from "@angular/material";
+import {CommonModule} from "@angular/common";
+import {ViewTaskCommentsService} from "./services/user_services/user-view-task-comment/view-task-comments.service";
 
 const appRoutes: Routes = [
 
@@ -129,8 +142,12 @@ const appRoutes: Routes = [
     component:ViewProjectComponent
   },
   {
-    path:'view/project/details/:projectID',
+    path:'view/project/details/:projectId',
     component:ViewProjectDetailsComponent
+  },
+  {
+    path:'view/task/details/:projectId/:taskId',
+    component:ViewTaskDetailsComponent
   }
 
 ];
@@ -165,8 +182,11 @@ const appRoutes: Routes = [
     ProfileAdminComponent,
     ViewProjectComponent,
     ViewUserModuleComponent,
-    ViewProjectDetailsComponent
+    ViewProjectDetailsComponent,
+    ViewTaskDetailsComponent
 
+  ],entryComponents:[
+    ViewTaskDetailsComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -174,19 +194,31 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatCommonModule
+
+  ],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
   ],
   providers: [
-    ProjectGoalService,
+    ViewTaskCommentsService,
+    UserModelService,
+    UserProjectService,
+    UserProjectTeamMembersService,
     ProjectCommentService,
+    ProjectGoalService,
     ProjectObjectiveService,
     ProjectWorkflowStepService,
     ProjectTaskService,
-    UserProjectService,
+    UserModelService,
     UserService,
     OrganisationService,
     ModuleService,
-    UserModelService,
     UserTypeService,
     CourseService,
     AuthenticationGuard,

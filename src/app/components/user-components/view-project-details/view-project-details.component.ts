@@ -1,11 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Component, Inject, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserProjectService} from "../../../services/user_services/user-project/user-project.service";
 import {ProjectGoalService} from "../../../services/user_services/user-project-goal/project-goal.service";
 import {ProjectObjectiveService} from "../../../services/user_services/user-project-objective/project-objective.service";
 import {ProjectWorkflowStepService} from "../../../services/user_services/user-project-workflow-step/project-workflow-step.service";
 import {ProjectTaskService} from "../../../services/user_services/user_project-task/project-task.service";
 import {HttpClient} from "@angular/common/http";
+import {ProjectCommentService} from "../../../services/user_services/user-project-comment/project-comment.service";
+import {UserProjectTeamMembersService} from "../../../services/user_services/user-project-team-members/user-project-team-members.service";
+import {Observable} from "rxjs/Observable";
+import {IntervalObservable} from "rxjs/observable/IntervalObservable";
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {ViewTaskDetailsComponent} from "../view-task-details/view-task-details.component";
+import {Overlay} from "@angular/cdk/overlay";
+
+
 
 @Component({
   selector: 'app-view-project-details',
@@ -15,10 +24,13 @@ import {HttpClient} from "@angular/common/http";
 export class ViewProjectDetailsComponent implements OnInit {
 
   actualProject:any;
-  projectID: string;
+  projectId: string;
+  taskId:string;
   projectGoal: any;
   projectObjective: any;
   projectWorkflowStep: any;
+  projectTeamMembers:any;
+  projectComments:any;
   projectTask: any;
   taskStatus1: any;
   taskStatus2: any;
@@ -26,18 +38,22 @@ export class ViewProjectDetailsComponent implements OnInit {
   taskStatus4: any;
   emptyArray = [];
 
+  viewTaskDetails: MatDialogRef<ViewTaskDetailsComponent>;
+
   updateTaskStatusApi = "http://slim.kingstonse.org/update/task/";
 
   constructor(private route: ActivatedRoute,
               private project: UserProjectService,
               private goalService: ProjectGoalService,
               private objectiveService: ProjectObjectiveService,
+              private commentService: ProjectCommentService,
+              private teamMembersService: UserProjectTeamMembersService,
               private workflowStepService: ProjectWorkflowStepService,
               private taskService: ProjectTaskService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              public dialog: MatDialog,) {
 
-    this.route.params.subscribe(params => this.projectID = params['projectID']);
-    console.log(this.projectID);
+    this.route.params.subscribe(params => this.projectId = params['projectId']);
   }
 
   ngOnInit() {
@@ -46,10 +62,35 @@ export class ViewProjectDetailsComponent implements OnInit {
     this.getProjectObjective();
     this.getProjectWorkflowStep();
     this.getProjectTask();
+    this.getProjectComment();
+    this.getProjectTeamMember();
     this.getProjectTaskByStatus1();
     this.getProjectTaskByStatus2();
     this.getProjectTaskByStatus3();
     this.getProjectTaskByStatus4();
+    //this.setObservableTaskStatus();   -------------------------->>>> DON'T FORGET
+  }
+
+  redirectToTaskDetails(event){
+    this.taskId = event.target.id.toString();
+
+    this.viewTaskDetails = this.dialog.open(ViewTaskDetailsComponent , {
+      width: '400px',
+      height: '400px',
+    });
+    this.viewTaskDetails.componentInstance.projectId = this.projectId;
+    this.viewTaskDetails.componentInstance.taskId = this.taskId;
+
+  }
+  setObservableTaskStatus(){
+
+    IntervalObservable.create(10000)
+      .subscribe(() => {
+        this.getProjectTaskByStatus1();
+        this.getProjectTaskByStatus2();
+        this.getProjectTaskByStatus3();
+        this.getProjectTaskByStatus4();
+      });
 
   }
 
@@ -91,37 +132,51 @@ export class ViewProjectDetailsComponent implements OnInit {
   }
 
   getProject() {
-    this.project.getProjectByProjectId(this.projectID).subscribe(project => {
+    this.project.getProjectByProjectId(this.projectId).subscribe(project => {
         this.actualProject = project;
     });
   }
 
   getProjectGoal() {
-    this.goalService.getGoalByProjectId(this.projectID).subscribe(goal => {
+    this.goalService.getGoalByProjectId(this.projectId).subscribe(goal => {
       this.projectGoal = goal;
     });
   }
 
   getProjectObjective() {
-    this.objectiveService.getObjectiveByProjectId(this.projectID).subscribe(objective => {
+    this.objectiveService.getObjectiveByProjectId(this.projectId).subscribe(objective => {
       this.projectObjective = objective;
     })
   }
 
   getProjectWorkflowStep() {
-    this.workflowStepService.getWorkflowStepByProjectId(this.projectID).subscribe(workflowStep => {
+    this.workflowStepService.getWorkflowStepByProjectId(this.projectId).subscribe(workflowStep => {
       this.projectWorkflowStep = workflowStep;
     })
   }
 
   getProjectTask() {
-    this.taskService.getTaskByProjectID(this.projectID).subscribe(tasks => {
+    this.taskService.getTaskByProjectId(this.projectId).subscribe(tasks => {
       this.projectTask = tasks;
     })
   }
 
+  getProjectTeamMember(){
+    this.teamMembersService.getTeamMembersByProjectId(this.projectId).subscribe(teamMembers=>{
+      this.projectTeamMembers = teamMembers;
+    })
+
+  }
+
+  getProjectComment(){
+    this.commentService.getCommentByProjectId(this.projectId).subscribe(comments=>{
+      this.projectComments = comments;
+    })
+
+  }
+
   getProjectTaskByStatus1() {
-    this.taskService.getTaskByProjectIdAndStatusId(this.projectID, "1").subscribe(tasks => {
+    this.taskService.getTaskByProjectIdAndStatusId(this.projectId, "1").subscribe(tasks => {
 
       if(tasks === "No tasks for this project"){
         this.taskStatus1 = this.emptyArray;
@@ -133,7 +188,7 @@ export class ViewProjectDetailsComponent implements OnInit {
   }
 
   getProjectTaskByStatus2() {
-    this.taskService.getTaskByProjectIdAndStatusId(this.projectID, "2").subscribe(tasks => {
+    this.taskService.getTaskByProjectIdAndStatusId(this.projectId, "2").subscribe(tasks => {
       if(tasks === "No tasks for this project"){
         this.taskStatus2 = this.emptyArray;
       }else{
@@ -143,7 +198,7 @@ export class ViewProjectDetailsComponent implements OnInit {
   }
 
   getProjectTaskByStatus3() {
-    this.taskService.getTaskByProjectIdAndStatusId(this.projectID, "3").subscribe(tasks => {
+    this.taskService.getTaskByProjectIdAndStatusId(this.projectId, "3").subscribe(tasks => {
       if(tasks === "No tasks for this project"){
         this.taskStatus3 = this.emptyArray;
       }else{
@@ -153,7 +208,7 @@ export class ViewProjectDetailsComponent implements OnInit {
   }
 
   getProjectTaskByStatus4() {
-    this.taskService.getTaskByProjectIdAndStatusId(this.projectID, "4").subscribe(tasks => {
+    this.taskService.getTaskByProjectIdAndStatusId(this.projectId, "4").subscribe(tasks => {
       if(tasks === "No tasks for this project"){
         this.taskStatus4 = this.emptyArray;
       }else{

@@ -1,0 +1,19 @@
+
+@import '~@angular/material/prebuilt-themes/purple-green.css';
+
+
+::ng-deep .cdk-overlay-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  background-color:white;
+}
+
+
+.mat-dialog-actions{
+display:inherit;
+}
+
+button:focus {outline:0;}

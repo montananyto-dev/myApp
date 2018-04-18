@@ -10,14 +10,14 @@ import {UserProjectService} from "../../../services/user_services/user-project/u
 })
 export class ViewProjectComponent implements OnInit {
 
-  projectID:string;
+  projectId:string;
 
   constructor(private route: ActivatedRoute,private project: UserProjectService) {
 
     this.route.queryParams.subscribe(params => {
-      this.projectID = params['projectID'];
+      this.projectId = params['projectId'];
 
-      console.log(this.projectID);
+      console.log(this.projectId);
     });
   }
 
@@ -26,7 +26,7 @@ export class ViewProjectComponent implements OnInit {
   }
 
   getProjectById(){
-    this.project.getProjectByProjectId(this.projectID).subscribe(data=>{
+    this.project.getProjectByProjectId(this.projectId).subscribe(data=>{
       console.log(data);
     });
   }

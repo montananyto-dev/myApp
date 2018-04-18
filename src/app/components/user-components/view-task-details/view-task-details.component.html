@@ -1,0 +1,32 @@
+<button mat-button type="button" class="close" mat-dialog-close><i class="fa fa-window-close" aria-hidden="true"></i>
+</button>
+
+<mat-dialog-content *ngFor="let taskDetails of task">
+  <h1 mat-dialog-title>{{taskDetails.task_title}}</h1>
+  <div><strong>Due date : </strong>{{taskDetails.task_due_date}}</div>
+  <div><strong>Creator : </strong>{{taskDetails.task_creator}}</div>
+  <div class="small">Date created: {{taskDetails.task_created_at}}</div>
+</mat-dialog-content>
+&nbsp;
+<mat-dialog-content *ngFor="let comments of comment">
+  <div><strong>Comment : </strong>{{comments.task_comment_description}}</div>
+  <div class="small">{{comments.task_comment_creator}} {{comments.task_comment_created_at}}</div>
+  &nbsp;
+</mat-dialog-content>
+
+
+&nbsp;
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value)">
+  <div class="small">Add comment</div>
+  <mat-dialog-content>
+      <input matInput formControlName="comment" placeholder="Enter comment">
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="submit"><i class="fa fa-plus-circle"></i></button>
+    <button mat-button type="button" mat-dialog-close><i class="fa fa-minus-circle"></i></button>
+  </mat-dialog-actions>
+</form>
+
+
+
+
