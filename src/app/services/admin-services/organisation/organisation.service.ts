@@ -7,6 +7,7 @@ export class OrganisationService {
 
   public organisations;
   organisationApi = 'http://slim.kingstonse.org/view/organisation';
+  organisationNameByIdApi = 'http://slim.kingstonse.org/view/user/organisationName/';
 
   constructor(private http: HttpClient) { }
 
@@ -16,9 +17,9 @@ export class OrganisationService {
 
   setOrganisations(organisation) {
     this.organisations = organisation;
-
   }
-  // getOrganisations() {
-  //   return this.organisations;
-  // }
+
+  getOrganisationNameById(organisationID){
+    return this.http.get(this.organisationNameByIdApi+organisationID);
+  }
 }

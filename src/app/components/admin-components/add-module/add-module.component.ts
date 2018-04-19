@@ -18,12 +18,6 @@ export class AddModuleComponent implements OnInit {
   private apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
   moduleForm: FormGroup;
-  usersDataJson: any;
-  courseDataJson: any;
-  moduleDataJson: any;
-  userTypeDataJson: any;
-  organisationDataJson: any;
-  selectionDataJson: any;
   modulesMatchingCourses;
   numberOfModules = 4;
   users;
@@ -32,6 +26,8 @@ export class AddModuleComponent implements OnInit {
   userTypes;
   organisations;
   moduleInserted:Boolean = false;
+  emptyArray = [];
+  courseSelected:Boolean = false;
 
   constructor(private userService: UserService,
               private courseService: CourseService,
@@ -42,16 +38,15 @@ export class AddModuleComponent implements OnInit {
               private formBuilder: FormBuilder) {
 
     this.moduleForm = this.formBuilder.group({
+      organisation:new FormControl(),
       course: new FormControl(),
       module: this.formBuilder.array([], Validators.required)
     })
   };
 
-
   ngOnInit() {
 
     this.retrieveUsers();
-    this.retrieveCourses();
     this.retrieveModules();
     this.retrieveUserTypes();
     this.retrieveOrganisations();
@@ -100,18 +95,21 @@ export class AddModuleComponent implements OnInit {
     }
   };
 
+  retrieveCoursesFromOrganisation(organisationId){
+    this.moduleForm.controls['course'].reset();
+    this.resetFormArrayModules();
+    this.retrieveCoursesByOrganisationId(organisationId);
+  }
+
   retrieveModuleFromCourse(courseIds) {
+
     this.resetFormArrayModules();
     this.http.get(this.apiUrl2 + '/' + courseIds).subscribe(object => {
-      this.selectionDataJson = object;
-      this.modulesMatchingCourses = this.selectionDataJson;
+      this.modulesMatchingCourses = object;
       this.numberOfModules = this.modulesMatchingCourses.length;
-
-      console.log(this.numberOfModules);
       if (this.numberOfModules > 4) {
         this.resetFormArrayModules();
       }
-
       if (this.numberOfModules == 36) {
         this.numberOfModules = 0;
       }
@@ -132,37 +130,43 @@ export class AddModuleComponent implements OnInit {
     }
   }
 
+  retrieveCoursesByOrganisationId(organisationId){
+    this.courseService.getCoursesByOrganisationId(organisationId).subscribe(data=>{
+
+      if (data.toLocaleString().includes("There are no courses for this organisation")) {
+        this.courses = this.emptyArray;
+      } else {
+
+        this.courseSelected = true;
+        console.log(data);
+        this.courses = data;
+
+      }
+
+    })
+
+  }
+
   retrieveOrganisations() {
     this.organisationService.getOrganisations().subscribe(data => {
-      this.organisationDataJson = data;
       this.organisations = data;
     })
   }
 
   retrieveUsers() {
     this.userService.getAllUsers().subscribe(data => {
-      this.usersDataJson = data;
       this.users = data;
-    })
-  }
-
-  retrieveCourses() {
-    this.courseService.getAllCourses().subscribe(data => {
-      this.courseDataJson = data;
-      this.courses = data;
     })
   }
 
   retrieveModules() {
     this.moduleService.getAllModules().subscribe(data => {
-      this.moduleDataJson = data;
       this.allModules = data;
     })
   }
 
   retrieveUserTypes() {
     this.userTypeService.getAllUserTypes().subscribe(data => {
-      this.userTypeDataJson = data;
       this.userTypes = data;
     })
   }

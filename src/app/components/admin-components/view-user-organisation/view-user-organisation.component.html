@@ -2,11 +2,11 @@
 
 <div class="container">
   <div class="form-group row">
-    <label for="moduleStudent" class="offset-2 col-2 col-form-label">Module</label>
+    <label for="courseStudent" class="offset-2 col-2 col-form-label">Organisation</label>
     <div class="col-6">
-      <select class="form-control" (change)="retrieveUsersFromModule($event.target.value)" type="text" id="moduleStudent" required>
-        <option value="undefined" disabled>Please, select the module</option>
-        <option *ngFor="let module of modules" [value]="module.module_id"> {{module.module_name}}</option>
+      <select class="form-control" (change)="retrieveUsersFromOrganisation($event.target.value)" type="text" id="courseStudent" required>
+        <option value="undefined" disabled>Please, select the organisation</option>
+        <option *ngFor="let organisation of organisations"  [value]="organisation.organisation_id"> {{organisation.organisation_name}}</option>
       </select>
     </div>
   </div>
@@ -19,7 +19,6 @@
         <th>Email</th>
         <th>Phone number</th>
         <th>Department</th>
-        <th>Organisation</th>
       </tr>
       <tr *ngFor="let item of users">
         <td>{{item.user_first_name}}</td>
@@ -27,7 +26,7 @@
         <td>{{item.user_email}}</td>
         <td>{{item.user_phone_number}}</td>
         <td>{{item.user_department}}</td>
-        <td>{{organisationName}}</td>
+
         <td *ngIf="!displayUsers">{{users}}</td>
       </tr>
     </table>

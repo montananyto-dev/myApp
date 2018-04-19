@@ -129,7 +129,6 @@ export class AddUserComponent implements OnInit {
     this.resetFormControlModule();
 
     for (let i = 0; i < this.selectedCourses.length; i++) {
-
       const courseControl = <FormArray>this.userForm.controls['courseModule'].get('course');
       courseControl.push(new FormControl(this.selectedCourses[i], Validators.required));
     }
@@ -181,9 +180,8 @@ export class AddUserComponent implements OnInit {
         this.resetFormControlCourse();
         this.resetFormControlModule();
         this.modulesMatchingCourses = null;
-
         this.showDivInserted();
-        //print out the data return by the server
+
         console.log(data);
       }, err => {
         console.log(err);
@@ -194,12 +192,9 @@ export class AddUserComponent implements OnInit {
 
 
   showDivInserted(): void {
-    //show box msg
     this.userInserted = true;
-    //wait 3 Seconds and hide
     setTimeout(function() {
       this.userInserted = false;
-      console.log(this.userInserted);
     }.bind(this),3000);
   }
 

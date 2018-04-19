@@ -6,19 +6,16 @@ import { HttpClient } from "@angular/common/http";
 export class CourseService {
 
   public courses;
-  public moduleApi = 'http://slim.kingstonse.org/view/course';
+  public courseApi = 'http://slim.kingstonse.org/view/course';
+  public courseByOrganisationIdApi = 'http://slim.kingstonse.org/view/courseByOrganisationId/';
 
   constructor(private http: HttpClient) { }
 
   getAllCourses(): Observable<any> {
-    return this.http.get(this.moduleApi);
+    return this.http.get(this.courseApi);
   }
 
-  setCourses(course) {
-    this.courses = course;
-
-  }
-  getCourses() {
-    return this.courses;
+  getCoursesByOrganisationId(organisationId): Observable<any> {
+    return this.http.get(this.courseByOrganisationIdApi + organisationId );
   }
 }

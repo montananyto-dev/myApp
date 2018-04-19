@@ -1,30 +1,17 @@
 <app-sidebar-admin></app-sidebar-admin>
 
 <div class="container">
-
   <div class="form-group row">
-
     <label for="courseStudent" class="offset-2 col-2 col-form-label">Course</label>
-
     <div class="col-6">
-
-      <select class="form-control" (change)="retrieveUsersFromCourse($event.target.value)" type="text"
-              id="courseStudent"
-              required>
-
+      <select class="form-control" (change)="retrieveUsersFromCourse($event.target.value)" type="text" id="courseStudent" required>
         <option value="undefined" disabled>Please, select the course</option>
-
         <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
-
       </select>
-
     </div>
-
   </div>
 
-
   <div *ngIf="displayUsers">
-
     <table class="table table-responsive table-sm">
       <tr>
         <th>First name</th>
@@ -32,21 +19,18 @@
         <th>Email</th>
         <th>Phone number</th>
         <th>Department</th>
+        <th>Organisation</th>
       </tr>
-
       <tr *ngFor="let item of users">
-
         <td>{{item.user_first_name}}</td>
         <td>{{item.user_last_name}}</td>
         <td>{{item.user_email}}</td>
         <td>{{item.user_phone_number}}</td>
         <td>{{item.user_department}}</td>
+        <td>{{organisationName}}</td>
         <td *ngIf="!displayUsers">{{users}}</td>
       </tr>
     </table>
-
   </div>
-
   <div class="span6" style="float: none;display: table;margin: 0 auto;" *ngIf="!displayUsers">{{users}}</div>
-
 </div>

@@ -17,17 +17,8 @@ export class AddCourseComponent implements OnInit {
   public addCourseApi = 'http://slim.kingstonse.org/add/course';
 
   courseForm: FormGroup;
-
-  usersDataJson: any;
-  courseDataJson: any;
-  moduleDataJson: any;
-  userTypeDataJson: any;
-  organisationDataJson: any;
-
   users;
-  allModules;
   courses;
-  userTypes;
   organisations;
   courseInserted:Boolean = false;
 
@@ -41,17 +32,14 @@ export class AddCourseComponent implements OnInit {
 
     this.courseForm= this.formBuilder.group({
 
+      organisationId : new FormControl(),
       courseName: new FormControl(),
-      courseDescription: new FormControl()
+      courseDescription: new FormControl(),
+      courseYear : new FormControl()
     })
   }
 
   ngOnInit() {
-
-    this.retrieveUsers();
-    this.retrieveCourses();
-    this.retrieveModules();
-    this.retrieveUserTypes();
     this.retrieveOrganisations();
   }
 
@@ -87,36 +75,8 @@ export class AddCourseComponent implements OnInit {
 
   retrieveOrganisations() {
     this.organisationService.getOrganisations().subscribe(data => {
-      this.organisationDataJson = data;
       this.organisations = data;
     })
   }
 
-  retrieveUsers() {
-    this.userService.getAllUsers().subscribe(data => {
-      this.usersDataJson = data;
-      this.users = data;
-    })
-  }
-
-  retrieveCourses() {
-    this.courseService.getAllCourses().subscribe(data => {
-      this.courseDataJson = data;
-      this.courses = data;
-    })
-  }
-
-  retrieveModules() {
-    this.moduleService.getAllModules().subscribe(data => {
-      this.moduleDataJson = data;
-      this.allModules = data;
-    })
-  }
-
-  retrieveUserTypes() {
-    this.userTypeService.getAllUserTypes().subscribe(data => {
-      this.userTypeDataJson = data;
-      this.userTypes = data;
-    })
-  }
 }
