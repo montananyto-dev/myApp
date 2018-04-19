@@ -22,17 +22,15 @@ export class ViewUserCourseComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveCourses();
-
   }
 
-  retrieveUsersFromCourse(courseId, projectId) {
+  retrieveUsersFromCourse(courseId) {
 
     this.http.get(this.viewUserByCourseApi + courseId).subscribe(object => {
       if (object.toLocaleString().includes("There are no users for this course")) {
         this.users = "There are no users for this course";
         this.displayUsers = false;
       } else {
-
         this.organisationId = object[0].organisation_id;
         this.retrieveOrganisationNameById();
         this.users = object;

@@ -68,9 +68,8 @@ export class ViewProjectDetailsComponent implements OnInit {
     this.getProjectTaskByStatus2();
     this.getProjectTaskByStatus3();
     this.getProjectTaskByStatus4();
-    //this.setObservableTaskStatus();   -------------------------->>>> DON'T FORGET
+    // this.setObservableTaskStatus(); ---------------------------------------------->DONT FORGET
   }
-
   redirectToTaskDetails(event){
     this.taskId = event.target.id.toString();
 

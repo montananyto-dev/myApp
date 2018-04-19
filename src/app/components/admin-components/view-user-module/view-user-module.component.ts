@@ -16,6 +16,7 @@ export class ViewUserModuleComponent implements OnInit {
   organisationId;
   viewUserByModuleApi = "http://slim.kingstonse.org/view/user/module/";
   displayUsers: boolean = false;
+  emptyArray = [];
 
   constructor(private moduleService: ModuleService, private http: HttpClient, private organisationService:OrganisationService) {
   }
@@ -51,11 +52,13 @@ export class ViewUserModuleComponent implements OnInit {
     })
   }
 
-
   retrieveModules() {
-    this.moduleService.getAllModules().subscribe(data => {
-      this.modules = data;
+    this.moduleService.getAllModules().subscribe(object => {
+      if (object.toLocaleString().includes("No modules are present in the system")) {
+        this.modules = this.emptyArray;
+      } else {
+        this.modules = object;
+      }
     })
   }
-
 }

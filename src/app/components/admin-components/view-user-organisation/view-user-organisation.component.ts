@@ -26,11 +26,9 @@ export class ViewUserOrganisationComponent implements OnInit {
     console.log('organisationId: ' + organisationId);
     this.http.get(this.viewUserByCourseApi + organisationId).subscribe(object => {
       if (object.toLocaleString().includes("There are no users for this organisation")) {
-
         this.users = "There are no users for this organisation";
         this.displayUsers = false;
       } else {
-
         this.users = object;
         this.displayUsers = true;
       }

@@ -1,11 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {CourseService} from "../../../services/admin-services/course/course.service";
-import {ModuleService} from "../../../services/admin-services/module/module.service";
 import {HttpClient} from "@angular/common/http";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {OrganisationService} from "../../../services/admin-services/organisation/organisation.service";
-import {UserService} from "../../../services/admin-services/user/user.service";
-import {UserTypeService} from "../../../services/admin-services/user-type/user-type.service";
 
 @Component({
   selector: 'app-add-module',
@@ -20,20 +17,13 @@ export class AddModuleComponent implements OnInit {
   moduleForm: FormGroup;
   modulesMatchingCourses;
   numberOfModules = 4;
-  users;
-  allModules;
   courses;
-  userTypes;
   organisations;
   moduleInserted:Boolean = false;
   emptyArray = [];
-  courseSelected:Boolean = false;
 
-  constructor(private userService: UserService,
-              private courseService: CourseService,
-              private userTypeService: UserTypeService,
+  constructor(private courseService: CourseService,
               private organisationService: OrganisationService,
-              private moduleService: ModuleService,
               private http: HttpClient,
               private formBuilder: FormBuilder) {
 
@@ -45,10 +35,6 @@ export class AddModuleComponent implements OnInit {
   };
 
   ngOnInit() {
-
-    this.retrieveUsers();
-    this.retrieveModules();
-    this.retrieveUserTypes();
     this.retrieveOrganisations();
   }
 
@@ -64,7 +50,6 @@ export class AddModuleComponent implements OnInit {
     const control = <FormArray>this.moduleForm.controls['module'];
     control.push(this.initModuleRow());
     this.numberOfModules = this.numberOfModules + 1;
-    console.log(this.numberOfModules);
   }
 
   deleteModule(index: number) {
@@ -76,7 +61,6 @@ export class AddModuleComponent implements OnInit {
   onSubmit = function (dataForm) {
 
     if (this.moduleForm.valid) {
-      console.log(JSON.stringify(dataForm));
       this.http.post(this.addModuleApi, JSON.stringify(dataForm),
         {
           headers: {
@@ -90,28 +74,29 @@ export class AddModuleComponent implements OnInit {
         this.showDivInserted();
       }, err => {
         console.log(err);
-
       });
     }
   };
 
   retrieveCoursesFromOrganisation(organisationId){
+
+    this.numberOfModules = 4;
     this.moduleForm.controls['course'].reset();
     this.resetFormArrayModules();
     this.retrieveCoursesByOrganisationId(organisationId);
   }
 
   retrieveModuleFromCourse(courseIds) {
-
+    this.numberOfModules = 4;
     this.resetFormArrayModules();
     this.http.get(this.apiUrl2 + '/' + courseIds).subscribe(object => {
       this.modulesMatchingCourses = object;
       this.numberOfModules = this.modulesMatchingCourses.length;
-      if (this.numberOfModules > 4) {
-        this.resetFormArrayModules();
-      }
+
       if (this.numberOfModules == 36) {
         this.numberOfModules = 0;
+      }   else if (this.numberOfModules > 4) {
+        this.resetFormArrayModules();
       }
     });
   }
@@ -136,15 +121,9 @@ export class AddModuleComponent implements OnInit {
       if (data.toLocaleString().includes("There are no courses for this organisation")) {
         this.courses = this.emptyArray;
       } else {
-
-        this.courseSelected = true;
-        console.log(data);
         this.courses = data;
-
       }
-
     })
-
   }
 
   retrieveOrganisations() {
@@ -153,21 +132,4 @@ export class AddModuleComponent implements OnInit {
     })
   }
 
-  retrieveUsers() {
-    this.userService.getAllUsers().subscribe(data => {
-      this.users = data;
-    })
-  }
-
-  retrieveModules() {
-    this.moduleService.getAllModules().subscribe(data => {
-      this.allModules = data;
-    })
-  }
-
-  retrieveUserTypes() {
-    this.userTypeService.getAllUserTypes().subscribe(data => {
-      this.userTypes = data;
-    })
-  }
 }

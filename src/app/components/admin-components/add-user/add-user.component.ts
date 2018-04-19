@@ -18,9 +18,8 @@ export class AddUserComponent implements OnInit {
 
   userForm: FormGroup;
   public addUserApi = 'http://slim.kingstonse.org/add/user';
-  public apiUrl2 = 'http://slim.kingstonse.org/return/specific';
+  public returnSpecificModuleApi = 'http://slim.kingstonse.org/return/specific/module';
 
-  selectionDataJson: any;
   users;
   allModules;
   modulesMatchingCourses;
@@ -29,7 +28,8 @@ export class AddUserComponent implements OnInit {
   organisations;
   userTypeChange: number = 0;
   selectedCourses: any[];
-  userInserted:Boolean = false;
+  userInserted: Boolean = false;
+  emptyArrayCourse = [];
 
   constructor(private userService: UserService,
               private courseService: CourseService,
@@ -59,7 +59,6 @@ export class AddUserComponent implements OnInit {
     })
   };
 
-
   passwordMatchValidator(password: FormGroup) {
     return password.get('passwordInput').value === password.get('passwordConfirm').value
       ? null : {'mismatch': true};
@@ -67,7 +66,6 @@ export class AddUserComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveUsers();
-    this.retrieveCourses();
     this.retrieveModules();
     this.retrieveUserTypes();
     this.retrieveOrganisations();
@@ -156,10 +154,14 @@ export class AddUserComponent implements OnInit {
   }
 
   retrieveModuleFromCourse(courseIds) {
-    return this.http.get(this.apiUrl2 + '/' + courseIds).subscribe(object => {
-      this.selectionDataJson = object;
-      this.modulesMatchingCourses = this.selectionDataJson;
-      this.modulesMatchingCourses = object;
+    return this.http.get(this.returnSpecificModuleApi + '/' + courseIds).subscribe(data => {
+
+      if (data.toLocaleString().includes("This course does not have any module")) {
+        this.modulesMatchingCourses = this.emptyArrayCourse;
+        this.userForm.controls['courseModule'].get('course').reset();
+      } else {
+        this.modulesMatchingCourses = data;
+      }
     });
   }
 
@@ -190,12 +192,11 @@ export class AddUserComponent implements OnInit {
     }
   };
 
-
   showDivInserted(): void {
     this.userInserted = true;
-    setTimeout(function() {
+    setTimeout(function () {
       this.userInserted = false;
-    }.bind(this),3000);
+    }.bind(this), 3000);
   }
 
   retrieveOrganisations() {
@@ -203,21 +204,31 @@ export class AddUserComponent implements OnInit {
       this.organisations = data;
     })
   }
+
   retrieveUsers() {
     this.userService.getAllUsers().subscribe(data => {
       this.users = data;
     })
   }
-  retrieveCourses() {
-    this.courseService.getAllCourses().subscribe(data => {
-      this.courses = data;
+
+  retrieveCourses(organisationId) {
+    this.courseService.getCoursesByOrganisationId(organisationId).subscribe(data => {
+
+      if (data.toLocaleString().includes("This course does not have any module")) {
+        this.users = this.emptyArrayCourse;
+        this.userForm.controls['courseModule'].get('course').reset();
+      } else {
+        this.courses = data;
+      }
     })
   }
+
   retrieveModules() {
     this.moduleService.getAllModules().subscribe(data => {
       this.allModules = data;
     })
   }
+
   retrieveUserTypes() {
     this.userTypeService.getAllUserTypes().subscribe(data => {
       this.userTypes = data;
