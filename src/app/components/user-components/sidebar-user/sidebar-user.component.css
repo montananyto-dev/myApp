@@ -155,3 +155,20 @@ a.list-group-item.d-inline-block.collapsed.empty {
   transition-timing-function: ease-out;
 }
 
+html{
+  min-height:100%;/* make sure it is at least as tall as the viewport */
+  position:relative;
+}
+body{
+  height:100%; /* force the BODY element to match the height of the HTML element */
+}
+#test{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  overflow:hidden;
+  z-index:-1; /* Remove this line if it's not going to be a background! */
+  background-color: red;
+}

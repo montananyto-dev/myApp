@@ -89,4 +89,9 @@ div .task .buttonLeft {
   cursor:pointer;
 }
 
+td.title {
+  height: 100vh;
+}
+
+
 

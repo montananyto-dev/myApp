@@ -5,24 +5,26 @@
   <h1 mat-dialog-title>{{taskDetails.task_title}}</h1>
   <div><strong>Due date : </strong>{{taskDetails.task_due_date}}</div>
   <div><strong>Creator : </strong>{{taskDetails.task_creator}}</div>
-  <div class="small">Date created: {{taskDetails.task_created_at}}</div>
+  <div class="small">Date created: {{taskDetails.task_created_at | date:'yyyy-MM-dd HH:mm:ss':'+0800'}}</div>
 </mat-dialog-content>
 &nbsp;
 <mat-dialog-content *ngFor="let comments of comment">
   <div><strong>Comment : </strong>{{comments.task_comment_description}}</div>
-  <div class="small">{{comments.task_comment_creator}} {{comments.task_comment_created_at}}</div>
+  <div class="small">{{comments.task_comment_creator}} {{comments.task_comment_created_at | date:'yyyy-MM-dd HH:mm:ss':'+0800'}}</div>
   &nbsp;
 </mat-dialog-content>
 
 
 &nbsp;
-<form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value)">
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value,$event)">
   <div class="small">Add comment</div>
   <mat-dialog-content>
-      <input matInput formControlName="comment" placeholder="Enter comment">
+    <input matInput formControlName="description" placeholder="Enter comment" required>
+    <input matInput formControlName="taskIdForm" [(ngModel)]="taskId" hidden>
+    <input matInput formControlName="creator" [(ngModel)]="userFullName" hidden>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button type="submit"><i class="fa fa-plus-circle"></i></button>
+    <button mat-button type="submit" [disabled]="commentForm.invalid"><i class="fa fa-plus-circle"></i></button>
     <button mat-button type="button" mat-dialog-close><i class="fa fa-minus-circle"></i></button>
   </mat-dialog-actions>
 </form>

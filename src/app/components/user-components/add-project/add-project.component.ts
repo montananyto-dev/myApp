@@ -24,6 +24,7 @@ export class AddProjectComponent implements OnInit {
   addProjectApi = "http://slim.kingstonse.org/add/project";
   button_class = "fa fa-plus";
   numberOfTeamMembers = 0;
+  projectInserted:Boolean = false;
 
   ngOnInit() {
     this.retrieveProjects();
@@ -34,11 +35,11 @@ export class AddProjectComponent implements OnInit {
               private user: UserService) {
 
     this.projectForm = this.formBuilder.group({
-      projectName: new FormControl(),
-      projectDescription: new FormControl(),
-      projectDueDate: new FormControl(),
-      projectDuration: new FormControl(),
-      projectCreator: new FormControl(),
+      projectName: new FormControl('',Validators.required),
+      projectDescription: new FormControl('',Validators.required),
+      projectDueDate: new FormControl('',Validators.required),
+      projectDuration: new FormControl('',Validators.required),
+      projectCreator: new FormControl('',Validators.required),
       teamMembers: this.formBuilder.array([],Validators.required),
       userId: new FormControl()
     })
@@ -100,6 +101,7 @@ export class AddProjectComponent implements OnInit {
 
         console.log(data);
         this.projectForm.reset();
+        this.projectInserted = true;
 
       }, err => {
         console.error(err);

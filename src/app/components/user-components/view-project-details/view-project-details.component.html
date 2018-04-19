@@ -5,7 +5,7 @@
 
   <div clas="container-fluid">
 
-  <table class="table table-responsive table-borderless ">
+  <table style="height: 1000px" class="table table-responsive table-borderless ">
     <thead>
     <tr >
       <td class="workflowTitle" *ngFor="let workflowStep of projectWorkflowStep">{{workflowStep.workflow_step_name}}</td>
@@ -13,8 +13,7 @@
     </thead>
     <tbody>
     <tr>
-
-      <td class="workflow1" >
+      <td class="title" >
         <div class="task" id="task1" *ngFor="let task1 of taskStatus1">
           {{task1.task_title}}
           <button  class="buttonRight" (click)="updateStatus(1,task1.task_status, task1.task_id,task1.project_id,'right')"><i class="fa fa-arrow-circle-o-right"></i></button>
