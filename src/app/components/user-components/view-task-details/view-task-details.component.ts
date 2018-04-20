@@ -21,7 +21,7 @@ export class ViewTaskDetailsComponent implements OnInit {
   user_first_name = this._currentUser.getUser_first_name();
   user_last_name = this._currentUser.getUser_last_name();
   userFullName = this.user_first_name +" "+ this.user_last_name;
-  addTaskCommentApi = 'http://slim.kingstonse.org/add/comment';
+  addTaskCommentApi = 'http://slim.kingstonse.org/add/task/comment';
   emptyArray = [ ];
 
   constructor(private taskService: ProjectTaskService,

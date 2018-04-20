@@ -75,6 +75,7 @@ div .task .buttonLeft {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   margin-bottom: -5px;
+  border-radius:5px;
 }
 .fa-arrow-circle-o-left:before{
   font-size: 20px;
@@ -94,4 +95,19 @@ td.title {
 }
 
 
-/*------------------------------------New Navbar------------------------------------*/
+/*------------------------------------Submenu------------------------------------*/
+
+
+.subMenu{
+  background-color: #f9f9f9;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.subMenu a {
+  cursor:pointer;
+  margin-right:20px;
+  margin-left:20px;
+}
+.subMenu a:hover {
+  background-color: lightgrey;
+}

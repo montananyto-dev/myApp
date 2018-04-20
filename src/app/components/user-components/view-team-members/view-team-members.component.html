@@ -1,0 +1,8 @@
+
+<button mat-button type="button" class="close" mat-dialog-close><i class="fa fa-window-close" aria-hidden="true"></i>
+</button>
+
+<mat-dialog-content *ngFor="let teamMember of teamMembers, let i = index">
+  <div><strong>Team member {{i + 1}} </strong></div>
+  <div>{{teamMember.user_first_name}} {{teamMember.user_last_name}}</div><br>
+</mat-dialog-content>

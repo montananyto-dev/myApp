@@ -12,7 +12,9 @@ import {Observable} from "rxjs/Observable";
 import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {ViewTaskDetailsComponent} from "../view-task-details/view-task-details.component";
-import {Overlay} from "@angular/cdk/overlay";
+import {ViewTeamMembersComponent} from "../view-team-members/view-team-members.component";
+import {ViewProjectMoreDetailsComponent} from "../view-project-more-details/view-project-more-details.component";
+import {ViewProjectCommentComponent} from "../view-project-comment/view-project-comment.component";
 
 
 
@@ -26,11 +28,7 @@ export class ViewProjectDetailsComponent implements OnInit {
   actualProject:any;
   projectId: string;
   taskId:string;
-  projectGoal: any;
-  projectObjective: any;
   projectWorkflowStep: any;
-  projectTeamMembers:any;
-  projectComments:any;
   projectTask: any;
   taskStatus1: any;
   taskStatus2: any;
@@ -39,13 +37,14 @@ export class ViewProjectDetailsComponent implements OnInit {
   emptyArray = [];
 
   viewTaskDetails: MatDialogRef<ViewTaskDetailsComponent>;
+  viewTeamMembers: MatDialogRef<ViewTeamMembersComponent>;
+  viewProjectDetails:MatDialogRef<ViewProjectMoreDetailsComponent>;
+  viewProjectComments:MatDialogRef<ViewProjectCommentComponent>;
 
   updateTaskStatusApi = "http://slim.kingstonse.org/update/task/";
 
   constructor(private route: ActivatedRoute,
               private project: UserProjectService,
-              private goalService: ProjectGoalService,
-              private objectiveService: ProjectObjectiveService,
               private commentService: ProjectCommentService,
               private teamMembersService: UserProjectTeamMembersService,
               private workflowStepService: ProjectWorkflowStepService,
@@ -58,12 +57,8 @@ export class ViewProjectDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.getProject();
-    this.getProjectGoal();
-    this.getProjectObjective();
     this.getProjectWorkflowStep();
     this.getProjectTask();
-    this.getProjectComment();
-    this.getProjectTeamMember();
     this.getProjectTaskByStatus1();
     this.getProjectTaskByStatus2();
     this.getProjectTaskByStatus3();
@@ -74,13 +69,42 @@ export class ViewProjectDetailsComponent implements OnInit {
     this.taskId = event.target.id.toString();
 
     this.viewTaskDetails = this.dialog.open(ViewTaskDetailsComponent , {
-      width: '400px',
-      height: '400px',
+      width: '450px',
+      height: '450px',
     });
     this.viewTaskDetails.componentInstance.projectId = this.projectId;
     this.viewTaskDetails.componentInstance.taskId = this.taskId;
 
   }
+
+  redirectToTeamMembers(){
+
+    this.viewTeamMembers = this.dialog.open(ViewTeamMembersComponent , {
+      width: '450px',
+      height: '450px',
+    });
+    this.viewTeamMembers.componentInstance.projectId = this.projectId;
+
+  }
+
+  redirectToProjectDetails(){
+    this.viewProjectDetails = this.dialog.open(ViewProjectMoreDetailsComponent , {
+      width: '450px',
+      height: '450px',
+    });
+    this.viewProjectDetails.componentInstance.projectId = this.projectId;
+  }
+
+  redirectToProjectComments(){
+    this.viewProjectComments = this.dialog.open(ViewProjectCommentComponent , {
+      width: '450px',
+      height: '450px',
+    });
+    this.viewProjectComments.componentInstance.projectId = this.projectId;
+  }
+
+
+
   setObservableTaskStatus(){
 
     IntervalObservable.create(10000)
@@ -136,18 +160,6 @@ export class ViewProjectDetailsComponent implements OnInit {
     });
   }
 
-  getProjectGoal() {
-    this.goalService.getGoalByProjectId(this.projectId).subscribe(goal => {
-      this.projectGoal = goal;
-    });
-  }
-
-  getProjectObjective() {
-    this.objectiveService.getObjectiveByProjectId(this.projectId).subscribe(objective => {
-      this.projectObjective = objective;
-    })
-  }
-
   getProjectWorkflowStep() {
     this.workflowStepService.getWorkflowStepByProjectId(this.projectId).subscribe(workflowStep => {
       this.projectWorkflowStep = workflowStep;
@@ -158,20 +170,6 @@ export class ViewProjectDetailsComponent implements OnInit {
     this.taskService.getTaskByProjectId(this.projectId).subscribe(tasks => {
       this.projectTask = tasks;
     })
-  }
-
-  getProjectTeamMember(){
-    this.teamMembersService.getTeamMembersByProjectId(this.projectId).subscribe(teamMembers=>{
-      this.projectTeamMembers = teamMembers;
-    })
-
-  }
-
-  getProjectComment(){
-    this.commentService.getCommentByProjectId(this.projectId).subscribe(comments=>{
-      this.projectComments = comments;
-    })
-
   }
 
   getProjectTaskByStatus1() {
@@ -215,4 +213,5 @@ export class ViewProjectDetailsComponent implements OnInit {
       }
     })
   }
+
 }

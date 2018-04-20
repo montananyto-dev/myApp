@@ -1,0 +1,24 @@
+<button mat-button type="button" class="close" mat-dialog-close><i class="fa fa-window-close" aria-hidden="true"></i>
+</button>
+
+
+<mat-dialog-content *ngFor="let comments of projectComments">
+  <div><strong>Comment : </strong>{{comments.project_comment_description}}</div>
+  <div class="small">{{comments.project_comment_creator}} {{comments.project_comment_created_at | date:'yyyy-MM-dd HH:mm:ss':'+0800'}}</div>
+  &nbsp;
+</mat-dialog-content>
+
+
+&nbsp;
+<form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value,$event)">
+  <div class="small">Add comment</div>
+  <mat-dialog-content>
+    <input matInput formControlName="description" placeholder="Enter comment" required>
+    <input matInput formControlName="projectIdForm" [(ngModel)]="projectId" hidden>
+    <input matInput formControlName="creator" [(ngModel)]="userFullName" hidden>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button type="submit" [disabled]="commentForm.invalid"><i class="fa fa-plus-circle"></i></button>
+    <button mat-button type="button" mat-dialog-close><i class="fa fa-minus-circle"></i></button>
+  </mat-dialog-actions>
+</form>

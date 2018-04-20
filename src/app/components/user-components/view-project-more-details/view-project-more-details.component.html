@@ -1,0 +1,18 @@
+
+
+<button mat-button type="button" class="close" mat-dialog-close><i class="fa fa-window-close" aria-hidden="true"></i>
+</button>
+
+
+<mat-dialog-content *ngFor="let goal of projectGoal, let i = index">
+  <div><strong>Goal </strong></div>
+  <div>{{goal.goal_description}} </div>
+  <div class="small">Date created: {{goal.goal_created_at | date:'yyyy-MM-dd HH:mm:ss':'+0800'}}</div><br>
+</mat-dialog-content>
+
+
+<mat-dialog-content *ngFor="let objective of projectObjective, let i = index">
+  <div><strong>Objective {{i + 1}} </strong></div>
+  <div>{{objective.objective_description}} </div>
+  <div class="small">Date created: {{objective.objective_created_at | date:'yyyy-MM-dd HH:mm:ss':'+0800'}}</div><br>
+</mat-dialog-content>

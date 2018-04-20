@@ -51,6 +51,9 @@ import {ViewTaskCommentsService} from "./services/user_services/user-view-task-c
 import {ViewUserOrganisationComponent} from './components/admin-components/view-user-organisation/view-user-organisation.component';
 import { ViewCourseOrganisationComponent } from './components/admin-components/view-course-organisation/view-course-organisation.component';
 import { ViewModuleOrganisationComponent } from './components/admin-components/view-module-organisation/view-module-organisation.component';
+import { ViewTeamMembersComponent } from './components/user-components/view-team-members/view-team-members.component';
+import { ViewProjectMoreDetailsComponent } from './components/user-components/view-project-more-details/view-project-more-details.component';
+import { ViewProjectCommentComponent } from './components/user-components/view-project-comment/view-project-comment.component';
 
 const appRoutes: Routes = [
 
@@ -114,10 +117,16 @@ const appRoutes: Routes = [
     ViewTaskDetailsComponent,
     ViewUserOrganisationComponent,
     ViewCourseOrganisationComponent,
-    ViewModuleOrganisationComponent
+    ViewModuleOrganisationComponent,
+    ViewTeamMembersComponent,
+    ViewProjectMoreDetailsComponent,
+    ViewProjectCommentComponent
 
   ], entryComponents: [
-    ViewTaskDetailsComponent
+    ViewTaskDetailsComponent,
+    ViewTeamMembersComponent,
+    ViewProjectMoreDetailsComponent,
+    ViewProjectCommentComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
