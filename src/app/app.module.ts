@@ -35,7 +35,6 @@ import {UserProjectService} from "./services/user_services/user-project/user-pro
 import {ViewAllProjectComponent} from './components/user-components/view-all-project/view-all-project.component';
 import {ProfileUserComponent} from './components/user-components/profile-user/profile-user.component';
 import {ProfileAdminComponent} from './components/admin-components/profile-admin/profile-admin.component';
-import {ViewProjectComponent} from './components/user-components/view-project/view-project.component';
 import {ViewUserModuleComponent} from './components/admin-components/view-user-module/view-user-module.component';
 import {ViewProjectDetailsComponent} from './components/user-components/view-project-details/view-project-details.component';
 import {ProjectGoalService} from "./services/user_services/user-project-goal/project-goal.service";
@@ -59,8 +58,8 @@ const appRoutes: Routes = [
 
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginFormComponent},
-  {
-    path: 'home', /* canActivate: [AuthenticationGuard],  access to home page once logged in */
+  {path: 'home',
+    // canActivate: [AuthenticationGuard],
     component: HomeAdminComponent
   }, {path: 'add/user', component: AddUserComponent},
   {path: 'view/user', component: ViewUserComponent},
@@ -80,7 +79,6 @@ const appRoutes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'user/profile', component: ProfileUserComponent},
   {path: 'admin/profile', component: ProfileAdminComponent},
-  {path: 'view/project', component: ViewProjectComponent},
   {path: 'view/project/details/:projectId', component: ViewProjectDetailsComponent},
   {path: 'view/task/details/:projectId/:taskId', component: ViewTaskDetailsComponent},
   {path: 'view/userOrganisation', component: ViewUserOrganisationComponent}
@@ -111,7 +109,6 @@ const appRoutes: Routes = [
     ViewAllProjectComponent,
     ProfileUserComponent,
     ProfileAdminComponent,
-    ViewProjectComponent,
     ViewUserModuleComponent,
     ViewProjectDetailsComponent,
     ViewTaskDetailsComponent,

@@ -1,22 +1,17 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
 import {UserProjectService} from "../../../services/user_services/user-project/user-project.service";
-import {ProjectGoalService} from "../../../services/user_services/user-project-goal/project-goal.service";
-import {ProjectObjectiveService} from "../../../services/user_services/user-project-objective/project-objective.service";
 import {ProjectWorkflowStepService} from "../../../services/user_services/user-project-workflow-step/project-workflow-step.service";
 import {ProjectTaskService} from "../../../services/user_services/user_project-task/project-task.service";
 import {HttpClient} from "@angular/common/http";
 import {ProjectCommentService} from "../../../services/user_services/user-project-comment/project-comment.service";
 import {UserProjectTeamMembersService} from "../../../services/user_services/user-project-team-members/user-project-team-members.service";
-import {Observable} from "rxjs/Observable";
 import {IntervalObservable} from "rxjs/observable/IntervalObservable";
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {MatDialog, MatDialogRef} from "@angular/material";
 import {ViewTaskDetailsComponent} from "../view-task-details/view-task-details.component";
 import {ViewTeamMembersComponent} from "../view-team-members/view-team-members.component";
 import {ViewProjectMoreDetailsComponent} from "../view-project-more-details/view-project-more-details.component";
 import {ViewProjectCommentComponent} from "../view-project-comment/view-project-comment.component";
-
-
 
 @Component({
   selector: 'app-view-project-details',
@@ -63,9 +58,10 @@ export class ViewProjectDetailsComponent implements OnInit {
     this.getProjectTaskByStatus2();
     this.getProjectTaskByStatus3();
     this.getProjectTaskByStatus4();
-    // this.setObservableTaskStatus(); ---------------------------------------------->DONT FORGET
+    this.setObservableTaskStatus();
   }
-  redirectToTaskDetails(event){
+  showViewTaskDetails(event){
+
     this.taskId = event.target.id.toString();
 
     this.viewTaskDetails = this.dialog.open(ViewTaskDetailsComponent , {
@@ -77,7 +73,7 @@ export class ViewProjectDetailsComponent implements OnInit {
 
   }
 
-  redirectToTeamMembers(){
+  showViewTeamMembers(){
 
     this.viewTeamMembers = this.dialog.open(ViewTeamMembersComponent , {
       width: '450px',
@@ -87,7 +83,7 @@ export class ViewProjectDetailsComponent implements OnInit {
 
   }
 
-  redirectToProjectDetails(){
+  showViewProjectDetails(){
     this.viewProjectDetails = this.dialog.open(ViewProjectMoreDetailsComponent , {
       width: '450px',
       height: '450px',
@@ -95,15 +91,13 @@ export class ViewProjectDetailsComponent implements OnInit {
     this.viewProjectDetails.componentInstance.projectId = this.projectId;
   }
 
-  redirectToProjectComments(){
+  showViewProjectComments(){
     this.viewProjectComments = this.dialog.open(ViewProjectCommentComponent , {
       width: '450px',
       height: '450px',
     });
     this.viewProjectComments.componentInstance.projectId = this.projectId;
   }
-
-
 
   setObservableTaskStatus(){
 
@@ -156,7 +150,9 @@ export class ViewProjectDetailsComponent implements OnInit {
 
   getProject() {
     this.project.getProjectByProjectId(this.projectId).subscribe(project => {
+      console.log(project);
         this.actualProject = project;
+        console.log(this.actualProject);
     });
   }
 

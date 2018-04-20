@@ -1,9 +1,12 @@
 <app-sidebar-user></app-sidebar-user>
 
 <div class="subMenu">
-  <a (click)="redirectToTeamMembers() ">View team members</a>
-  <a (click)="redirectToProjectDetails() ">View project details</a>
-  <a (click)="redirectToProjectComments() ">View project comments</a>
+  <a (click)="showViewTeamMembers() ">View team members</a>
+  <a (click)="showViewProjectDetails() ">View project details</a>
+  <a (click)="showViewProjectComments() ">View project comments</a>
+
+  <span *ngFor="let project of actualProject" ><strong>Project : {{project.project_name}}</strong></span>
+
 </div>
 
 
@@ -21,7 +24,7 @@
         <div class="task" id="task1" *ngFor="let task1 of taskStatus1">
           {{task1.task_title}}
           <button  class="buttonRight" (click)="updateStatus(1,task1.task_status, task1.task_id,task1.project_id,'right')"><i class="fa fa-arrow-circle-o-right"></i></button>
-          <button class="taskDetails" id="{{task1.task_id}}" (click)="redirectToTaskDetails($event)" >View details</button>
+          <button class="taskDetails" id="{{task1.task_id}}" (click)="showViewTaskDetails($event)" >View details</button>
         </div>
       </td>
 
@@ -30,7 +33,7 @@
           <button class="buttonLeft"  (click)="updateStatus(2,task2.task_status, task2.task_id,task2.project_id,'left')"><i class="fa fa-arrow-circle-o-left"></i></button>
           {{task2.task_title}}
           <button class="buttonRight" (click)="updateStatus(2,task2.task_status, task2.task_id,task2.project_id,'right')"><i class="fa fa-arrow-circle-o-right"></i></button>
-        <button class="taskDetails" id="{{task2.task_id}}" (click)="redirectToTaskDetails($event)"  >View details</button>
+        <button class="taskDetails" id="{{task2.task_id}}" (click)="showViewTaskDetails($event)"  >View details</button>
         </div>
       </td>
 
@@ -39,7 +42,7 @@
           <button class="buttonLeft" (click)="updateStatus(3,task3.task_status, task3.task_id,task3.project_id,'left')"><i class="fa fa-arrow-circle-o-left"></i></button>
           {{task3.task_title}}
           <button class="buttonRight" (click)="updateStatus(3,task3.task_status, task3.task_id,task3.project_id,'right')"><i class="fa fa-arrow-circle-o-right"></i></button>
-          <button class="taskDetails" id="{{task3.task_id}}" (click)="redirectToTaskDetails($event)"  >View details</button>
+          <button class="taskDetails" id="{{task3.task_id}}" (click)="showViewTaskDetails($event)"  >View details</button>
         </div>
       </td>
 
@@ -47,7 +50,7 @@
         <div class="task" id ="task4" *ngFor="let task4 of taskStatus4">
           <button class="buttonLeft" (click)="updateStatus(4,task4.task_status, task4.task_id,task4.project_id,'left')"><i class="fa fa-arrow-circle-o-left"></i></button>
           {{task4.task_title}}
-          <button class="taskDetails" id="{{task4.task_id}}" (click)="redirectToTaskDetails($event)"  >View details</button>
+          <button class="taskDetails" id="{{task4.task_id}}" (click)="showViewTaskDetails($event)"  >View details</button>
         </div>
       </td>
     </tr>
