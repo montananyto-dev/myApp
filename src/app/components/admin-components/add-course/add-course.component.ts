@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CourseService} from "../../../services/admin-services/course/course.service";
 import {ModuleService} from "../../../services/admin-services/module/module.service";
 import {HttpClient} from "@angular/common/http";
@@ -17,10 +17,10 @@ export class AddCourseComponent implements OnInit {
   public addCourseApi = 'http://slim.kingstonse.org/add/course';
 
   courseForm: FormGroup;
-  users;
-  courses;
-  organisations;
-  courseInserted:Boolean = false;
+  users: any;
+  courses: any;
+  organisations: any;
+  courseInserted: boolean = false;
 
   constructor(private userService: UserService,
               private courseService: CourseService,
@@ -30,12 +30,12 @@ export class AddCourseComponent implements OnInit {
               private http: HttpClient,
               private formBuilder: FormBuilder) {
 
-    this.courseForm= this.formBuilder.group({
+    this.courseForm = this.formBuilder.group({
 
-      organisationId : new FormControl(),
+      organisationId: new FormControl(),
       courseName: new FormControl(),
       courseDescription: new FormControl(),
-      courseYear : new FormControl()
+      courseYear: new FormControl()
     })
   }
 
@@ -68,9 +68,9 @@ export class AddCourseComponent implements OnInit {
 
   showDivInserted(): void {
     this.courseInserted = true;
-    setTimeout(function() {
+    setTimeout(function () {
       this.courseInserted = false;
-    }.bind(this),3000);
+    }.bind(this), 3000);
   }
 
   retrieveOrganisations() {
@@ -78,5 +78,4 @@ export class AddCourseComponent implements OnInit {
       this.organisations = data;
     })
   }
-
 }

@@ -3,6 +3,7 @@ import {CourseService} from "../../../services/admin-services/course/course.serv
 import {HttpClient} from "@angular/common/http";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {OrganisationService} from "../../../services/admin-services/organisation/organisation.service";
+import {ModuleService} from "../../../services/admin-services/module/module.service";
 
 @Component({
   selector: 'app-add-module',
@@ -12,20 +13,21 @@ import {OrganisationService} from "../../../services/admin-services/organisation
 export class AddModuleComponent implements OnInit {
 
   private addModuleApi = 'http://slim.kingstonse.org/add/module';
-  private apiUrl2 = 'http://slim.kingstonse.org/return/specific';
 
   moduleForm: FormGroup;
-  modulesMatchingCourses;
+  modulesMatchingCourses:any;
   numberOfModules = 4;
-  courses;
-  organisations;
+  courses:any;
+  organisations:any;
   moduleInserted:Boolean = false;
   emptyArray = [];
+  defaultValue ="test";
 
   constructor(private courseService: CourseService,
               private organisationService: OrganisationService,
               private http: HttpClient,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private moduleService: ModuleService) {
 
     this.moduleForm = this.formBuilder.group({
       organisation:new FormControl(),
@@ -86,10 +88,11 @@ export class AddModuleComponent implements OnInit {
     this.retrieveCoursesByOrganisationId(organisationId);
   }
 
-  retrieveModuleFromCourse(courseIds) {
+  retrieveModuleFromCourse(courseId) {
+
     this.numberOfModules = 4;
     this.resetFormArrayModules();
-    this.http.get(this.apiUrl2 + '/' + courseIds).subscribe(object => {
+    this.moduleService.getModuleByCourseIds(courseId).subscribe(object => {
       this.modulesMatchingCourses = object;
       this.numberOfModules = this.modulesMatchingCourses.length;
 

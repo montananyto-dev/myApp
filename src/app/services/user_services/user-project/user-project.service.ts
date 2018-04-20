@@ -6,8 +6,8 @@ import {UserModelService} from "../user-model/user-model.service";
 @Injectable()
 export class UserProjectService {
 
-  public projectUserIDApi = 'http://slim.kingstonse.org/view/project';
-  public projectProjectIDApi = 'http://slim.kingstonse.org/view/project/projectID';
+  public projectUserIDApi = 'http://slim.kingstonse.org/view/project/';
+  public projectProjectIDApi = 'http://slim.kingstonse.org/view/project/projectID/';
 
   public user_id = this._currentUser.getUser_id();
 
@@ -16,11 +16,11 @@ export class UserProjectService {
   }
   getProjectByUserId(): Observable<any> {
 
-    return this.http.get(this.projectUserIDApi+"/"+this.user_id);
+    return this.http.get(this.projectUserIDApi + this.user_id);
   }
 
   getProjectByProjectId(projectID:string): Observable<any>{
-    return this.http.get(this.projectProjectIDApi+"/"+projectID);
+    return this.http.get(this.projectProjectIDApi + projectID);
   }
 
 }

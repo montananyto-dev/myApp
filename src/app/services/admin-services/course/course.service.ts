@@ -5,14 +5,13 @@ import { HttpClient } from "@angular/common/http";
 @Injectable()
 export class CourseService {
 
-  public courses;
-  public courseApi = 'http://slim.kingstonse.org/view/course';
+  public viewAllCoursesApi = 'http://slim.kingstonse.org/view/course';
   public courseByOrganisationIdApi = 'http://slim.kingstonse.org/view/courseByOrganisationId/';
 
   constructor(private http: HttpClient) { }
 
   getAllCourses(): Observable<any> {
-    return this.http.get(this.courseApi);
+    return this.http.get(this.viewAllCoursesApi);
   }
 
   getCoursesByOrganisationId(organisationId): Observable<any> {

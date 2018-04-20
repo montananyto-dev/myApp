@@ -15,10 +15,6 @@ export class OrganisationService {
     return this.http.get(this.organisationApi);
   }
 
-  setOrganisations(organisation) {
-    this.organisations = organisation;
-  }
-
   getOrganisationNameById(organisationID){
     return this.http.get(this.organisationNameByIdApi+organisationID);
   }

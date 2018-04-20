@@ -11,9 +11,7 @@ export class ViewUserOrganisationComponent implements OnInit {
 
   organisations:any;
   users:any;
-
   viewUserByCourseApi = "http://slim.kingstonse.org/view/user/organisation/";
-
   displayUsers: boolean = false;
 
   constructor(private organisationService: OrganisationService,private http: HttpClient) { }

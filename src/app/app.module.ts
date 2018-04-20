@@ -49,6 +49,8 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatCommonModule, MatDialogModule,} from "@angular/material";
 import {ViewTaskCommentsService} from "./services/user_services/user-view-task-comment/view-task-comments.service";
 import {ViewUserOrganisationComponent} from './components/admin-components/view-user-organisation/view-user-organisation.component';
+import { ViewCourseOrganisationComponent } from './components/admin-components/view-course-organisation/view-course-organisation.component';
+import { ViewModuleOrganisationComponent } from './components/admin-components/view-module-organisation/view-module-organisation.component';
 
 const appRoutes: Routes = [
 
@@ -61,7 +63,9 @@ const appRoutes: Routes = [
   {path: 'view/user', component: ViewUserComponent},
   {path: 'view/organisation', component: ViewOrganisationComponent},
   {path: 'view/module', component: ViewModuleComponent},
+  {path: 'view/module/organisation', component: ViewModuleOrganisationComponent},
   {path: 'view/course', component: ViewCourseComponent},
+  {path: 'view/course/organisation', component: ViewCourseOrganisationComponent},
   {path: 'add/organisation', component: AddOrganisationComponent},
   {path: 'add/module', component: AddModuleComponent},
   {path: 'add/course', component: AddCourseComponent},
@@ -108,7 +112,9 @@ const appRoutes: Routes = [
     ViewUserModuleComponent,
     ViewProjectDetailsComponent,
     ViewTaskDetailsComponent,
-    ViewUserOrganisationComponent
+    ViewUserOrganisationComponent,
+    ViewCourseOrganisationComponent,
+    ViewModuleOrganisationComponent
 
   ], entryComponents: [
     ViewTaskDetailsComponent

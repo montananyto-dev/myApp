@@ -1,0 +1,32 @@
+<app-sidebar-admin></app-sidebar-admin>
+
+<div class="container">
+  <div class="form-group row">
+    <label for="courseStudent" class="offset-2 col-2 col-form-label">Organisation</label>
+    <div class="col-6">
+      <select class="form-control" (change)="retrieveCoursesFromOrganisation($event.target.value)" type="text" id="courseStudent" required>
+        <option value="undefined" disabled>Please, select the organisation</option>
+        <option *ngFor="let organisation of organisations"  [value]="organisation.organisation_id"> {{organisation.organisation_name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div *ngIf="displayCourses">
+    <table class="table table-responsive table-sm">
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Year</th>
+      </tr>
+      <tr *ngFor="let item of courses">
+        <td>{{ item.course_name }}</td>
+        <td>{{ item.course_description }}</td>
+        <td>{{ item.course_year}}</td>
+        <td *ngIf="!displayCourses">{{courses}}</td>
+      </tr>
+    </table>
+  </div>
+  <div class="span6" style="float: none;display: table;margin: 0 auto;" *ngIf="!displayCourses">{{courses}}</div>
+</div>
+
+

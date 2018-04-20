@@ -10,7 +10,7 @@
         <label for="courseStudent" class="offset-1 col-2 col-form-label">Organisation</label>
         <div class="col-6">
           <select  formControlName="organisation" class="form-control" (change)="retrieveCoursesFromOrganisation($event.target.value)" type="text" id="courseStudent" required>
-            <option value="undefined" disabled>Please, select the organisation</option>
+            <option value=null disabled>Please, select the organisation</option>
             <option  *ngFor="let organisation of organisations"  [value]="organisation.organisation_id"> {{organisation.organisation_name}}</option>
           </select>
         </div>
@@ -21,7 +21,7 @@
         <div class="col-6">
           <select #course class="form-control" formControlName="course"
                   (change)="retrieveModuleFromCourse(course.value)" type="text" id="course" required>
-            <option value="undefined" disabled>Please, select another organisation</option>
+            <option value=null disabled>Please, select the course</option>
             <option *ngFor="let course of courses" [value]="course.course_id"> {{course.course_name}}</option>
           </select>
         </div>
