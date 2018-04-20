@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA, OnInit} from '@angular/core';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {Router, RouterModule, Routes} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {NavbarAdminComponent} from './components/admin-components/navbar-admin/navbar-admin.component';
 import {SidebarAdminComponent} from './components/admin-components/sidebar-admin/sidebar-admin.component';

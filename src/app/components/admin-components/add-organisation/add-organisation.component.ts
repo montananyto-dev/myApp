@@ -68,8 +68,6 @@ export class AddOrganisationComponent implements OnInit {
 
     this.organisation.getOrganisations().subscribe(data => {
       this.organisationDataJson = data;
-      this.organisation.setOrganisations(data);
-
     })}
 
 }
