@@ -54,8 +54,8 @@ export class AddUserComponent implements OnInit {
         passwordConfirm: new FormControl('', Validators.pattern('(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}')),// "Password" that must contain 8 or more characters with at least one number, and one uppercase and lowercase letter
       }, {validator: this.passwordMatchValidator}),
       email: new FormControl('', Validators.email),
-      phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$')),
-      department: new FormControl('', Validators.pattern('^[a-zA-Z]{5,25}$'))
+      phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$'))
+
     })
   };
 
@@ -176,11 +176,10 @@ export class AddUserComponent implements OnInit {
         }).subscribe
       (data => {
         //reset the form after submission
-        this.userForm.reset();
-        this.retrieveUsers();
-        this.userForm.controls['courseModule'].disable();
         this.resetFormControlCourse();
         this.resetFormControlModule();
+        this.userForm.reset();
+        this.retrieveUsers();
         this.modulesMatchingCourses = null;
         this.showDivInserted();
 

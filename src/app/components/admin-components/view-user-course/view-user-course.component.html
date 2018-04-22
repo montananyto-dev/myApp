@@ -18,7 +18,6 @@
         <th>last name</th>
         <th>Email</th>
         <th>Phone number</th>
-        <th>Department</th>
         <th>Organisation</th>
       </tr>
       <tr *ngFor="let item of users">
@@ -26,7 +25,6 @@
         <td>{{item.user_last_name}}</td>
         <td>{{item.user_email}}</td>
         <td>{{item.user_phone_number}}</td>
-        <td>{{item.user_department}}</td>
         <td>{{organisationName}}</td>
         <td *ngIf="!displayUsers">{{users}}</td>
       </tr>

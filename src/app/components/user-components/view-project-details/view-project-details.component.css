@@ -108,6 +108,6 @@ td.title {
   background-color: lightgrey;
 }
 .subMenu span {
-  float: right;
-  margin-right:10px;
+  float: left;
+  margin-left:10px;
 }

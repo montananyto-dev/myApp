@@ -103,10 +103,12 @@ export class ViewProjectDetailsComponent implements OnInit {
 
     IntervalObservable.create(10000)
       .subscribe(() => {
+        console.log("update task status");
         this.getProjectTaskByStatus1();
         this.getProjectTaskByStatus2();
         this.getProjectTaskByStatus3();
         this.getProjectTaskByStatus4();
+
       });
 
   }
@@ -164,6 +166,7 @@ export class ViewProjectDetailsComponent implements OnInit {
 
   getProjectTask() {
     this.taskService.getTaskByProjectId(this.projectId).subscribe(tasks => {
+      console.log(tasks);
       this.projectTask = tasks;
     })
   }

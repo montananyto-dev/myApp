@@ -5,3 +5,14 @@
 .ng-invalid[required] {
   border: 1px solid #a90614;
 }
+
+
+.table-responsive {
+  display: block;
+  width: 50%;
+  overflow-x: initial;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  margin:auto;
+  font-size: 15px;
+}
+

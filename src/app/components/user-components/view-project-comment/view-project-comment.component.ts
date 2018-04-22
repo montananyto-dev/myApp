@@ -3,6 +3,7 @@ import {ProjectCommentService} from "../../../services/user_services/user-projec
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {UserModelService} from "../../../services/user_services/user-model/user-model.service";
+import {IntervalObservable} from "rxjs/observable/IntervalObservable";
 
 @Component({
   selector: 'app-view-project-comment',
@@ -32,6 +33,16 @@ export class ViewProjectCommentComponent implements OnInit {
   ngOnInit(
   ) {
     this.getProjectComment();
+    this.setObservableComments();
+  }
+
+  setObservableComments(){
+
+    IntervalObservable.create(10000)
+      .subscribe(() => {
+        this.getProjectComment();
+        console.log("update project comment");
+      });
   }
 
   onSubmit(dataForm){
@@ -45,7 +56,6 @@ export class ViewProjectCommentComponent implements OnInit {
       }).subscribe
     (data => {
 
-      this.getProjectComment();
       this.commentForm.reset();
       console.log(data);
 

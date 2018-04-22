@@ -35,7 +35,6 @@ export class EditUserComponent implements OnInit {
   currentUserLastName;
   currentUserEmail;
   currentUserPhoneNumber;
-  currentUserDepartment;
 
   editUserApi  = "http://slim.kingstonse.org/edit/user";
 
@@ -47,8 +46,7 @@ export class EditUserComponent implements OnInit {
         userFirstNameForm: this.formBuilder.array([]),
         userLastNameForm: this.formBuilder.array([]),
         userEmailForm: this.formBuilder.array([]),
-        userPhoneNumberForm: this.formBuilder.array([]),
-        userDepartmentForm: this.formBuilder.array([])
+        userPhoneNumberForm: this.formBuilder.array([])
       }
     )
   }
@@ -82,13 +80,6 @@ export class EditUserComponent implements OnInit {
     patchV.patchValue(data);
 
   }
-  setDepartment(data){
-
-    const patchV = (<FormArray>this.editUserForm.controls['userDepartmentForm']).at(0) as FormArray;
-    patchV.patchValue(data);
-
-
-  }
 
   setArrayBoolean() {
 
@@ -108,7 +99,6 @@ export class EditUserComponent implements OnInit {
     this.currentUserLastName = this.currentUser.user_last_name;
     this.currentUserEmail = this.currentUser.user_email;
     this.currentUserPhoneNumber = this.currentUser.user_phone_number;
-    this.currentUserDepartment = this.currentUser.user_department;
 
   }
 
@@ -125,10 +115,6 @@ export class EditUserComponent implements OnInit {
     userEmail.removeAt(0);
     const userPhoneNumber = <FormArray>this.editUserForm.controls['userPhoneNumberForm'];
     userPhoneNumber.removeAt(0);
-    const userDepartment = <FormArray>this.editUserForm.controls['userDepartmentForm'];
-    userDepartment.removeAt(0);
-
-
   }
 
   pushToArray() {
@@ -143,8 +129,6 @@ export class EditUserComponent implements OnInit {
     userEmail.push(this.formBuilder.control(this.currentUserEmail,Validators.required));
     const userPhoneNumber = <FormArray>this.editUserForm.controls['userPhoneNumberForm'];
     userPhoneNumber.push(this.formBuilder.control(this.currentUserPhoneNumber,Validators.required));
-    const userDepartment = <FormArray>this.editUserForm.controls['userDepartmentForm'];
-    userDepartment.push(this.formBuilder.control(this.currentUserDepartment,Validators.required));
 
   }
 
@@ -188,6 +172,7 @@ export class EditUserComponent implements OnInit {
         console.log(data);
         this.resetEditForm();
         this.retrieveUsers();
+        this.editUserForm.reset();
 
       }, err => {
 
