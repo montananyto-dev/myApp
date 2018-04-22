@@ -33,15 +33,15 @@ export class ViewProjectCommentComponent implements OnInit {
   ngOnInit(
   ) {
     this.getProjectComment();
-    this.setObservableComments();
+    this.setObservableProjectComments();
   }
 
-  setObservableComments(){
+  setObservableProjectComments(){
 
     IntervalObservable.create(10000)
       .subscribe(() => {
         this.getProjectComment();
-        console.log("update project comment");
+        console.log("Called project comment");
       });
   }
 
@@ -66,6 +66,7 @@ export class ViewProjectCommentComponent implements OnInit {
   }
 
   getProjectComment(){
+    this.projectId =  window.localStorage.getItem('currentProjectId');
     this.commentService.getCommentByProjectId(this.projectId).subscribe(comments=>{
       this.projectComments = comments;
     })

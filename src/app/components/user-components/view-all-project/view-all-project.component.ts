@@ -20,7 +20,7 @@ export class ViewAllProjectComponent implements OnInit {
   }
 
   redirectTo(projectID){
-
+    window.localStorage.setItem('currentProjectId',projectID);
     this.router.navigate(['view/project/details',projectID])
   }
 

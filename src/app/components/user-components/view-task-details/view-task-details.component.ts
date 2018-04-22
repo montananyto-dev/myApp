@@ -50,7 +50,7 @@ export class ViewTaskDetailsComponent implements OnInit {
     IntervalObservable.create(10000)
       .subscribe(() => {
         this.retrieveCommentByTaskId();
-        console.log("update task comment");
+
       });
   }
 
@@ -76,6 +76,8 @@ export class ViewTaskDetailsComponent implements OnInit {
   }
 
   retrieveCommentByTaskId() {
+
+    this.taskId =  window.localStorage.getItem('currentTaskId');
     this.commentService.getCommentByTaskId(this.taskId).subscribe(data => {
       if (data === "No comments for this task") {
         this.comment = this.emptyArray;
@@ -85,10 +87,11 @@ export class ViewTaskDetailsComponent implements OnInit {
     });
   }
 
+
   retrieveTaskDetails() {
     this.taskService.getTaskByProjectIdAndTaskId(this.projectId, this.taskId).subscribe(data => {
       this.task = data;
-      console.log(data);
+
     });
   }
 

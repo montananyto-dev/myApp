@@ -64,6 +64,8 @@ export class ViewProjectDetailsComponent implements OnInit {
 
     this.taskId = event.target.id.toString();
 
+    window.localStorage.setItem('currentTaskId',String(this.taskId));
+
     this.viewTaskDetails = this.dialog.open(ViewTaskDetailsComponent , {
       width: '450px',
       height: '450px',
@@ -103,7 +105,6 @@ export class ViewProjectDetailsComponent implements OnInit {
 
     IntervalObservable.create(10000)
       .subscribe(() => {
-        console.log("update task status");
         this.getProjectTaskByStatus1();
         this.getProjectTaskByStatus2();
         this.getProjectTaskByStatus3();
@@ -116,18 +117,12 @@ export class ViewProjectDetailsComponent implements OnInit {
   updateStatus(currentPosition,taskStatus, taskId, projectId, position:string) {
 
     var taskStatusNum = Number(taskStatus);
-    console.log("The original task status: " +taskStatusNum);
-    console.log(position);
 
     if (position === "right") {
-      console.log("right");
       taskStatusNum = taskStatusNum +1;
     } else if(position === "left"){
-      console.log("left");
       taskStatusNum = taskStatusNum -1;
     }
-
-    console.log("The new task status: " +taskStatusNum);
 
     var data = {taskId: taskId, taskStatus: taskStatusNum, projectId: projectId};
 
@@ -152,9 +147,7 @@ export class ViewProjectDetailsComponent implements OnInit {
 
   getProject() {
     this.project.getProjectByProjectId(this.projectId).subscribe(project => {
-      console.log(project);
         this.actualProject = project;
-        console.log(this.actualProject);
     });
   }
 
@@ -166,7 +159,6 @@ export class ViewProjectDetailsComponent implements OnInit {
 
   getProjectTask() {
     this.taskService.getTaskByProjectId(this.projectId).subscribe(tasks => {
-      console.log(tasks);
       this.projectTask = tasks;
     })
   }
