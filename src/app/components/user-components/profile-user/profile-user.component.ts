@@ -16,7 +16,6 @@ export class ProfileUserComponent implements OnInit {
   public user_last_name = this.currentUser.getUser_last_name();
   public user_email = this.currentUser.getUser_email();
   public user_phone_number = this.currentUser.getUser_phone_number();
-  public user_department = this.currentUser.getUser_department();
   public user_about_me = this.currentUser.getUser_about_me();
   public user_date_of_birth = this.currentUser.getUser_date_of_birth();
 
@@ -29,8 +28,7 @@ export class ProfileUserComponent implements OnInit {
       email: new FormControl('', Validators.email),
       dateOfBirth: new FormControl('', Validators.pattern('')),
       aboutMe: new FormControl('', Validators.required),
-      phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$')),
-      department: new FormControl('', Validators.pattern('^[a-zA-Z]{5,25}$'))
+      phoneNumber: new FormControl('', Validators.pattern('^[0-9()-]+$'))
     })
 
 
